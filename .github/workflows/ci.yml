@@ -55,7 +55,7 @@ jobs:
       
       # Make like the instructions say to 
       - name: Making 
-        run: make -j4
+        run: make -j1
 
       # - name: Compile
       #   run: ./ci/ci.sh compile
