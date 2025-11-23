@@ -55,10 +55,10 @@ jobs:
       
       # Make like the instructions say to 
       - name: Making 
-        run: make -j32
+        run: make -j4
 
-      - name: Compile
-        run: ./ci/ci.sh compile
+      # - name: Compile
+      #   run: ./ci/ci.sh compile
 
       - name: Run tests - RRR unit tests
         run: ./ci/ci.sh rrrTests
