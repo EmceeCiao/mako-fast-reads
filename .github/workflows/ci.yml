@@ -37,7 +37,14 @@ jobs:
           echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
           echo "RUN_NUMBER=${{ matrix.run_number }}"
           echo "RUN_NUM=${{ github.run_number }}"
-          echo "RUN_ID=${{ github.run_id }}"
+          echo "RUN_ID=${{ github.run_id }}"  
+          
+      # 🚨 NEW STEP: Install Clang/LLVM Dependencies
+      - name: Install Clang Development Libraries
+        run: |
+          sudo apt-get update
+          # Install the specific Clang/LLVM version required by the build system
+          sudo apt-get install -y llvm-14-dev libclang-14-dev
 
       - name: Compile
         run: ./ci/ci.sh compile
