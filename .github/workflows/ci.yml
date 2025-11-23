@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       max-parallel: 1
@@ -40,26 +40,22 @@ jobs:
           echo "RUN_ID=${{ github.run_id }}"  
       
       # Install Depencies Via Script 
-      - name: 2a. Install System Dependencies
-        # Fixes the 'libclang.so not found' error for rusty-cpp-checker
+      - name: Install System Dependencies
         run: |
           sudo apt-get update
           bash apt_packages.sh  # Runs your existing script 
       
-      # Install Clang/LLVM Dependencies
-      - name: Install Clang Development Libraries
-        run: |
-          sudo apt-get update
-          # Install the specific Clang/LLVM version required by the build system
-          sudo apt-get install -y llvm-14-dev libclang-14-dev
-      
-      # Recommended Step (Best Practice)
+      # Install RustC Version as Specified 
       - name: Install Specific Rust Toolchain 1.91.0
         uses: dtolnay/rust-toolchain@v1
         with:
           toolchain: 1.91.0 # Uses rustup internally to fetch and install the correct version
           profile: minimal
-          override: true 
+          override: true  
+      
+      # Make like the instructions say to 
+      - name: Making 
+        run: make -j32
 
       - name: Compile
         run: ./ci/ci.sh compile
