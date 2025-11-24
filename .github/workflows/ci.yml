@@ -41,7 +41,10 @@ jobs:
       #     sudo apt-get update
       #     bash apt_packages.sh  # Runs your existing script 
       
-      # # Install RustC Version as Specified 
+      # # Install RustC Version as Specified  
+      - name: Install Rust Version 
+        run: | 
+          source install_rustc.sh
       # - name: Install Specific Rust Toolchain 1.91.0
       #   uses: dtolnay/rust-toolchain@v1
       #   with:
