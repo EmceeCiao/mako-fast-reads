@@ -11,6 +11,7 @@
 #include <vector>
 
 #include "abstract_ordered_index.h"
+#include "benchmarks/benchmark_config.h"
 
 class mbta_sharded_ordered_index {
 public:
@@ -175,8 +176,13 @@ inline void mbta_sharded_ordered_index::scan(
     const std::string *end_key,
     abstract_ordered_index::scan_callback &callback,
     str_arena *arena) {
-  for (auto *shard : shard_tables_) {
-    shard->scan(txn, start_key, end_key, callback, arena);
+  for (int i=0; i<shard_tables_.size(); i++) {
+    // TODO: Please note that, we don't support scan across multiple tables and multiple shards
+    //       To support it, we should implement a scanRemoteAll RPCs
+    if (i==BenchmarkConfig::getInstance().getShardIndex()) {
+      auto *shard = shard_tables_[i];
+      shard->scan(txn, start_key, end_key, callback, arena);
+    }
   }
 }
 
@@ -186,8 +192,13 @@ inline void mbta_sharded_ordered_index::rscan(
     const std::string *end_key,
     abstract_ordered_index::scan_callback &callback,
     str_arena *arena) {
-  for (auto *shard : shard_tables_) {
-    shard->rscan(txn, start_key, end_key, callback, arena);
+  for (int i=0; i<shard_tables_.size(); i++) {
+    // TODO: Please note that, we don't support scan across multiple tables and multiple shards
+    //       To support it, we should implement a scanRemoteAll RPCs
+    if (i==BenchmarkConfig::getInstance().getShardIndex()) {
+      auto *shard = shard_tables_[i];
+      shard->rscan(txn, start_key, end_key, callback, arena);
+    }
   }
 }
 

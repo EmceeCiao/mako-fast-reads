@@ -94,9 +94,10 @@ public:
     if (!mbta.get_is_remote()) {
       STD_OP({
         bool ret = mbta.transGet(key, value);
-        UPDATE_VS(value.data(),value.length())
-
-        if (value.length() >= mako::EXTRA_BITS_FOR_VALUE) value.resize(value.length() - mako::EXTRA_BITS_FOR_VALUE);;
+        if (ret) {
+          UPDATE_VS(value.data(),value.length())
+          if (value.length() >= mako::EXTRA_BITS_FOR_VALUE) value.resize(value.length() - mako::EXTRA_BITS_FOR_VALUE);
+        }
         return ret;
       });
     } else {
@@ -104,9 +105,10 @@ public:
       if (ret>0) {
         throw abstract_db::abstract_abort_exception();
       }
-      UPDATE_VS(value.data(),value.length())
-
-      if (value.length() >= mako::EXTRA_BITS_FOR_VALUE) value.resize(value.length() - mako::EXTRA_BITS_FOR_VALUE);;
+      if (value.length() >= mako::EXTRA_BITS_FOR_VALUE) {
+        UPDATE_VS(value.data(),value.length())
+        value.resize(value.length() - mako::EXTRA_BITS_FOR_VALUE);
+      }
       return true;
     }
   }
@@ -218,9 +220,10 @@ void scanRemoteOne(void *txn,
   if (ret>0) {
     throw abstract_db::abstract_abort_exception();
   }
-  UPDATE_VS(value.data(),value.length())
-
-  if (value.length() >= mako::EXTRA_BITS_FOR_VALUE) value.resize(value.length() - mako::EXTRA_BITS_FOR_VALUE);;
+  if (value.length() >= mako::EXTRA_BITS_FOR_VALUE) {
+    UPDATE_VS(value.data(),value.length())
+    value.resize(value.length() - mako::EXTRA_BITS_FOR_VALUE);
+  }
 }
 
 void rscan(void *txn,

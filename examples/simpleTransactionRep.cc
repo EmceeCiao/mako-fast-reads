@@ -506,7 +506,7 @@ int main(int argc, char **argv) {
         mako::stop_erpc_server();
     }
 
-    db_close() ; // EXIT 0
+    db_close() ;
 
     {
         abstract_db * db2 = benchConfig.getLeaderConfig()? db : replicated_db;
