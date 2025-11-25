@@ -80,39 +80,133 @@ jobs:
       # - name: Compile
       #   run: ./ci/ci.sh compile
 
+      # - name: Run tests - RRR unit tests
+      #   run: ./ci/ci.sh rrrTests
+
+      # - name: Run tests - simple transaction
+      #   run: ./ci/ci.sh simpleTransaction
+
+      # - name: Run tests - simple replication
+      #   run: ./ci/ci.sh simplePaxos 
+
+      # - name: Run tests - simple 2 shards without replication (RRR)
+      #   run: ./ci/ci.sh shardNoReplication
+
+      # - name: Run tests - simple 2 shards without replication (eRPC)
+      #   run: ./ci/ci.sh shardNoReplicationErpc
+
+      # - name: Run tests - simple 1 shard with replication - dbtest
+      #   run: ./ci/ci.sh shard1Replication
+
+      # - name: Run tests - simple 2 shard with replication - dbtest (RRR)
+      #   run: ./ci/ci.sh shard2Replication
+
+      # - name: Run tests - simple 2 shard with replication - dbtest (eRPC)
+      #   run: ./ci/ci.sh shard2ReplicationErpc
+
+      # - name: Run tests - simple 1 shard with replication - simpleTransactionRep
+      #   run: ./ci/ci.sh shard1ReplicationSimple
+      
+      # - name: Run tests - simple 2 shard with replication - simpleTransactionRep
+      #   run: ./ci/ci.sh shard2ReplicationSimple
+
+      # - name: Run tests - RocksDB persistence and partitioned queues
+      #   run: ./ci/ci.sh rocksdbTests
+
+      # - name: Cleanup
+      #   if: always()
+      #   run: ./ci/ci.sh cleanup
+
       - name: Run tests - RRR unit tests
+        id: rrrTests
+        continue-on-error: true
         run: ./ci/ci.sh rrrTests
 
       - name: Run tests - simple transaction
+        id: simpleTransaction
+        continue-on-error: true
         run: ./ci/ci.sh simpleTransaction
 
       - name: Run tests - simple replication
+        id: simplePaxos
+        continue-on-error: true
         run: ./ci/ci.sh simplePaxos 
 
       - name: Run tests - simple 2 shards without replication (RRR)
+        id: shardNoReplication
+        continue-on-error: true
         run: ./ci/ci.sh shardNoReplication
 
       - name: Run tests - simple 2 shards without replication (eRPC)
+        id: shardNoReplicationErpc
+        continue-on-error: true
         run: ./ci/ci.sh shardNoReplicationErpc
 
       - name: Run tests - simple 1 shard with replication - dbtest
+        id: shard1Replication
+        continue-on-error: true
         run: ./ci/ci.sh shard1Replication
 
       - name: Run tests - simple 2 shard with replication - dbtest (RRR)
+        id: shard2Replication
+        continue-on-error: true
         run: ./ci/ci.sh shard2Replication
 
       - name: Run tests - simple 2 shard with replication - dbtest (eRPC)
+        id: shard2ReplicationErpc
+        continue-on-error: true
         run: ./ci/ci.sh shard2ReplicationErpc
 
       - name: Run tests - simple 1 shard with replication - simpleTransactionRep
+        id: shard1ReplicationSimple
+        continue-on-error: true
         run: ./ci/ci.sh shard1ReplicationSimple
       
       - name: Run tests - simple 2 shard with replication - simpleTransactionRep
+        id: shard2ReplicationSimple
+        continue-on-error: true
         run: ./ci/ci.sh shard2ReplicationSimple
 
       - name: Run tests - RocksDB persistence and partitioned queues
-        run: ./ci/ci.sh rocksdbTests
+        id: rocksdbTests
+        continue-on-error: true
+        run: ./ci/ci.sh rocksdbTests 
 
       - name: Cleanup
         if: always()
         run: ./ci/ci.sh cleanup
+
+      - name: Fail job if any tests failed
+        if: ${{ always() }}
+        run: |
+          failed=0
+
+          check() {
+            name=$1
+            outcome=$2
+            if [ "$outcome" != "success" ]; then
+              echo "❌ $name failed (outcome=$outcome)"
+              failed=1
+            else
+              echo "✅ $name passed"
+            fi
+          }
+
+          check "rrrTests"                "${{ steps.rrrTests.outcome }}"
+          check "simpleTransaction"       "${{ steps.simpleTransaction.outcome }}"
+          check "simplePaxos"             "${{ steps.simplePaxos.outcome }}"
+          check "shardNoReplication"      "${{ steps.shardNoReplication.outcome }}"
+          check "shardNoReplicationErpc"  "${{ steps.shardNoReplicationErpc.outcome }}"
+          check "shard1Replication"       "${{ steps.shard1Replication.outcome }}"
+          check "shard2Replication"       "${{ steps.shard2Replication.outcome }}"
+          check "shard2ReplicationErpc"   "${{ steps.shard2ReplicationErpc.outcome }}"
+          check "shard1ReplicationSimple" "${{ steps.shard1ReplicationSimple.outcome }}"
+          check "shard2ReplicationSimple" "${{ steps.shard2ReplicationSimple.outcome }}"
+          check "rocksdbTests"            "${{ steps.rocksdbTests.outcome }}"
+
+          if [ "$failed" -ne 0 ]; then
+            echo "One or more tests failed."
+            exit 1
+          else
+            echo "All tests passed."
+          fi
