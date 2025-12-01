@@ -492,6 +492,9 @@ private:
         current_term_ = 0;
         // Initialize single timestamp system
         maxTimestampReadSet = 0;
+        // Reset read-only fast path state
+        is_read_only_fast_path_ = false;
+        read_timestamp_ = 0;
         buf_.clear();
 #if STO_DEBUG_ABORTS
         abort_item_ = nullptr;
@@ -655,15 +658,57 @@ public:
     }
 
     bool try_commit(bool no_paxos= false);
+    bool try_commit_read_only();  // Fast path for read-only transactions
     bool shard_try_lock_last_writeset();
     int shard_validate();
+
+    // Read-only fast path methods
+    void set_read_only_fast_path(bool value = true) {
+        is_read_only_fast_path_ = value;
+        // Note: read_timestamp_ is acquired at commit time when we know all shards
+        // Do NOT acquire here - readset_shard_bits is still 0 at this point
+    }
+    
+    bool is_read_only_fast_path() const {
+        return is_read_only_fast_path_;
+    }
+    
+    void set_read_timestamp(uint32_t ts) {
+        read_timestamp_ = ts;
+    }
+    
+    uint32_t get_read_timestamp() const {
+        return read_timestamp_;
+    }
+    
+    // Acquire read timestamp for follower reads (call before doing reads)
+    // This allows follower replicas to check if they're fresh enough
+    void acquireReadTimestamp() {
+        if (read_timestamp_ == 0) {
+            read_timestamp_ = getMinSafeTimestamp();
+        }
+    }
+    
+    // Check if transaction has any writes (for fast-path routing)
+    bool has_any_writes() const {
+        return any_writes_;
+    }
+    
+    // Get minimum safe timestamp across all shards involved in this transaction
+    uint32_t getMinSafeTimestamp() const;
     void shard_install(uint32_t timestamp);
     void shard_serialize_util(uint32_t timestamp);
     void shard_unlock(bool committed);
 
     void commit() {
-        if (!try_commit())
-            throw Abort();
+        // Route to fast path for read-only transactions
+        if (is_read_only_fast_path_ && !has_any_writes()) {
+            if (!try_commit_read_only())
+                throw Abort();
+        } else {
+            if (!try_commit())
+                throw Abort();
+        }
     }
 
     bool aborted() {
@@ -828,6 +873,10 @@ public:
     mutable uint32_t maxTimestampReadSet;
     mutable unordered_map<uint64_t, vector<uint64_t>> rollbacks_tracker; // <time in ms, shard clock of shard-0>
 
+    // Read-only fast path support (follower reads)
+    mutable bool is_read_only_fast_path_{false};  // Flag for read-only fast path
+    mutable uint32_t read_timestamp_{0};          // Snapshot timestamp for read-only txns
+
 private:
     enum {
         s_in_progress = 0, s_opacity_check = 1, s_committing = 2,
@@ -965,6 +1014,10 @@ public:
 
     static bool try_commit() {
         always_assert(in_progress());
+        // Route to fast path for read-only transactions
+        if (TThread::txn->is_read_only_fast_path() && !TThread::txn->has_any_writes()) {
+            return TThread::txn->try_commit_read_only();
+        }
         return TThread::txn->try_commit();
     }
 

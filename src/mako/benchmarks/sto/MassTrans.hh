@@ -127,6 +127,26 @@ public:
     //   1) not found a key
     //   2) found a key, but updated by other writes 
     /// in the original implement, throw exception to distinguish case2
+    
+    // ==================== FOLLOWER READ SUPPORT ====================
+    // For read-only fast-path transactions on a follower:
+    // Check if this follower can serve the read, or redirect to leader
+    if (TThread::txn && TThread::txn->is_read_only_fast_path()) {
+      uint32_t read_ts = TThread::txn->get_read_timestamp();
+      
+      // If read_ts is set and follower is too stale, we need to get from leader
+      // Note: read_ts == 0 means timestamp not yet acquired (will be set at commit)
+      if (read_ts > 0 && sync_util::sync_logger::should_redirect_to_leader(read_ts)) {
+        // Follower is stale - this would require fetching from leader
+        // For now, we abort and let the transaction retry
+        // In a full implementation, you would call remoteGet() to the leader
+        Sto::abort_without_throw();
+        TThread::transget_without_throw = true;
+        return false;
+      }
+    }
+    // ===============================================================
+    
     unlocked_cursor_type lp(table_, key);
     bool found = lp.find_unlocked(*ti.ti);
     if (found) {
@@ -165,6 +185,14 @@ public:
     }
     return found;
   }
+  
+  // ==================== FOLLOWER READ HELPER ====================
+  // Check if this replica can serve a read-only transaction
+  // Returns true if reads can be served locally, false if should redirect to leader
+  bool canServeFollowerRead(uint32_t read_timestamp) const {
+    return sync_util::sync_logger::can_serve_follower_read(read_timestamp);
+  }
+  // ==============================================================
 
   template <typename K>
   bool transDelete(const K& key, threadinfo_type& ti = mythreadinfo) {

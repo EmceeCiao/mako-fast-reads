@@ -114,6 +114,42 @@ namespace sync_util {
             return timestamp <= single_watermark_.load(memory_order_acquire);
         }
         
+        // ==================== FOLLOWER READ SUPPORT ====================
+        
+        // Check if this replica (leader or follower) can serve a read at the given timestamp
+        // For leaders: always return true (leader has the latest data)
+        // For followers: check if local watermark >= requested timestamp
+        static bool can_serve_follower_read(uint32_t requested_ts) {
+            // Leaders can always serve reads
+            if (is_leader) return true;
+            
+            // System not initialized yet
+            if (!worker_running) return true;
+            
+            // Followers can serve if their watermark is >= requested timestamp
+            uint32_t local_safe_ts = single_watermark_.load(memory_order_acquire) / 10;
+            return requested_ts <= local_safe_ts;
+        }
+        
+        // Get the current follower's safe timestamp (for determining read freshness)
+        static uint32_t getFollowerSafeTimestamp() {
+            return single_watermark_.load(memory_order_acquire) / 10;
+        }
+        
+        // Check if we should redirect this read to the leader
+        // Returns true if follower is too stale and should redirect
+        static bool should_redirect_to_leader(uint32_t requested_ts) {
+            if (is_leader) return false;  // Already on leader
+            return !can_serve_follower_read(requested_ts);
+        }
+        
+        // Check if this is a leader replica
+        static bool isLeader() {
+            return is_leader;
+        }
+        
+        // ===============================================================
+        
         static uint32_t computeLocal() { // compute G immediately and strictly, tt*10+epoch
             uint32_t min_so_far = numeric_limits<uint32_t>::max();
 

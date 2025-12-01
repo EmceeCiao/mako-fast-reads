@@ -1,0 +1,401 @@
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:78] 2025-11-30 21:56:40.142 | PWD : /home/dyeung/Desktop/mako-fast-reads
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:276] 2025-11-30 21:56:40.142 | starting process 24756
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/config.cc:290] 2025-11-30 21:56:40.142 | LoadYML: /home/dyeung/Desktop/mako-fast-reads/examples/../config/1leader_2followers/paxos3_shardidx0.yml
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/config.cc:290] 2025-11-30 21:56:40.143 | LoadYML: /home/dyeung/Desktop/mako-fast-reads/examples/../config/occ_paxos.yml
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:285] 2025-11-30 21:56:40.143 | server_infos, number of sites: 3, proc_name: localhost
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 21:56:40.150 | parition id of each Paxos group is 2, site-name: s103, site-id: 8
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 21:56:40.156 | parition id of each Paxos group is 1, site-name: s102, site-id: 4
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 21:56:40.163 | parition id of each Paxos group is 0, site-name: s101, site-id: 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:297] 2025-11-30 21:56:40.163 | running machine-id: 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 21:56:40.164 | launching site: 0, bind address 0.0.0.0:17001
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 21:56:40.164 | launching site: 4, bind address 0.0.0.0:17002
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:106] 2025-11-30 21:56:40.164 | waiting for server setup threads.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 21:56:40.164 | launching site: 8, bind address 0.0.0.0:17003
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 21:56:40.164 | [service]loc_id: 0, name: s101, proc: localhost, id: 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 21:56:40.164 | [service]loc_id: 0, name: s103, proc: localhost, id: 8
+starting server at starting server at 0.0.0.0:170030.0.0.0:17001
+
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 21:56:40.164 | [service]loc_id: 0, name: s102, proc: localhost, id: 4
+starting server at 0.0.0.0:17002
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 21:56:40.167 | Server s103 ready at 0.0.0.0:17003
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 21:56:40.167 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.167 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 21:56:40.167 | Server s102 ready at 0.0.0.0:17002
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 21:56:40.167 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.167 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 21:56:40.168 | Server s101 ready at 0.0.0.0:17001
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 21:56:40.168 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.168 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.168 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.168 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.168 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.169 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.169 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.169 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.169 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.169 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.169 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.170 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 21:56:40.172 | site 0 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.173 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 21:56:40.174 | site 4 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.175 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.175 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 21:56:40.175 | site 8 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:110] 2025-11-30 21:56:40.175 | done waiting for server setup threads.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 21:56:40.176 | heartbeat setup for s101 on 0.0.0.0:27001
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 21:56:40.176 | heartbeat setup for s102 on 0.0.0.0:27002
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 21:56:40.176 | heartbeat setup for s103 on 0.0.0.0:27003
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:117] 2025-11-30 21:56:40.176 | server workers' communicators setup
+[LEADER DEBUG] Starting db_worker threads
+[DB_WORKER DEBUG] Starting db_worker for par_id: 0
+[DB_WORKER DEBUG] Starting db_worker for par_id: 1
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3083
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3086
+[DB_WORKER DEBUG] Starting db_worker for par_id: 2
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3077
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3015
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3093
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3035
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3086
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3092
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3049
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3021
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3062
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3027
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3090
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3059
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3063
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3026
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3040
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3026
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3072
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3036
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3011
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3068
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3067
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3029
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3082
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3062
+, size: 3030
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3023
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3067
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3035
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3029
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3002
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3022
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3058
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3069
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3067
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3093
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3056
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3011
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3042
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3029
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3073
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3021
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3019
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3084
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3037
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3098
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3024
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3015
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3070
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3013
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3026
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3091
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3080
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3056
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3073
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3062
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3070
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3096
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3081
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3005
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3025
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3084
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3027
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3036
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3005
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3046
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3029
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3013
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3057
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3024
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3095
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3082
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3045
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3014
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3067
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3034
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3064
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3043
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3050
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3087
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3008
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3076
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3078
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3088
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3084
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3003
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3051
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3054
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3099
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3032
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3060
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3076
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3068
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3039
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3012
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3026
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3086
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3094
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3039
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3095
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3070
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3034
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3078
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3067
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3001
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3097
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3002
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3017
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3092
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3052
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3056
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3001
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3080
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3086
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3041
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3065
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3089
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3044
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3019
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3040
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3029
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3031
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3017
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3097
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3071
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3081
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3075
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3009
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3027
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3067
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3056
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3097
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3053
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3086
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3065
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3006
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3083
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3019
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3024
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3028
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3071
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3032
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3029
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3003
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3019
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3070
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3068
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3008
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3015
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3040
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3049
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3096
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3023
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3018
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3045
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3046
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3051
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3021
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3055
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3079
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3088
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3064
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3028
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3041
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3050
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3093
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3000
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3034
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3064
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3024
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3014
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3087
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3056
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3043
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3091
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3027
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3065
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3059
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3036
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3032
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3051
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3037
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3028
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3075
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3007
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3074
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3021
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3058
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3095
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3029
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3037
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3035
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3093
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3018
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3028
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3043
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3011
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3028
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3029
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3076
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3004
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3043
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3063
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3013
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3038
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3006
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3040
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3004
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3018
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3028
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3088
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3069
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3017
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3017
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3096
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3024
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3043
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3070
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3083
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3090
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3099
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3072
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3025
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3044
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3090
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3005
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3039
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3054
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3086
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3069
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3082
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3042
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3064
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3097
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3007
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3055
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3004
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3048
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3011
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3022
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3028
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3099
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3043
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3046
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3068
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3040
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3022
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3011
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3010
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3005
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3001
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3061
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3030
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3078
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3005
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3020
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3036
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3044
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3026
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3022
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3065
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3008
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3016
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3082
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3058
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3024
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3037
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3062
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3024
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3000
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3036
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3052
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3099
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3079
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3050
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3068
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3071
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3073
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3031
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3081
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3030
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3033
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3094
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3060
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3063
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3099
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3081
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3099
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3096
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3059
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3073
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3013
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3068
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3090
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3095
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3026
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 0, size: 3066
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 2, size: 3084
+[DB_WORKER DEBUG] Calling add_log_to_nc for par_id: 1, size: 3040
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:987] 2025-11-30 21:56:42.693 | The number of completed submits n_current: 91 replay_queue: 0 par_id: 0 submit_tot: 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:608] 2025-11-30 21:56:42.693 | wait for task, amount: 10 - n_tot: 101, n_current: 91
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:993] 2025-11-30 21:56:42.743 | Par_id 0 [partition], the number of completed submits 101 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:987] 2025-11-30 21:56:42.743 | The number of completed submits n_current: 100 replay_queue: 0 par_id: 1 submit_tot: 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:608] 2025-11-30 21:56:42.743 | wait for task, amount: 1 - n_tot: 101, n_current: 100
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-11-30 21:56:42.743 | Recieved a zero length log
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-11-30 21:56:42.743 | Recieved a zero length log
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:993] 2025-11-30 21:56:42.745 | Par_id 1 [partition], the number of completed submits 101 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:987] 2025-11-30 21:56:42.745 | The number of completed submits n_current: 101 replay_queue: 0 par_id: 2 submit_tot: 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:993] 2025-11-30 21:56:42.745 | Par_id 2 [partition], the number of completed submits 101 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-11-30 21:56:42.745 | Recieved a zero length log
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:999] 2025-11-30 21:56:46.745 | shutdown Server Control Service after task finish total submit 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-11-30 21:56:46.745 | Shutdown Server Control Service
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-11-30 21:56:46.745 | Shutdown Server Control Service
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-11-30 21:56:46.745 | Shutdown Server Control Service
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:311] 2025-11-30 21:56:46.796 | all server workers have shut down.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-11-30 21:56:46.896 | site s101 deleting services, num: 1 0 101 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-11-30 21:56:46.946 | site par 0, loc 0: prepare 0, accept 101, commit 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-11-30 21:56:46.947 | site s102 deleting services, num: 1 0 101 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-11-30 21:56:46.997 | site par 1, loc 0: prepare 0, accept 101, commit 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-11-30 21:56:46.997 | site s103 deleting services, num: 1 0 101 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-11-30 21:56:47.003 | site par 2, loc 0: prepare 0, accept 101, commit 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-11-30 21:56:47.053 | Ending worker with n_tot 101 and n_current 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-11-30 21:56:47.056 | Ending worker with n_tot 101 and n_current 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-11-30 21:56:47.059 | Ending worker with n_tot 101 and n_current 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:332] 2025-11-30 21:56:47.063 | exit process.
+[localhost committed]: 0(follower/learner), 303(leader), endReceived: 0, leaderEndReceived:3
+[[32mPASS[0m] committed logs count verify

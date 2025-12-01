@@ -616,6 +616,86 @@ abort:
     return false;
 }
 
+// Get minimum safe timestamp across all shards involved in this transaction
+// Returns timestamp value (already divided by 10, without epoch encoding)
+uint32_t Transaction::getMinSafeTimestamp() const {
+    // Start with local watermark (encoded as timestamp*10 + epoch)
+    uint32_t local_watermark = sync_util::sync_logger::retrieveW();
+    uint32_t min_safe_ts = local_watermark / 10;  // Decode: remove epoch
+    
+    // If transaction reads from remote shards, get their watermarks
+    if (TThread::readset_shard_bits > 0 && TThread::sclient != nullptr) {
+        uint32_t remote_watermark = 0;
+        TThread::sclient->remoteExchangeWatermark(remote_watermark, TThread::readset_shard_bits);
+        
+        // Decode and take minimum
+        uint32_t remote_ts = remote_watermark / 10;
+        if (remote_ts > 0 && remote_ts < min_safe_ts) {
+            min_safe_ts = remote_ts;
+        }
+    }
+    
+    return min_safe_ts;
+}
+
+// Fast-path commit for read-only transactions
+// Skips locking, write installation, and Paxos replication
+bool Transaction::try_commit_read_only() {
+    // Safety check: if somehow called incorrectly, fall back to normal path
+    if (!is_read_only_fast_path_ || state_ != s_in_progress) {
+        return try_commit();
+    }
+    
+    // Step 1: Get safe timestamp for snapshot isolation
+    read_timestamp_ = getMinSafeTimestamp();
+    
+    if (read_timestamp_ == 0) {
+        // Watermark not yet initialized, fall back to normal path
+        // This can happen during system startup
+        is_read_only_fast_path_ = false;
+        return try_commit();
+    }
+    
+    // Step 2: Validate all local reads
+    // For read-only transactions, we verify that all versions we read
+    // have timestamps <= read_timestamp_ (i.e., they are safely replicated)
+    TransItem* it = nullptr;
+    for (unsigned tidx = 0; tidx != tset_size_; ++tidx) {
+        it = (tidx % tset_chunk ? it + 1 : tset_[tidx / tset_chunk]);
+        
+        if (it->has_read()) {
+            // Check that the version we read is still valid
+            if (!it->owner()->check(*it, *this)) {
+                // Version changed since we read it
+                stop(false, nullptr, 0);
+                return false;
+            }
+        }
+    }
+    
+    // Step 3: Validate remote reads if any
+    if (TThread::readset_shard_bits > 0 && TThread::sclient != nullptr) {
+        uint32_t watermark = 0;
+        int ret = TThread::sclient->remoteValidate(watermark);
+        if (ret > 0) {
+            // Remote validation failed
+            stop(false, nullptr, 0);
+            return false;
+        }
+        
+        // Update local watermark if remote is higher
+        uint32_t currentWatermark = sync_util::sync_logger::single_watermark_.load(std::memory_order_acquire);
+        if (watermark > currentWatermark) {
+            sync_util::sync_logger::single_watermark_.store(watermark, std::memory_order_release);
+        }
+    }
+    
+    // SUCCESS: No locking needed, no write installation, no Paxos replication
+    // Just clean up the transaction state
+    stop(true, nullptr, 0);
+    return true;
+}
+
 // serialize transactions into log and then sent it out via Paxos
 inline void Transaction::serialize_util(unsigned nwriteset, bool on_remote, int max_bytes_size, int batch_size, uint32_t timestamp) const {
     if (nwriteset == 0) return;

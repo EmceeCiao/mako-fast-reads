@@ -1,0 +1,123 @@
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:78] 2025-11-30 21:56:35.146 | PWD : /home/dyeung/Desktop/mako-fast-reads
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:276] 2025-11-30 21:56:35.146 | starting process 24685
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/config.cc:290] 2025-11-30 21:56:35.146 | LoadYML: /home/dyeung/Desktop/mako-fast-reads/examples/../config/1leader_2followers/paxos3_shardidx0.yml
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/config.cc:290] 2025-11-30 21:56:35.146 | LoadYML: /home/dyeung/Desktop/mako-fast-reads/examples/../config/occ_paxos.yml
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:285] 2025-11-30 21:56:35.146 | server_infos, number of sites: 3, proc_name: learner
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 21:56:35.153 | parition id of each Paxos group is 2, site-name: s403, site-id: 11
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 21:56:35.160 | parition id of each Paxos group is 1, site-name: s402, site-id: 7
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 21:56:35.166 | parition id of each Paxos group is 0, site-name: s401, site-id: 3
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:297] 2025-11-30 21:56:35.166 | running machine-id: 3
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:106] 2025-11-30 21:56:35.166 | waiting for server setup threads.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 21:56:35.166 | launching site: 3, bind address 0.0.0.0:17301
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 21:56:35.166 | launching site: 7, bind address 0.0.0.0:17302
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 21:56:35.166 | launching site: b, bind address 0.0.0.0:17303
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 21:56:35.166 | [service]loc_id: 3, name: s401, proc: learner, id: 3
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 21:56:35.166 | [service]loc_id: 3, name: s403, proc: learner, id: 11
+starting server at 0.0.0.0:17303starting server at 0.0.0.0:17301
+
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 21:56:35.167 | Server s403 ready at 0.0.0.0:17303
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 21:56:35.167 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:35.167 | connect to site: 127.0.0.1:17001 (attempt 0)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:35.167 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 21:56:35.167 | [service]loc_id: 3, name: s402, proc: learner, id: 7
+starting server at 0.0.0.0:17302
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 21:56:35.167 | Server s402 ready at 0.0.0.0:17302
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 21:56:35.167 | Server s401 ready at 0.0.0.0:17301
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 21:56:35.167 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 21:56:35.167 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:35.167 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:35.168 | connect to site: 127.0.0.1:17001 (attempt 0)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:35.168 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:35.168 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:36.167 | connect to site: 127.0.0.1:17001 (attempt 1)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:36.167 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:36.168 | connect to site: 127.0.0.1:17001 (attempt 1)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:36.168 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:36.168 | connect to site: 127.0.0.1:17001 (attempt 1)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:36.168 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:37.167 | connect to site: 127.0.0.1:17001 (attempt 2)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:37.167 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:37.168 | connect to site: 127.0.0.1:17001 (attempt 2)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:37.168 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:37.168 | connect to site: 127.0.0.1:17001 (attempt 2)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:37.168 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:38.167 | connect to site: 127.0.0.1:17001 (attempt 3)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:38.167 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:38.168 | connect to site: 127.0.0.1:17001 (attempt 3)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:38.168 | connect to site: 127.0.0.1:17001 (attempt 3)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:38.168 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:38.168 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:39.167 | connect to site: 127.0.0.1:17001 (attempt 4)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:39.167 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:39.168 | connect to site: 127.0.0.1:17001 (attempt 4)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:39.168 | connect to site: 127.0.0.1:17001 (attempt 4)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:39.168 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:39.168 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.169 | connect to site: 127.0.0.1:17001 (attempt 5)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.169 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.170 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.170 | connect to site: 127.0.0.1:17001 (attempt 5)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.171 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 21:56:40.172 | site 7 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17001 (attempt 5)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.172 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.173 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.173 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.173 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.173 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.174 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.175 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 21:56:40.175 | site 11 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 21:56:40.175 | site 3 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:110] 2025-11-30 21:56:40.175 | done waiting for server setup threads.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 21:56:40.176 | heartbeat setup for s401 on 0.0.0.0:27301
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 21:56:40.177 | heartbeat setup for s402 on 0.0.0.0:27302
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 21:56:40.178 | heartbeat setup for s403 on 0.0.0.0:27303
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:117] 2025-11-30 21:56:40.178 | server workers' communicators setup
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:756] 2025-11-30 21:56:40.181 | start a heartbeatBackground, addr:127.0.0.1:27001
+learner, received ending: 0, num_workers:3, received msg: 0, end_received_leader:0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-11-30 21:56:42.744 | Recieved a zero length log
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-11-30 21:56:42.744 | Recieved a zero length log
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-11-30 21:56:42.745 | Recieved a zero length log
+learner, received ending: 3, received msg: 303
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:999] 2025-11-30 21:56:46.182 | shutdown Server Control Service after task finish total submit 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-11-30 21:56:46.182 | Shutdown Server Control Service
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-11-30 21:56:46.182 | Shutdown Server Control Service
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-11-30 21:56:46.182 | Shutdown Server Control Service
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:770] 2025-11-30 21:56:46.183 | heartbeatBackground is ended!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:311] 2025-11-30 21:56:46.184 | all server workers have shut down.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-11-30 21:56:46.285 | site s401 deleting services, num: 1 0 0 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-11-30 21:56:46.337 | site par 0, loc 3: prepare 0, accept 0, commit 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-11-30 21:56:46.337 | site s402 deleting services, num: 1 0 0 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-11-30 21:56:46.341 | site par 1, loc 3: prepare 0, accept 0, commit 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-11-30 21:56:46.341 | site s403 deleting services, num: 1 0 0 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-11-30 21:56:46.392 | site par 2, loc 3: prepare 0, accept 0, commit 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-11-30 21:56:46.443 | Ending worker with n_tot 0 and n_current 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-11-30 21:56:46.459 | Ending worker with n_tot 0 and n_current 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-11-30 21:56:46.470 | Ending worker with n_tot 0 and n_current 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:332] 2025-11-30 21:56:46.475 | exit process.
+[learner committed]: 303(follower/learner), 0(leader), endReceived: 3, leaderEndReceived:0
+[[32mPASS[0m] committed logs count verify

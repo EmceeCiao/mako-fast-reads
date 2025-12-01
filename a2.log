@@ -1,0 +1,787 @@
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:78] 2025-11-30 21:56:25.142 | PWD : /home/dyeung/Desktop/mako-fast-reads
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:276] 2025-11-30 21:56:25.142 | starting process 24514
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/config.cc:290] 2025-11-30 21:56:25.142 | LoadYML: /home/dyeung/Desktop/mako-fast-reads/examples/../config/1leader_2followers/paxos3_shardidx0.yml
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/config.cc:290] 2025-11-30 21:56:25.143 | LoadYML: /home/dyeung/Desktop/mako-fast-reads/examples/../config/occ_paxos.yml
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:285] 2025-11-30 21:56:25.143 | server_infos, number of sites: 3, proc_name: p1
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 21:56:25.150 | parition id of each Paxos group is 2, site-name: s203, site-id: 9
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 21:56:25.158 | parition id of each Paxos group is 1, site-name: s202, site-id: 5
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 21:56:25.168 | parition id of each Paxos group is 0, site-name: s201, site-id: 1
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:297] 2025-11-30 21:56:25.168 | running machine-id: 1
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 21:56:25.169 | launching site: 1, bind address 0.0.0.0:17101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 21:56:25.169 | launching site: 5, bind address 0.0.0.0:17102
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:106] 2025-11-30 21:56:25.169 | waiting for server setup threads.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 21:56:25.169 | launching site: 9, bind address 0.0.0.0:17103
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 21:56:25.169 | [service]loc_id: 1, name: s201, proc: p1, id: 1
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 21:56:25.169 | [service]loc_id: 1, name: s202, proc: p1, id: 5
+starting server at 0.0.0.0:17101
+starting server at 0.0.0.0:17102
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 21:56:25.169 | [service]loc_id: 1, name: s203, proc: p1, id: 9
+starting server at 0.0.0.0:17103
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 21:56:25.175 | Server s202 ready at 0.0.0.0:17102
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 21:56:25.175 | Server s201 ready at 0.0.0.0:17101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 21:56:25.175 | Server s203 ready at 0.0.0.0:17103
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 21:56:25.175 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 21:56:25.175 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 21:56:25.175 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:25.176 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:25.176 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:25.176 | connect to site: 127.0.0.1:17001 (attempt 0)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:25.177 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:25.177 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:25.177 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:26.177 | connect to site: 127.0.0.1:17001 (attempt 1)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:26.177 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:26.177 | connect to site: 127.0.0.1:17001 (attempt 1)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:26.177 | connect to site: 127.0.0.1:17001 (attempt 1)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:26.177 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:26.178 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:27.177 | connect to site: 127.0.0.1:17001 (attempt 2)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:27.177 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:27.178 | connect to site: 127.0.0.1:17001 (attempt 2)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:27.178 | connect to site: 127.0.0.1:17001 (attempt 2)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:27.178 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:27.178 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:28.177 | connect to site: 127.0.0.1:17001 (attempt 3)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:28.178 | connect to site: 127.0.0.1:17001 (attempt 3)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:28.178 | connect to site: 127.0.0.1:17001 (attempt 3)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:28.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:28.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:28.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:29.179 | connect to site: 127.0.0.1:17001 (attempt 4)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:29.179 | connect to site: 127.0.0.1:17001 (attempt 4)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:29.179 | connect to site: 127.0.0.1:17001 (attempt 4)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:29.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:29.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:29.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:30.179 | connect to site: 127.0.0.1:17001 (attempt 5)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:30.179 | connect to site: 127.0.0.1:17001 (attempt 5)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:30.179 | connect to site: 127.0.0.1:17001 (attempt 5)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:30.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:30.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:30.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:31.179 | connect to site: 127.0.0.1:17001 (attempt 6)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:31.179 | connect to site: 127.0.0.1:17001 (attempt 6)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:31.179 | connect to site: 127.0.0.1:17001 (attempt 6)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:31.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:31.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:31.179 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:32.180 | connect to site: 127.0.0.1:17001 (attempt 7)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:32.180 | connect to site: 127.0.0.1:17001 (attempt 7)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:32.180 | connect to site: 127.0.0.1:17001 (attempt 7)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:32.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:32.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:32.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:33.180 | connect to site: 127.0.0.1:17001 (attempt 8)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:33.180 | connect to site: 127.0.0.1:17001 (attempt 8)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:33.180 | connect to site: 127.0.0.1:17001 (attempt 8)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:33.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:33.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:33.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:34.180 | connect to site: 127.0.0.1:17001 (attempt 9)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:34.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:34.180 | connect to site: 127.0.0.1:17001 (attempt 9)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:34.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:34.181 | connect to site: 127.0.0.1:17001 (attempt 9)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:34.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:35.180 | connect to site: 127.0.0.1:17001 (attempt 10)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:35.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:35.180 | connect to site: 127.0.0.1:17001 (attempt 10)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:35.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:35.181 | connect to site: 127.0.0.1:17001 (attempt 10)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:35.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:36.180 | connect to site: 127.0.0.1:17001 (attempt 11)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:36.180 | connect to site: 127.0.0.1:17001 (attempt 11)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:36.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:36.180 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:36.181 | connect to site: 127.0.0.1:17001 (attempt 11)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:36.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:37.181 | connect to site: 127.0.0.1:17001 (attempt 12)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:37.181 | connect to site: 127.0.0.1:17001 (attempt 12)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:37.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:37.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:37.181 | connect to site: 127.0.0.1:17001 (attempt 12)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:37.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:38.181 | connect to site: 127.0.0.1:17001 (attempt 13)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:38.181 | connect to site: 127.0.0.1:17001 (attempt 13)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:38.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:38.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:38.181 | connect to site: 127.0.0.1:17001 (attempt 13)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:38.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:39.181 | connect to site: 127.0.0.1:17001 (attempt 14)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:39.181 | connect to site: 127.0.0.1:17001 (attempt 14)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:39.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:39.181 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:39.182 | connect to site: 127.0.0.1:17001 (attempt 14)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 21:56:39.182 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.181 | connect to site: 127.0.0.1:17001 (attempt 15)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.181 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.181 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.181 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.181 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.181 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.181 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.181 | connect to site: 127.0.0.1:17001 (attempt 15)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17001 (attempt 15)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 21:56:40.182 | site 9 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 21:56:40.182 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 21:56:40.182 | site 1 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 21:56:40.183 | site 5 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:110] 2025-11-30 21:56:40.183 | done waiting for server setup threads.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 21:56:40.183 | heartbeat setup for s201 on 0.0.0.0:27101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 21:56:40.183 | heartbeat setup for s202 on 0.0.0.0:27102
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 21:56:40.183 | heartbeat setup for s203 on 0.0.0.0:27103
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:117] 2025-11-30 21:56:40.183 | server workers' communicators setup
+p1, received ending: 0, num_workers:3, received msg: 0, end_received_leader:0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.227 | ForwardToLearner: par_id=1, slot=1, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.228 | ForwardToLearner: SENDING to learner site_id=7, slot=1
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.228 | ForwardToLearner: par_id=0, slot=1, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.228 | ForwardToLearner: SENDING to learner site_id=3, slot=1
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.229 | ForwardToLearner: par_id=2, slot=1, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.229 | ForwardToLearner: SENDING to learner site_id=11, slot=1
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.233 | ForwardToLearner: par_id=1, slot=2, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.233 | ForwardToLearner: SENDING to learner site_id=7, slot=2
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.234 | ForwardToLearner: par_id=0, slot=2, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.234 | ForwardToLearner: SENDING to learner site_id=3, slot=2
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.235 | ForwardToLearner: par_id=2, slot=2, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.235 | ForwardToLearner: SENDING to learner site_id=11, slot=2
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.238 | ForwardToLearner: par_id=0, slot=3, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.238 | ForwardToLearner: SENDING to learner site_id=3, slot=3
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.239 | ForwardToLearner: par_id=1, slot=3, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.239 | ForwardToLearner: SENDING to learner site_id=7, slot=3
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.239 | ForwardToLearner: par_id=2, slot=3, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.239 | ForwardToLearner: SENDING to learner site_id=11, slot=3
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.244 | ForwardToLearner: par_id=1, slot=4, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.244 | ForwardToLearner: SENDING to learner site_id=7, slot=4
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.244 | ForwardToLearner: par_id=0, slot=4, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.244 | ForwardToLearner: SENDING to learner site_id=3, slot=4
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.245 | ForwardToLearner: par_id=2, slot=4, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.245 | ForwardToLearner: SENDING to learner site_id=11, slot=4
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.249 | ForwardToLearner: par_id=1, slot=5, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.249 | ForwardToLearner: SENDING to learner site_id=7, slot=5
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.249 | ForwardToLearner: par_id=2, slot=5, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.249 | ForwardToLearner: SENDING to learner site_id=11, slot=5
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.250 | ForwardToLearner: par_id=0, slot=5, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.250 | ForwardToLearner: SENDING to learner site_id=3, slot=5
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.253 | ForwardToLearner: par_id=0, slot=6, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.253 | ForwardToLearner: SENDING to learner site_id=3, slot=6
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.255 | ForwardToLearner: par_id=1, slot=6, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.255 | ForwardToLearner: SENDING to learner site_id=7, slot=6
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.255 | ForwardToLearner: par_id=2, slot=6, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.255 | ForwardToLearner: SENDING to learner site_id=11, slot=6
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.259 | ForwardToLearner: par_id=0, slot=7, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.259 | ForwardToLearner: SENDING to learner site_id=3, slot=7
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.260 | ForwardToLearner: par_id=1, slot=7, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.260 | ForwardToLearner: SENDING to learner site_id=7, slot=7
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.260 | ForwardToLearner: par_id=2, slot=7, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.260 | ForwardToLearner: SENDING to learner site_id=11, slot=7
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.264 | ForwardToLearner: par_id=0, slot=8, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.264 | ForwardToLearner: SENDING to learner site_id=3, slot=8
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.264 | ForwardToLearner: par_id=1, slot=8, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.264 | ForwardToLearner: SENDING to learner site_id=7, slot=8
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.264 | ForwardToLearner: par_id=2, slot=8, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.264 | ForwardToLearner: SENDING to learner site_id=11, slot=8
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.270 | ForwardToLearner: par_id=0, slot=9, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.270 | ForwardToLearner: SENDING to learner site_id=3, slot=9
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.270 | ForwardToLearner: par_id=2, slot=9, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.270 | ForwardToLearner: SENDING to learner site_id=11, slot=9
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.270 | ForwardToLearner: par_id=1, slot=9, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.270 | ForwardToLearner: SENDING to learner site_id=7, slot=9
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.274 | ForwardToLearner: par_id=0, slot=10, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.274 | ForwardToLearner: SENDING to learner site_id=3, slot=10
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.275 | ForwardToLearner: par_id=2, slot=10, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.275 | ForwardToLearner: SENDING to learner site_id=11, slot=10
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.276 | ForwardToLearner: par_id=1, slot=10, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.276 | ForwardToLearner: SENDING to learner site_id=7, slot=10
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.279 | ForwardToLearner: par_id=0, slot=11, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.279 | ForwardToLearner: SENDING to learner site_id=3, slot=11
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.281 | ForwardToLearner: par_id=1, slot=11, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.281 | ForwardToLearner: SENDING to learner site_id=7, slot=11
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.281 | ForwardToLearner: par_id=2, slot=11, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.281 | ForwardToLearner: SENDING to learner site_id=11, slot=11
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.284 | ForwardToLearner: par_id=0, slot=12, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.284 | ForwardToLearner: SENDING to learner site_id=3, slot=12
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.285 | ForwardToLearner: par_id=1, slot=12, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.285 | ForwardToLearner: SENDING to learner site_id=7, slot=12
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.285 | ForwardToLearner: par_id=2, slot=12, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.285 | ForwardToLearner: SENDING to learner site_id=11, slot=12
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.290 | ForwardToLearner: par_id=0, slot=13, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.290 | ForwardToLearner: SENDING to learner site_id=3, slot=13
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.291 | ForwardToLearner: par_id=1, slot=13, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.291 | ForwardToLearner: SENDING to learner site_id=7, slot=13
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.291 | ForwardToLearner: par_id=2, slot=13, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.291 | ForwardToLearner: SENDING to learner site_id=11, slot=13
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.295 | ForwardToLearner: par_id=0, slot=14, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.295 | ForwardToLearner: SENDING to learner site_id=3, slot=14
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.296 | ForwardToLearner: par_id=1, slot=14, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.296 | ForwardToLearner: SENDING to learner site_id=7, slot=14
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.296 | ForwardToLearner: par_id=2, slot=14, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.296 | ForwardToLearner: SENDING to learner site_id=11, slot=14
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.300 | ForwardToLearner: par_id=0, slot=15, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.300 | ForwardToLearner: SENDING to learner site_id=3, slot=15
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.301 | ForwardToLearner: par_id=2, slot=15, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.301 | ForwardToLearner: SENDING to learner site_id=11, slot=15
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.301 | ForwardToLearner: par_id=1, slot=15, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.301 | ForwardToLearner: SENDING to learner site_id=7, slot=15
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.305 | ForwardToLearner: par_id=0, slot=16, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.305 | ForwardToLearner: SENDING to learner site_id=3, slot=16
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.305 | ForwardToLearner: par_id=2, slot=16, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.305 | ForwardToLearner: SENDING to learner site_id=11, slot=16
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.306 | ForwardToLearner: par_id=1, slot=16, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.306 | ForwardToLearner: SENDING to learner site_id=7, slot=16
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.310 | ForwardToLearner: par_id=0, slot=17, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.310 | ForwardToLearner: SENDING to learner site_id=3, slot=17
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.311 | ForwardToLearner: par_id=2, slot=17, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.311 | ForwardToLearner: SENDING to learner site_id=11, slot=17
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.311 | ForwardToLearner: par_id=1, slot=17, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.311 | ForwardToLearner: SENDING to learner site_id=7, slot=17
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.315 | ForwardToLearner: par_id=0, slot=18, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.315 | ForwardToLearner: SENDING to learner site_id=3, slot=18
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.316 | ForwardToLearner: par_id=2, slot=18, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.316 | ForwardToLearner: SENDING to learner site_id=11, slot=18
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.316 | ForwardToLearner: par_id=1, slot=18, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.316 | ForwardToLearner: SENDING to learner site_id=7, slot=18
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.320 | ForwardToLearner: par_id=0, slot=19, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.320 | ForwardToLearner: SENDING to learner site_id=3, slot=19
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.320 | ForwardToLearner: par_id=2, slot=19, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.320 | ForwardToLearner: SENDING to learner site_id=11, slot=19
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.322 | ForwardToLearner: par_id=1, slot=19, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.322 | ForwardToLearner: SENDING to learner site_id=7, slot=19
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.327 | ForwardToLearner: par_id=1, slot=20, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.327 | ForwardToLearner: SENDING to learner site_id=7, slot=20
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.327 | ForwardToLearner: par_id=0, slot=20, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.327 | ForwardToLearner: SENDING to learner site_id=3, slot=20
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.327 | ForwardToLearner: par_id=2, slot=20, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.327 | ForwardToLearner: SENDING to learner site_id=11, slot=20
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.331 | ForwardToLearner: par_id=2, slot=21, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.331 | ForwardToLearner: SENDING to learner site_id=11, slot=21
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.331 | ForwardToLearner: par_id=0, slot=21, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.331 | ForwardToLearner: SENDING to learner site_id=3, slot=21
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.332 | ForwardToLearner: par_id=1, slot=21, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.332 | ForwardToLearner: SENDING to learner site_id=7, slot=21
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.336 | ForwardToLearner: par_id=0, slot=22, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.336 | ForwardToLearner: SENDING to learner site_id=3, slot=22
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.337 | ForwardToLearner: par_id=2, slot=22, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.337 | ForwardToLearner: SENDING to learner site_id=11, slot=22
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.337 | ForwardToLearner: par_id=1, slot=22, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.337 | ForwardToLearner: SENDING to learner site_id=7, slot=22
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.341 | ForwardToLearner: par_id=2, slot=23, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.341 | ForwardToLearner: SENDING to learner site_id=11, slot=23
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.342 | ForwardToLearner: par_id=0, slot=23, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.342 | ForwardToLearner: SENDING to learner site_id=3, slot=23
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.343 | ForwardToLearner: par_id=1, slot=23, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.343 | ForwardToLearner: SENDING to learner site_id=7, slot=23
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.346 | ForwardToLearner: par_id=2, slot=24, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.346 | ForwardToLearner: SENDING to learner site_id=11, slot=24
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.346 | ForwardToLearner: par_id=0, slot=24, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.346 | ForwardToLearner: SENDING to learner site_id=3, slot=24
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.347 | ForwardToLearner: par_id=1, slot=24, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.347 | ForwardToLearner: SENDING to learner site_id=7, slot=24
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.351 | ForwardToLearner: par_id=0, slot=25, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.351 | ForwardToLearner: SENDING to learner site_id=3, slot=25
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.352 | ForwardToLearner: par_id=1, slot=25, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.352 | ForwardToLearner: SENDING to learner site_id=7, slot=25
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.352 | ForwardToLearner: par_id=2, slot=25, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.352 | ForwardToLearner: SENDING to learner site_id=11, slot=25
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.357 | ForwardToLearner: par_id=0, slot=26, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.357 | ForwardToLearner: SENDING to learner site_id=3, slot=26
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.357 | ForwardToLearner: par_id=2, slot=26, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.357 | ForwardToLearner: SENDING to learner site_id=11, slot=26
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.358 | ForwardToLearner: par_id=1, slot=26, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.358 | ForwardToLearner: SENDING to learner site_id=7, slot=26
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.362 | ForwardToLearner: par_id=0, slot=27, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.362 | ForwardToLearner: SENDING to learner site_id=3, slot=27
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.362 | ForwardToLearner: par_id=2, slot=27, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.362 | ForwardToLearner: SENDING to learner site_id=11, slot=27
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.363 | ForwardToLearner: par_id=1, slot=27, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.363 | ForwardToLearner: SENDING to learner site_id=7, slot=27
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.367 | ForwardToLearner: par_id=0, slot=28, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.367 | ForwardToLearner: SENDING to learner site_id=3, slot=28
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.367 | ForwardToLearner: par_id=2, slot=28, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.367 | ForwardToLearner: SENDING to learner site_id=11, slot=28
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.368 | ForwardToLearner: par_id=1, slot=28, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.368 | ForwardToLearner: SENDING to learner site_id=7, slot=28
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.372 | ForwardToLearner: par_id=0, slot=29, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.372 | ForwardToLearner: SENDING to learner site_id=3, slot=29
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.373 | ForwardToLearner: par_id=2, slot=29, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.373 | ForwardToLearner: SENDING to learner site_id=11, slot=29
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.373 | ForwardToLearner: par_id=1, slot=29, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.373 | ForwardToLearner: SENDING to learner site_id=7, slot=29
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.377 | ForwardToLearner: par_id=0, slot=30, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.377 | ForwardToLearner: SENDING to learner site_id=3, slot=30
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.377 | ForwardToLearner: par_id=2, slot=30, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.377 | ForwardToLearner: SENDING to learner site_id=11, slot=30
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.378 | ForwardToLearner: par_id=1, slot=30, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.378 | ForwardToLearner: SENDING to learner site_id=7, slot=30
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.382 | ForwardToLearner: par_id=0, slot=31, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.382 | ForwardToLearner: SENDING to learner site_id=3, slot=31
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.382 | ForwardToLearner: par_id=2, slot=31, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.382 | ForwardToLearner: SENDING to learner site_id=11, slot=31
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.383 | ForwardToLearner: par_id=1, slot=31, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.383 | ForwardToLearner: SENDING to learner site_id=7, slot=31
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.388 | ForwardToLearner: par_id=0, slot=32, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.388 | ForwardToLearner: SENDING to learner site_id=3, slot=32
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.388 | ForwardToLearner: par_id=2, slot=32, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.388 | ForwardToLearner: SENDING to learner site_id=11, slot=32
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.389 | ForwardToLearner: par_id=1, slot=32, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.389 | ForwardToLearner: SENDING to learner site_id=7, slot=32
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.393 | ForwardToLearner: par_id=0, slot=33, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.393 | ForwardToLearner: SENDING to learner site_id=3, slot=33
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.393 | ForwardToLearner: par_id=1, slot=33, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.393 | ForwardToLearner: SENDING to learner site_id=7, slot=33
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.394 | ForwardToLearner: par_id=2, slot=33, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.394 | ForwardToLearner: SENDING to learner site_id=11, slot=33
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.399 | ForwardToLearner: par_id=0, slot=34, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.399 | ForwardToLearner: SENDING to learner site_id=3, slot=34
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.399 | ForwardToLearner: par_id=1, slot=34, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.399 | ForwardToLearner: SENDING to learner site_id=7, slot=34
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.400 | ForwardToLearner: par_id=2, slot=34, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.400 | ForwardToLearner: SENDING to learner site_id=11, slot=34
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.403 | ForwardToLearner: par_id=0, slot=35, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.403 | ForwardToLearner: SENDING to learner site_id=3, slot=35
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.404 | ForwardToLearner: par_id=1, slot=35, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.404 | ForwardToLearner: SENDING to learner site_id=7, slot=35
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.404 | ForwardToLearner: par_id=2, slot=35, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.404 | ForwardToLearner: SENDING to learner site_id=11, slot=35
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.408 | ForwardToLearner: par_id=1, slot=36, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.408 | ForwardToLearner: SENDING to learner site_id=7, slot=36
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.409 | ForwardToLearner: par_id=2, slot=36, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.409 | ForwardToLearner: SENDING to learner site_id=11, slot=36
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.409 | ForwardToLearner: par_id=0, slot=36, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.409 | ForwardToLearner: SENDING to learner site_id=3, slot=36
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.413 | ForwardToLearner: par_id=0, slot=37, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.413 | ForwardToLearner: SENDING to learner site_id=3, slot=37
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.414 | ForwardToLearner: par_id=1, slot=37, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.414 | ForwardToLearner: SENDING to learner site_id=7, slot=37
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.415 | ForwardToLearner: par_id=2, slot=37, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.415 | ForwardToLearner: SENDING to learner site_id=11, slot=37
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.419 | ForwardToLearner: par_id=2, slot=38, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.419 | ForwardToLearner: SENDING to learner site_id=11, slot=38
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.419 | ForwardToLearner: par_id=0, slot=38, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.419 | ForwardToLearner: SENDING to learner site_id=3, slot=38
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.420 | ForwardToLearner: par_id=1, slot=38, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.420 | ForwardToLearner: SENDING to learner site_id=7, slot=38
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.424 | ForwardToLearner: par_id=0, slot=39, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.424 | ForwardToLearner: SENDING to learner site_id=3, slot=39
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.424 | ForwardToLearner: par_id=1, slot=39, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.424 | ForwardToLearner: SENDING to learner site_id=7, slot=39
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.425 | ForwardToLearner: par_id=2, slot=39, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.425 | ForwardToLearner: SENDING to learner site_id=11, slot=39
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.430 | ForwardToLearner: par_id=2, slot=40, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.430 | ForwardToLearner: SENDING to learner site_id=11, slot=40
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.430 | ForwardToLearner: par_id=0, slot=40, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.430 | ForwardToLearner: SENDING to learner site_id=3, slot=40
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.430 | ForwardToLearner: par_id=1, slot=40, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.430 | ForwardToLearner: SENDING to learner site_id=7, slot=40
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.434 | ForwardToLearner: par_id=2, slot=41, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.434 | ForwardToLearner: SENDING to learner site_id=11, slot=41
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.434 | ForwardToLearner: par_id=0, slot=41, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.434 | ForwardToLearner: SENDING to learner site_id=3, slot=41
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.435 | ForwardToLearner: par_id=1, slot=41, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.435 | ForwardToLearner: SENDING to learner site_id=7, slot=41
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.439 | ForwardToLearner: par_id=0, slot=42, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.439 | ForwardToLearner: SENDING to learner site_id=3, slot=42
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.440 | ForwardToLearner: par_id=2, slot=42, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.440 | ForwardToLearner: SENDING to learner site_id=11, slot=42
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.440 | ForwardToLearner: par_id=1, slot=42, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.440 | ForwardToLearner: SENDING to learner site_id=7, slot=42
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.445 | ForwardToLearner: par_id=0, slot=43, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.445 | ForwardToLearner: SENDING to learner site_id=3, slot=43
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.445 | ForwardToLearner: par_id=1, slot=43, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.445 | ForwardToLearner: SENDING to learner site_id=7, slot=43
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.445 | ForwardToLearner: par_id=2, slot=43, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.445 | ForwardToLearner: SENDING to learner site_id=11, slot=43
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.449 | ForwardToLearner: par_id=0, slot=44, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.449 | ForwardToLearner: SENDING to learner site_id=3, slot=44
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.450 | ForwardToLearner: par_id=2, slot=44, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.450 | ForwardToLearner: SENDING to learner site_id=11, slot=44
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.451 | ForwardToLearner: par_id=1, slot=44, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.451 | ForwardToLearner: SENDING to learner site_id=7, slot=44
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.455 | ForwardToLearner: par_id=2, slot=45, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.455 | ForwardToLearner: SENDING to learner site_id=11, slot=45
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.455 | ForwardToLearner: par_id=0, slot=45, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.455 | ForwardToLearner: SENDING to learner site_id=3, slot=45
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.455 | ForwardToLearner: par_id=1, slot=45, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.455 | ForwardToLearner: SENDING to learner site_id=7, slot=45
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.460 | ForwardToLearner: par_id=0, slot=46, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.460 | ForwardToLearner: SENDING to learner site_id=3, slot=46
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.460 | ForwardToLearner: par_id=1, slot=46, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.460 | ForwardToLearner: SENDING to learner site_id=7, slot=46
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.460 | ForwardToLearner: par_id=2, slot=46, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.460 | ForwardToLearner: SENDING to learner site_id=11, slot=46
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.465 | ForwardToLearner: par_id=2, slot=47, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.465 | ForwardToLearner: SENDING to learner site_id=11, slot=47
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.465 | ForwardToLearner: par_id=0, slot=47, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.465 | ForwardToLearner: SENDING to learner site_id=3, slot=47
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.466 | ForwardToLearner: par_id=1, slot=47, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.466 | ForwardToLearner: SENDING to learner site_id=7, slot=47
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.470 | ForwardToLearner: par_id=0, slot=48, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.470 | ForwardToLearner: SENDING to learner site_id=3, slot=48
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.471 | ForwardToLearner: par_id=1, slot=48, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.471 | ForwardToLearner: SENDING to learner site_id=7, slot=48
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.471 | ForwardToLearner: par_id=2, slot=48, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.471 | ForwardToLearner: SENDING to learner site_id=11, slot=48
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.475 | ForwardToLearner: par_id=0, slot=49, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.475 | ForwardToLearner: SENDING to learner site_id=3, slot=49
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.475 | ForwardToLearner: par_id=2, slot=49, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.475 | ForwardToLearner: SENDING to learner site_id=11, slot=49
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.476 | ForwardToLearner: par_id=1, slot=49, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.476 | ForwardToLearner: SENDING to learner site_id=7, slot=49
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.480 | ForwardToLearner: par_id=0, slot=50, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.480 | ForwardToLearner: SENDING to learner site_id=3, slot=50
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.481 | ForwardToLearner: par_id=1, slot=50, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.481 | ForwardToLearner: SENDING to learner site_id=7, slot=50
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.481 | ForwardToLearner: par_id=2, slot=50, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.481 | ForwardToLearner: SENDING to learner site_id=11, slot=50
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.485 | ForwardToLearner: par_id=0, slot=51, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.485 | ForwardToLearner: SENDING to learner site_id=3, slot=51
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.486 | ForwardToLearner: par_id=2, slot=51, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.486 | ForwardToLearner: SENDING to learner site_id=11, slot=51
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.487 | ForwardToLearner: par_id=1, slot=51, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.487 | ForwardToLearner: SENDING to learner site_id=7, slot=51
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.491 | ForwardToLearner: par_id=0, slot=52, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.491 | ForwardToLearner: SENDING to learner site_id=3, slot=52
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.491 | ForwardToLearner: par_id=2, slot=52, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.491 | ForwardToLearner: SENDING to learner site_id=11, slot=52
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.491 | ForwardToLearner: par_id=1, slot=52, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.491 | ForwardToLearner: SENDING to learner site_id=7, slot=52
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.495 | ForwardToLearner: par_id=0, slot=53, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.495 | ForwardToLearner: SENDING to learner site_id=3, slot=53
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.497 | ForwardToLearner: par_id=2, slot=53, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.497 | ForwardToLearner: SENDING to learner site_id=11, slot=53
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.497 | ForwardToLearner: par_id=1, slot=53, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.497 | ForwardToLearner: SENDING to learner site_id=7, slot=53
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.501 | ForwardToLearner: par_id=1, slot=54, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.501 | ForwardToLearner: SENDING to learner site_id=7, slot=54
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.501 | ForwardToLearner: par_id=0, slot=54, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.501 | ForwardToLearner: SENDING to learner site_id=3, slot=54
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.502 | ForwardToLearner: par_id=2, slot=54, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.502 | ForwardToLearner: SENDING to learner site_id=11, slot=54
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.506 | ForwardToLearner: par_id=0, slot=55, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.506 | ForwardToLearner: SENDING to learner site_id=3, slot=55
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.507 | ForwardToLearner: par_id=2, slot=55, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.507 | ForwardToLearner: SENDING to learner site_id=11, slot=55
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.508 | ForwardToLearner: par_id=1, slot=55, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.508 | ForwardToLearner: SENDING to learner site_id=7, slot=55
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.511 | ForwardToLearner: par_id=0, slot=56, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.512 | ForwardToLearner: SENDING to learner site_id=3, slot=56
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.512 | ForwardToLearner: par_id=1, slot=56, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.512 | ForwardToLearner: SENDING to learner site_id=7, slot=56
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.512 | ForwardToLearner: par_id=2, slot=56, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.512 | ForwardToLearner: SENDING to learner site_id=11, slot=56
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.516 | ForwardToLearner: par_id=0, slot=57, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.516 | ForwardToLearner: SENDING to learner site_id=3, slot=57
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.517 | ForwardToLearner: par_id=2, slot=57, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.517 | ForwardToLearner: SENDING to learner site_id=11, slot=57
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.518 | ForwardToLearner: par_id=1, slot=57, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.518 | ForwardToLearner: SENDING to learner site_id=7, slot=57
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.522 | ForwardToLearner: par_id=0, slot=58, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.522 | ForwardToLearner: SENDING to learner site_id=3, slot=58
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.523 | ForwardToLearner: par_id=1, slot=58, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.523 | ForwardToLearner: SENDING to learner site_id=7, slot=58
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.523 | ForwardToLearner: par_id=2, slot=58, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.523 | ForwardToLearner: SENDING to learner site_id=11, slot=58
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.526 | ForwardToLearner: par_id=0, slot=59, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.526 | ForwardToLearner: SENDING to learner site_id=3, slot=59
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.528 | ForwardToLearner: par_id=2, slot=59, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.528 | ForwardToLearner: SENDING to learner site_id=11, slot=59
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.528 | ForwardToLearner: par_id=1, slot=59, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.528 | ForwardToLearner: SENDING to learner site_id=7, slot=59
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.532 | ForwardToLearner: par_id=0, slot=60, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.532 | ForwardToLearner: SENDING to learner site_id=3, slot=60
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.533 | ForwardToLearner: par_id=1, slot=60, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.533 | ForwardToLearner: SENDING to learner site_id=7, slot=60
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.533 | ForwardToLearner: par_id=2, slot=60, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.533 | ForwardToLearner: SENDING to learner site_id=11, slot=60
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.537 | ForwardToLearner: par_id=0, slot=61, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.537 | ForwardToLearner: SENDING to learner site_id=3, slot=61
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.538 | ForwardToLearner: par_id=1, slot=61, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.538 | ForwardToLearner: SENDING to learner site_id=7, slot=61
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.538 | ForwardToLearner: par_id=2, slot=61, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.538 | ForwardToLearner: SENDING to learner site_id=11, slot=61
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.542 | ForwardToLearner: par_id=2, slot=62, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.542 | ForwardToLearner: SENDING to learner site_id=11, slot=62
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.543 | ForwardToLearner: par_id=0, slot=62, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.543 | ForwardToLearner: SENDING to learner site_id=3, slot=62
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.543 | ForwardToLearner: par_id=1, slot=62, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.543 | ForwardToLearner: SENDING to learner site_id=7, slot=62
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.547 | ForwardToLearner: par_id=0, slot=63, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.547 | ForwardToLearner: SENDING to learner site_id=3, slot=63
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.548 | ForwardToLearner: par_id=1, slot=63, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.548 | ForwardToLearner: SENDING to learner site_id=7, slot=63
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.548 | ForwardToLearner: par_id=2, slot=63, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.548 | ForwardToLearner: SENDING to learner site_id=11, slot=63
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.552 | ForwardToLearner: par_id=0, slot=64, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.552 | ForwardToLearner: SENDING to learner site_id=3, slot=64
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.553 | ForwardToLearner: par_id=2, slot=64, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.553 | ForwardToLearner: SENDING to learner site_id=11, slot=64
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.554 | ForwardToLearner: par_id=1, slot=64, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.554 | ForwardToLearner: SENDING to learner site_id=7, slot=64
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.558 | ForwardToLearner: par_id=0, slot=65, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.558 | ForwardToLearner: SENDING to learner site_id=3, slot=65
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.558 | ForwardToLearner: par_id=1, slot=65, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.558 | ForwardToLearner: SENDING to learner site_id=7, slot=65
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.559 | ForwardToLearner: par_id=2, slot=65, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.559 | ForwardToLearner: SENDING to learner site_id=11, slot=65
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.562 | ForwardToLearner: par_id=0, slot=66, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.562 | ForwardToLearner: SENDING to learner site_id=3, slot=66
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.563 | ForwardToLearner: par_id=2, slot=66, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.563 | ForwardToLearner: SENDING to learner site_id=11, slot=66
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.564 | ForwardToLearner: par_id=1, slot=66, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.564 | ForwardToLearner: SENDING to learner site_id=7, slot=66
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.568 | ForwardToLearner: par_id=0, slot=67, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.568 | ForwardToLearner: SENDING to learner site_id=3, slot=67
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.569 | ForwardToLearner: par_id=1, slot=67, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.569 | ForwardToLearner: SENDING to learner site_id=7, slot=67
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.569 | ForwardToLearner: par_id=2, slot=67, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.569 | ForwardToLearner: SENDING to learner site_id=11, slot=67
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.573 | ForwardToLearner: par_id=0, slot=68, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.573 | ForwardToLearner: SENDING to learner site_id=3, slot=68
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.574 | ForwardToLearner: par_id=2, slot=68, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.574 | ForwardToLearner: SENDING to learner site_id=11, slot=68
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.575 | ForwardToLearner: par_id=1, slot=68, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.575 | ForwardToLearner: SENDING to learner site_id=7, slot=68
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.578 | ForwardToLearner: par_id=2, slot=69, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.578 | ForwardToLearner: SENDING to learner site_id=11, slot=69
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.579 | ForwardToLearner: par_id=0, slot=69, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.579 | ForwardToLearner: SENDING to learner site_id=3, slot=69
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.579 | ForwardToLearner: par_id=1, slot=69, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.579 | ForwardToLearner: SENDING to learner site_id=7, slot=69
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.583 | ForwardToLearner: par_id=0, slot=70, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.583 | ForwardToLearner: SENDING to learner site_id=3, slot=70
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.584 | ForwardToLearner: par_id=2, slot=70, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.584 | ForwardToLearner: SENDING to learner site_id=11, slot=70
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.585 | ForwardToLearner: par_id=1, slot=70, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.585 | ForwardToLearner: SENDING to learner site_id=7, slot=70
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.589 | ForwardToLearner: par_id=2, slot=71, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.589 | ForwardToLearner: SENDING to learner site_id=11, slot=71
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.589 | ForwardToLearner: par_id=0, slot=71, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.589 | ForwardToLearner: SENDING to learner site_id=3, slot=71
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.589 | ForwardToLearner: par_id=1, slot=71, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.589 | ForwardToLearner: SENDING to learner site_id=7, slot=71
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.593 | ForwardToLearner: par_id=0, slot=72, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.593 | ForwardToLearner: SENDING to learner site_id=3, slot=72
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.594 | ForwardToLearner: par_id=1, slot=72, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.594 | ForwardToLearner: SENDING to learner site_id=7, slot=72
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.595 | ForwardToLearner: par_id=2, slot=72, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.595 | ForwardToLearner: SENDING to learner site_id=11, slot=72
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.599 | ForwardToLearner: par_id=2, slot=73, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.599 | ForwardToLearner: SENDING to learner site_id=11, slot=73
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.599 | ForwardToLearner: par_id=0, slot=73, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.599 | ForwardToLearner: SENDING to learner site_id=3, slot=73
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.600 | ForwardToLearner: par_id=1, slot=73, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.600 | ForwardToLearner: SENDING to learner site_id=7, slot=73
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.604 | ForwardToLearner: par_id=0, slot=74, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.604 | ForwardToLearner: SENDING to learner site_id=3, slot=74
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.605 | ForwardToLearner: par_id=1, slot=74, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.605 | ForwardToLearner: SENDING to learner site_id=7, slot=74
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.605 | ForwardToLearner: par_id=2, slot=74, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.605 | ForwardToLearner: SENDING to learner site_id=11, slot=74
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.609 | ForwardToLearner: par_id=0, slot=75, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.609 | ForwardToLearner: SENDING to learner site_id=3, slot=75
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.609 | ForwardToLearner: par_id=2, slot=75, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.609 | ForwardToLearner: SENDING to learner site_id=11, slot=75
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.610 | ForwardToLearner: par_id=1, slot=75, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.610 | ForwardToLearner: SENDING to learner site_id=7, slot=75
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.614 | ForwardToLearner: par_id=0, slot=76, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.614 | ForwardToLearner: SENDING to learner site_id=3, slot=76
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.615 | ForwardToLearner: par_id=1, slot=76, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.615 | ForwardToLearner: SENDING to learner site_id=7, slot=76
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.615 | ForwardToLearner: par_id=2, slot=76, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.615 | ForwardToLearner: SENDING to learner site_id=11, slot=76
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.619 | ForwardToLearner: par_id=0, slot=77, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.619 | ForwardToLearner: SENDING to learner site_id=3, slot=77
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.620 | ForwardToLearner: par_id=2, slot=77, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.620 | ForwardToLearner: SENDING to learner site_id=11, slot=77
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.620 | ForwardToLearner: par_id=1, slot=77, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.620 | ForwardToLearner: SENDING to learner site_id=7, slot=77
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.625 | ForwardToLearner: par_id=0, slot=78, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.625 | ForwardToLearner: SENDING to learner site_id=3, slot=78
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.625 | ForwardToLearner: par_id=1, slot=78, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.625 | ForwardToLearner: SENDING to learner site_id=7, slot=78
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.625 | ForwardToLearner: par_id=2, slot=78, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.625 | ForwardToLearner: SENDING to learner site_id=11, slot=78
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.629 | ForwardToLearner: par_id=0, slot=79, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.629 | ForwardToLearner: SENDING to learner site_id=3, slot=79
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.630 | ForwardToLearner: par_id=1, slot=79, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.630 | ForwardToLearner: SENDING to learner site_id=7, slot=79
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.630 | ForwardToLearner: par_id=2, slot=79, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.630 | ForwardToLearner: SENDING to learner site_id=11, slot=79
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.635 | ForwardToLearner: par_id=2, slot=80, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.635 | ForwardToLearner: SENDING to learner site_id=11, slot=80
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.635 | ForwardToLearner: par_id=0, slot=80, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.635 | ForwardToLearner: SENDING to learner site_id=3, slot=80
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.636 | ForwardToLearner: par_id=1, slot=80, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.636 | ForwardToLearner: SENDING to learner site_id=7, slot=80
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.640 | ForwardToLearner: par_id=0, slot=81, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.640 | ForwardToLearner: SENDING to learner site_id=3, slot=81
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.640 | ForwardToLearner: par_id=1, slot=81, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.640 | ForwardToLearner: SENDING to learner site_id=7, slot=81
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.641 | ForwardToLearner: par_id=2, slot=81, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.641 | ForwardToLearner: SENDING to learner site_id=11, slot=81
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.645 | ForwardToLearner: par_id=2, slot=82, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.645 | ForwardToLearner: SENDING to learner site_id=11, slot=82
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.645 | ForwardToLearner: par_id=0, slot=82, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.645 | ForwardToLearner: SENDING to learner site_id=3, slot=82
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.646 | ForwardToLearner: par_id=1, slot=82, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.646 | ForwardToLearner: SENDING to learner site_id=7, slot=82
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.650 | ForwardToLearner: par_id=0, slot=83, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.650 | ForwardToLearner: SENDING to learner site_id=3, slot=83
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.651 | ForwardToLearner: par_id=1, slot=83, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.651 | ForwardToLearner: SENDING to learner site_id=7, slot=83
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.651 | ForwardToLearner: par_id=2, slot=83, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.651 | ForwardToLearner: SENDING to learner site_id=11, slot=83
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.656 | ForwardToLearner: par_id=2, slot=84, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.656 | ForwardToLearner: SENDING to learner site_id=11, slot=84
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.656 | ForwardToLearner: par_id=0, slot=84, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.656 | ForwardToLearner: SENDING to learner site_id=3, slot=84
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.656 | ForwardToLearner: par_id=1, slot=84, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.656 | ForwardToLearner: SENDING to learner site_id=7, slot=84
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.660 | ForwardToLearner: par_id=0, slot=85, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.660 | ForwardToLearner: SENDING to learner site_id=3, slot=85
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.661 | ForwardToLearner: par_id=1, slot=85, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.661 | ForwardToLearner: SENDING to learner site_id=7, slot=85
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.662 | ForwardToLearner: par_id=2, slot=85, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.662 | ForwardToLearner: SENDING to learner site_id=11, slot=85
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.665 | ForwardToLearner: par_id=0, slot=86, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.665 | ForwardToLearner: SENDING to learner site_id=3, slot=86
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.666 | ForwardToLearner: par_id=2, slot=86, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.666 | ForwardToLearner: SENDING to learner site_id=11, slot=86
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.667 | ForwardToLearner: par_id=1, slot=86, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.667 | ForwardToLearner: SENDING to learner site_id=7, slot=86
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.671 | ForwardToLearner: par_id=0, slot=87, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.671 | ForwardToLearner: SENDING to learner site_id=3, slot=87
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.672 | ForwardToLearner: par_id=1, slot=87, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.672 | ForwardToLearner: SENDING to learner site_id=7, slot=87
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.672 | ForwardToLearner: par_id=2, slot=87, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.672 | ForwardToLearner: SENDING to learner site_id=11, slot=87
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.676 | ForwardToLearner: par_id=2, slot=88, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.676 | ForwardToLearner: SENDING to learner site_id=11, slot=88
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.676 | ForwardToLearner: par_id=0, slot=88, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.676 | ForwardToLearner: SENDING to learner site_id=3, slot=88
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.677 | ForwardToLearner: par_id=1, slot=88, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.677 | ForwardToLearner: SENDING to learner site_id=7, slot=88
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.682 | ForwardToLearner: par_id=0, slot=89, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.682 | ForwardToLearner: SENDING to learner site_id=3, slot=89
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.682 | ForwardToLearner: par_id=2, slot=89, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.682 | ForwardToLearner: SENDING to learner site_id=11, slot=89
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.682 | ForwardToLearner: par_id=1, slot=89, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.682 | ForwardToLearner: SENDING to learner site_id=7, slot=89
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.686 | ForwardToLearner: par_id=0, slot=90, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.686 | ForwardToLearner: SENDING to learner site_id=3, slot=90
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.686 | ForwardToLearner: par_id=2, slot=90, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.686 | ForwardToLearner: SENDING to learner site_id=11, slot=90
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.688 | ForwardToLearner: par_id=1, slot=90, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.688 | ForwardToLearner: SENDING to learner site_id=7, slot=90
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.692 | ForwardToLearner: par_id=0, slot=91, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.692 | ForwardToLearner: SENDING to learner site_id=3, slot=91
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.692 | ForwardToLearner: par_id=1, slot=91, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.692 | ForwardToLearner: SENDING to learner site_id=7, slot=91
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.692 | ForwardToLearner: par_id=2, slot=91, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.692 | ForwardToLearner: SENDING to learner site_id=11, slot=91
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.696 | ForwardToLearner: par_id=0, slot=92, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.696 | ForwardToLearner: SENDING to learner site_id=3, slot=92
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.697 | ForwardToLearner: par_id=2, slot=92, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.697 | ForwardToLearner: SENDING to learner site_id=11, slot=92
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.698 | ForwardToLearner: par_id=1, slot=92, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.698 | ForwardToLearner: SENDING to learner site_id=7, slot=92
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.701 | ForwardToLearner: par_id=0, slot=93, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.701 | ForwardToLearner: SENDING to learner site_id=3, slot=93
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.703 | ForwardToLearner: par_id=1, slot=93, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.703 | ForwardToLearner: SENDING to learner site_id=7, slot=93
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.703 | ForwardToLearner: par_id=2, slot=93, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.703 | ForwardToLearner: SENDING to learner site_id=11, slot=93
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.707 | ForwardToLearner: par_id=0, slot=94, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.707 | ForwardToLearner: SENDING to learner site_id=3, slot=94
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.707 | ForwardToLearner: par_id=1, slot=94, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.707 | ForwardToLearner: SENDING to learner site_id=7, slot=94
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.707 | ForwardToLearner: par_id=2, slot=94, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.707 | ForwardToLearner: SENDING to learner site_id=11, slot=94
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.712 | ForwardToLearner: par_id=2, slot=95, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.712 | ForwardToLearner: SENDING to learner site_id=11, slot=95
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.712 | ForwardToLearner: par_id=0, slot=95, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.712 | ForwardToLearner: SENDING to learner site_id=3, slot=95
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.713 | ForwardToLearner: par_id=1, slot=95, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.713 | ForwardToLearner: SENDING to learner site_id=7, slot=95
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.717 | ForwardToLearner: par_id=0, slot=96, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.717 | ForwardToLearner: SENDING to learner site_id=3, slot=96
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.717 | ForwardToLearner: par_id=1, slot=96, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.717 | ForwardToLearner: SENDING to learner site_id=7, slot=96
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.717 | ForwardToLearner: par_id=2, slot=96, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.717 | ForwardToLearner: SENDING to learner site_id=11, slot=96
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.722 | ForwardToLearner: par_id=2, slot=97, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.722 | ForwardToLearner: SENDING to learner site_id=11, slot=97
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.723 | ForwardToLearner: par_id=0, slot=97, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.723 | ForwardToLearner: SENDING to learner site_id=3, slot=97
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.724 | ForwardToLearner: par_id=1, slot=97, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.724 | ForwardToLearner: SENDING to learner site_id=7, slot=97
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.727 | ForwardToLearner: par_id=1, slot=98, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.727 | ForwardToLearner: par_id=0, slot=98, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.727 | ForwardToLearner: SENDING to learner site_id=7, slot=98
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.727 | ForwardToLearner: SENDING to learner site_id=3, slot=98
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.728 | ForwardToLearner: par_id=2, slot=98, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.728 | ForwardToLearner: SENDING to learner site_id=11, slot=98
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.732 | ForwardToLearner: par_id=0, slot=99, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.732 | ForwardToLearner: SENDING to learner site_id=3, slot=99
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.733 | ForwardToLearner: par_id=2, slot=99, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.733 | ForwardToLearner: SENDING to learner site_id=11, slot=99
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.734 | ForwardToLearner: par_id=1, slot=99, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.734 | ForwardToLearner: SENDING to learner site_id=7, slot=99
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.738 | ForwardToLearner: par_id=1, slot=100, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.738 | ForwardToLearner: SENDING to learner site_id=7, slot=100
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.738 | ForwardToLearner: par_id=0, slot=100, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.738 | ForwardToLearner: SENDING to learner site_id=3, slot=100
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.738 | ForwardToLearner: par_id=2, slot=100, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.738 | ForwardToLearner: SENDING to learner site_id=11, slot=100
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.743 | ForwardToLearner: par_id=2, slot=101, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.743 | ForwardToLearner: SENDING to learner site_id=11, slot=101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-11-30 21:56:42.743 | Recieved a zero length log
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.744 | ForwardToLearner: par_id=0, slot=101, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.744 | ForwardToLearner: SENDING to learner site_id=3, slot=101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-11-30 21:56:42.744 | Recieved a zero length log
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:125] 2025-11-30 21:56:42.745 | ForwardToLearner: par_id=1, slot=101, n=3, proxies.size=4, batch_idx=0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/commo.cc:151] 2025-11-30 21:56:42.745 | ForwardToLearner: SENDING to learner site_id=7, slot=101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-11-30 21:56:42.745 | Recieved a zero length log
+p1, received ending: 3, received msg: 303
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:999] 2025-11-30 21:56:46.184 | shutdown Server Control Service after task finish total submit 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-11-30 21:56:46.184 | Shutdown Server Control Service
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-11-30 21:56:46.184 | Shutdown Server Control Service
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-11-30 21:56:46.184 | Shutdown Server Control Service
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:311] 2025-11-30 21:56:46.188 | all server workers have shut down.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-11-30 21:56:46.288 | site s201 deleting services, num: 1 0 0 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-11-30 21:56:46.340 | site par 0, loc 1: prepare 0, accept 101, commit 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-11-30 21:56:46.341 | site s202 deleting services, num: 1 0 0 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-11-30 21:56:46.393 | site par 1, loc 1: prepare 0, accept 101, commit 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-11-30 21:56:46.393 | site s203 deleting services, num: 1 0 0 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-11-30 21:56:46.444 | site par 2, loc 1: prepare 0, accept 101, commit 101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-11-30 21:56:46.494 | Ending worker with n_tot 0 and n_current 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-11-30 21:56:46.501 | Ending worker with n_tot 0 and n_current 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-11-30 21:56:46.515 | Ending worker with n_tot 0 and n_current 0
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:332] 2025-11-30 21:56:46.526 | exit process.
+[p1 committed]: 303(follower/learner), 0(leader), endReceived: 3, leaderEndReceived:0
+[[32mPASS[0m] committed logs count verify

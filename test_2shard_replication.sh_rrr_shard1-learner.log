@@ -1,0 +1,459 @@
+=========================================
+Configuration:
+=========================================
+  Number of shards:  2
+  Shard index:       1
+  Number of threads: 6
+  Cluster:           learner
+  Micro benchmark:   disabled
+  Replicated mode:   enabled
+=========================================
+20251030-22:00.15-365252(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:78] 2025-11-30 22:00:15.366 | PWD : /home/dyeung/Desktop/mako-fast-reads
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:276] 2025-11-30 22:00:15.366 | starting process 26101
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/config.cc:290] 2025-11-30 22:00:15.366 | LoadYML: config/1leader_2followers/paxos6_shardidx1.yml
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/config.cc:290] 2025-11-30 22:00:15.367 | LoadYML: config/occ_paxos.yml
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:285] 2025-11-30 22:00:15.367 | server_infos, number of sites: 6, proc_name: learner
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 22:00:15.378 | parition id of each Paxos group is 5, site-name: s406, site-id: 23
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 22:00:15.391 | parition id of each Paxos group is 4, site-name: s405, site-id: 19
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 22:00:15.400 | parition id of each Paxos group is 3, site-name: s404, site-id: 15
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 22:00:15.410 | parition id of each Paxos group is 2, site-name: s403, site-id: 11
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 22:00:15.430 | parition id of each Paxos group is 1, site-name: s402, site-id: 7
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-11-30 22:00:15.440 | parition id of each Paxos group is 0, site-name: s401, site-id: 3
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:297] 2025-11-30 22:00:15.440 | running machine-id: 3
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 22:00:15.440 | launching site: 3, bind address 0.0.0.0:18301
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 22:00:15.440 | launching site: 7, bind address 0.0.0.0:18302
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 22:00:15.441 | [service]loc_id: 3, name: s402, proc: learner, id: 7
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 22:00:15.441 | launching site: b, bind address 0.0.0.0:18303
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 22:00:15.441 | launching site: f, bind address 0.0.0.0:18304
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 22:00:15.441 | [service]loc_id: 3, name: s401, proc: learner, id: 3
+starting server at 0.0.0.0:18301
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 22:00:15.441 | launching site: 13, bind address 0.0.0.0:18305
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 22:00:15.441 | Server s401 ready at 0.0.0.0:18301
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 22:00:15.441 | setup paxos communicator
+starting server at 0.0.0.0:18302
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 22:00:15.441 | Server s402 ready at 0.0.0.0:18302
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 22:00:15.441 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.441 | connect to site: 127.0.0.1:18001 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.442 | connect to site: 127.0.0.1:18101 (attempt 0)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 22:00:15.442 | rrr::Client: connect(127.0.0.1:18101): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.442 | connect to site: 127.0.0.1:18001 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.442 | connect to site: 127.0.0.1:18101 (attempt 0)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 22:00:15.442 | rrr::Client: connect(127.0.0.1:18101): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 22:00:15.442 | [service]loc_id: 3, name: s403, proc: learner, id: 11
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 22:00:15.442 | [service]loc_id: 3, name: s404, proc: learner, id: 15
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:106] 2025-11-30 22:00:15.442 | waiting for server setup threads.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-11-30 22:00:15.442 | launching site: 17, bind address 0.0.0.0:18306
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 22:00:15.442 | [service]loc_id: 3, name: s405, proc: learner, id: 19
+starting server at 0.0.0.0:18303
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 22:00:15.442 | Server s403 ready at 0.0.0.0:18303
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 22:00:15.442 | setup paxos communicator
+starting server at 0.0.0.0:18304
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 22:00:15.442 | Server s404 ready at 0.0.0.0:18304
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 22:00:15.442 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.442 | connect to site: 127.0.0.1:18001 (attempt 0)
+starting server at I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.443 | connect to site: 127.0.0.1:18101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.442 | connect to site: 127.0.0.1:18001 (attempt 0)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 22:00:15.443 | rrr::Client: connect(127.0.0.1:18101): Connection refused
+0.0.0.0:18305
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.443 | connect to site: 127.0.0.1:18101 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 22:00:15.443 | Server s405 ready at 0.0.0.0:18305
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 22:00:15.443 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.443 | connect to site: 127.0.0.1:18001 (attempt 0)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 22:00:15.443 | rrr::Client: connect(127.0.0.1:18101): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.443 | connect to site: 127.0.0.1:18101 (attempt 0)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 22:00:15.443 | rrr::Client: connect(127.0.0.1:18101): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-11-30 22:00:15.443 | [service]loc_id: 3, name: s406, proc: learner, id: 23
+starting server at 0.0.0.0:18306
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-11-30 22:00:15.443 | Server s406 ready at 0.0.0.0:18306
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:14] 2025-11-30 22:00:15.443 | setup paxos communicator
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.443 | connect to site: 127.0.0.1:18001 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:15.443 | connect to site: 127.0.0.1:18101 (attempt 0)
+E [/home/dyeung/Desktop/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-11-30 22:00:15.443 | rrr::Client: connect(127.0.0.1:18101): Connection refused
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18101 (attempt 1)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18101 (attempt 1)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.442 | connect to site: 127.0.0.1:18202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18004 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18004 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18101 (attempt 1)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18101 (attempt 1)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18101 (attempt 1)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.443 | connect to site: 127.0.0.1:18302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18004 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18004 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18104 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18204 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18104 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18304 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18204 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18304 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18005 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18005 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18105 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18205 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18305 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18105 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18205 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18305 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18006 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18006 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18106 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18106 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18206 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18306 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18206 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 22:00:16.444 | site 3 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18104 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18306 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18204 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 22:00:16.444 | site 19 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18101 (attempt 1)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18201 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18301 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18304 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18005 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18105 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18205 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18305 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.444 | connect to site: 127.0.0.1:18104 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18006 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18106 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18206 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18204 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18306 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18304 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18002 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18005 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.445 | connect to site: 127.0.0.1:18102 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18202 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18302 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18105 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18205 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18305 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18006 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18004 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18104 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18204 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18106 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18304 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18206 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18005 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18306 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.446 | connect to site: 127.0.0.1:18105 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.447 | connect to site: 127.0.0.1:18003 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 22:00:16.447 | site 7 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18103 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18203 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18303 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18004 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 22:00:16.449 | site 11 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18104 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18204 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18304 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18005 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18105 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18205 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18305 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18006 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18106 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18206 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.449 | connect to site: 127.0.0.1:18306 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 22:00:16.449 | site 15 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.450 | connect to site: 127.0.0.1:18205 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.450 | connect to site: 127.0.0.1:18305 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.450 | connect to site: 127.0.0.1:18006 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.450 | connect to site: 127.0.0.1:18106 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.450 | connect to site: 127.0.0.1:18206 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/communicator.cc:175] 2025-11-30 22:00:16.450 | connect to site: 127.0.0.1:18306 (attempt 0)
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-11-30 22:00:16.450 | site 23 launched!
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:110] 2025-11-30 22:00:16.450 | done waiting for server setup threads.
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 22:00:16.450 | heartbeat setup for s401 on 0.0.0.0:28301
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 22:00:16.450 | heartbeat setup for s402 on 0.0.0.0:28302
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 22:00:16.451 | heartbeat setup for s403 on 0.0.0.0:28303
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 22:00:16.451 | heartbeat setup for s404 on 0.0.0.0:28304
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 22:00:16.451 | heartbeat setup for s405 on 0.0.0.0:28305
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-11-30 22:00:16.451 | heartbeat setup for s406 on 0.0.0.0:28306
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:117] 2025-11-30 22:00:16.451 | server workers' communicators setup
+I [/home/dyeung/Desktop/mako-fast-reads/src/deptran/paxos_main_helper.cc:756] 2025-11-30 22:00:16.451 | start a heartbeatBackground, addr:127.0.0.1:28001
+tpcc settings:
+  cross_partition_transactions : 1
+  read_only_snapshots          : 1
+  partition_locks              : 0
+  separate_tree_per_partition  : 1
+  new_order_remote_item_pct    : 1
+  new_order_fast_id_gen        : 1
+  uniform_item_dist            : 0
+  order_status_scan_hack       : 0
+  workload_mix                 : [45, 43, 4, 4, 4]
+reinitializing partitions under failure
+reinitializing partitions under failure - DONE
+new table is createded with name: customer_remote_1, table-id: 1, on shard-server id:0
+new table is createded with name: customer_remote_2, table-id: 2, on shard-server id:0
+new table is createded with name: customer_remote_3, table-id: 3, on shard-server id:0
+new table is createded with name: customer_remote_4, table-id: 4, on shard-server id:0
+new table is createded with name: customer_remote_5, table-id: 5, on shard-server id:0
+new table is createded with name: customer_remote_6, table-id: 6, on shard-server id:0
+new table is createded with name: customer_name_idx_remote_1, table-id: 7, on shard-server id:0
+new table is createded with name: customer_name_idx_remote_2, table-id: 8, on shard-server id:0
+new table is createded with name: customer_name_idx_remote_3, table-id: 9, on shard-server id:0
+new table is createded with name: customer_name_idx_remote_4, table-id: 10, on shard-server id:0
+new table is createded with name: customer_name_idx_remote_5, table-id: 11, on shard-server id:0
+new table is createded with name: customer_name_idx_remote_6, table-id: 12, on shard-server id:0
+new table is createded with name: district_remote_1, table-id: 13, on shard-server id:0
+new table is createded with name: district_remote_2, table-id: 14, on shard-server id:0
+new table is createded with name: district_remote_3, table-id: 15, on shard-server id:0
+new table is createded with name: district_remote_4, table-id: 16, on shard-server id:0
+new table is createded with name: district_remote_5, table-id: 17, on shard-server id:0
+new table is createded with name: district_remote_6, table-id: 18, on shard-server id:0
+new table is createded with name: history_remote_1, table-id: 19, on shard-server id:0
+new table is createded with name: history_remote_2, table-id: 20, on shard-server id:0
+new table is createded with name: history_remote_3, table-id: 21, on shard-server id:0
+new table is createded with name: history_remote_4, table-id: 22, on shard-server id:0
+new table is createded with name: history_remote_5, table-id: 23, on shard-server id:0
+new table is createded with name: history_remote_6, table-id: 24, on shard-server id:0
+new table is createded with name: new_order_remote_1, table-id: 25, on shard-server id:0
+new table is createded with name: new_order_remote_2, table-id: 26, on shard-server id:0
+new table is createded with name: new_order_remote_3, table-id: 27, on shard-server id:0
+new table is createded with name: new_order_remote_4, table-id: 28, on shard-server id:0
+new table is createded with name: new_order_remote_5, table-id: 29, on shard-server id:0
+new table is createded with name: new_order_remote_6, table-id: 30, on shard-server id:0
+new table is createded with name: oorder_remote_1, table-id: 31, on shard-server id:0
+new table is createded with name: oorder_remote_2, table-id: 32, on shard-server id:0
+new table is createded with name: oorder_remote_3, table-id: 33, on shard-server id:0
+new table is createded with name: oorder_remote_4, table-id: 34, on shard-server id:0
+new table is createded with name: oorder_remote_5, table-id: 35, on shard-server id:0
+new table is createded with name: oorder_remote_6, table-id: 36, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_remote_1, table-id: 37, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_remote_2, table-id: 38, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_remote_3, table-id: 39, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_remote_4, table-id: 40, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_remote_5, table-id: 41, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_remote_6, table-id: 42, on shard-server id:0
+new table is createded with name: order_line_remote_1, table-id: 43, on shard-server id:0
+new table is createded with name: order_line_remote_2, table-id: 44, on shard-server id:0
+new table is createded with name: order_line_remote_3, table-id: 45, on shard-server id:0
+new table is createded with name: order_line_remote_4, table-id: 46, on shard-server id:0
+new table is createded with name: order_line_remote_5, table-id: 47, on shard-server id:0
+new table is createded with name: order_line_remote_6, table-id: 48, on shard-server id:0
+new table is createded with name: stock_remote_1, table-id: 49, on shard-server id:0
+new table is createded with name: stock_remote_2, table-id: 50, on shard-server id:0
+new table is createded with name: stock_remote_3, table-id: 51, on shard-server id:0
+new table is createded with name: stock_remote_4, table-id: 52, on shard-server id:0
+new table is createded with name: stock_remote_5, table-id: 53, on shard-server id:0
+new table is createded with name: stock_remote_6, table-id: 54, on shard-server id:0
+new table is createded with name: stock_data_remote_1, table-id: 55, on shard-server id:0
+new table is createded with name: stock_data_remote_2, table-id: 56, on shard-server id:0
+new table is createded with name: stock_data_remote_3, table-id: 57, on shard-server id:0
+new table is createded with name: stock_data_remote_4, table-id: 58, on shard-server id:0
+new table is createded with name: stock_data_remote_5, table-id: 59, on shard-server id:0
+new table is createded with name: stock_data_remote_6, table-id: 60, on shard-server id:0
+new table is createded with name: warehouse_remote_1, table-id: 61, on shard-server id:0
+new table is createded with name: warehouse_remote_2, table-id: 62, on shard-server id:0
+new table is createded with name: warehouse_remote_3, table-id: 63, on shard-server id:0
+new table is createded with name: warehouse_remote_4, table-id: 64, on shard-server id:0
+new table is createded with name: warehouse_remote_5, table-id: 65, on shard-server id:0
+new table is createded with name: warehouse_remote_6, table-id: 66, on shard-server id:0
+new table is createded with name: item_remote_1, table-id: 67, on shard-server id:0
+new table is createded with name: item_remote_2, table-id: 68, on shard-server id:0
+new table is createded with name: item_remote_3, table-id: 69, on shard-server id:0
+new table is createded with name: item_remote_4, table-id: 70, on shard-server id:0
+new table is createded with name: item_remote_5, table-id: 71, on shard-server id:0
+new table is createded with name: item_remote_6, table-id: 72, on shard-server id:0
+20251030-22:00.19-456516(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+20251030-22:00.19-459252(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+20251030-22:00.19-461088(us) 26101 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251030-22:00.19-461160(us) 26101 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:34111 (listening on 0.0.0.0:34111)
+20251030-22:00.19-461174(us) 26101 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:34111
+20251030-22:00.19-461197(us) 26101 * RunEventLoop    (rrr_rpc_backend.cc:518): RrrRpcBackend::RunEventLoop: Starting event loop
+20251030-22:00.19-462050(us) 26101 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251030-22:00.19-463703(us) 26101 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:34112 (listening on 0.0.0.0:34112)
+20251030-22:00.19-463718(us) 26101 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:34112
+20251030-22:00.19-463739(us) 26101 * RunEventLoop    (rrr_rpc_backend.cc:518): RrrRpcBackend::RunEventLoop: Starting event loop
+20251030-22:00.19-468944(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-469699(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-470777(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-470967(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-472211(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-472420(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-473048(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-474190(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-475737(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-476721(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-482773(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-483623(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-484506(us) 26101 ! modeMonitor     (common2.h:93):     start for modeMonitor, running:0
+start worker:32569
+allocator::Initialize()
+  hugepgsize: 2097152
+  use MADV_WILLNEED: 1
+  mmap() region [0x7a0eaf200000, 0x7a0eefc00000)
+cpu0 owns [0x7a0eaf200000, 0x7a0eb9e00000)
+cpu1 owns [0x7a0eb9e00000, 0x7a0ec4a00000)
+cpu2 owns [0x7a0ec4a00000, 0x7a0ecf600000)
+cpu3 owns [0x7a0ecf600000, 0x7a0eda200000)
+cpu4 owns [0x7a0eda200000, 0x7a0ee4e00000)
+cpu5 owns [0x7a0ee4e00000, 0x7a0eefa00000)
+Database Benchmark:
+  pid: 26101
+settings:
+  num-cpus    : 4
+  num-threads : 6
+  shardIndex  : 1
+  paxos_proc_name  : learner
+  nshards     : 2
+  is_micro    : 0
+  is_replicated : 1
+  var-encode  : yes
+  allocator   : jemalloc
+system properties:
+  tuple_prefetch          : no
+  btree_node_prefetch     : yes
+20251030-22:00.19-489856(us) 26101 ! Init            (sync_util.hh:74):  the watermark is exchanging within the cluster: learner
+20251030-22:00.19-490704(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+20251030-22:00.19-491208(us) 26101 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251030-22:00.19-491264(us) 26101 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:34107 (listening on 0.0.0.0:34107)
+20251030-22:00.19-491277(us) 26101 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:34107
+20251030-22:00.19-491288(us) 26101 * RunEventLoop    (rrr_rpc_backend.cc:518): RrrRpcBackend::RunEventLoop: Starting event loop
+20251030-22:00.19-793554(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.19-799371(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+20251030-22:00.19-799590(us) 26101 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251030-22:00.19-799661(us) 26101 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:34108 (listening on 0.0.0.0:34108)
+20251030-22:00.19-799681(us) 26101 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:34108
+20251030-22:00.19-803586(us) 26101 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251030-22:00.20-791423(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:114, wait_time:1s
+
+20251030-22:00.21-791548(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:204, wait_time:2s
+
+20251030-22:00.22-791671(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:278, wait_time:3s
+
+20251030-22:00.23-793622(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:389, wait_time:4s
+
+20251030-22:00.24-794423(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:435, wait_time:5s
+
+20251030-22:00.25-794664(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:463, wait_time:6s
+
+20251030-22:00.26-795326(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:464, wait_time:7s
+
+20251030-22:00.27-795509(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:466, wait_time:8s
+
+20251030-22:00.28-796958(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:468, wait_time:9s
+
+20251030-22:00.29-797863(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:470, wait_time:10s
+
+20251030-22:00.30-798868(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:472, wait_time:11s
+
+20251030-22:00.31-799495(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:472, wait_time:12s
+
+20251030-22:00.32-799739(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:473, wait_time:13s
+
+we can start a advancer
+start the advancer thread...
+20251030-22:00.33-800517(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:474, wait_time:14s
+
+20251030-22:00.34-800907(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:475, wait_time:15s
+
+20251030-22:00.35-801425(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:489, wait_time:16s
+
+20251030-22:00.36-802803(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:503, wait_time:17s
+
+20251030-22:00.37-806005(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:511, wait_time:18s
+
+20251030-22:00.38-807112(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:520, wait_time:19s
+
+20251030-22:00.39-807847(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:528, wait_time:20s
+
+20251030-22:00.40-807972(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:537, wait_time:21s
+
+20251030-22:00.41-809699(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:545, wait_time:22s
+
+20251030-22:00.42-809911(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:554, wait_time:23s
+
+20251030-22:00.43-810397(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:565, wait_time:24s
+
+20251030-22:00.44-811177(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:583, wait_time:25s
+
+20251030-22:00.45-811598(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:595, wait_time:26s
+
+20251030-22:00.46-816364(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:602, wait_time:27s
+
+20251030-22:00.47-816760(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:615, wait_time:28s
+
+20251030-22:00.48-818019(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:623, wait_time:29s
+
+20251030-22:00.49-821533(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:629, wait_time:30s
+
+20251030-22:00.50-822094(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:640, wait_time:31s
+
+20251030-22:00.51-823703(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:651, wait_time:32s
+
+20251030-22:00.52-824788(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:663, wait_time:33s
+
+20251030-22:00.53-828326(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:678, wait_time:34s
+
+20251030-22:00.54-831349(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:689, wait_time:35s
+
+20251030-22:00.55-833930(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:691, wait_time:36s
+
+20251030-22:00.56-846894(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:699, wait_time:37s
+
+20251030-22:00.58-20344(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:701, wait_time:38s
+
+20251030-22:00.59-101398(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:702, wait_time:39s
+
+20251030-22:01.00-271731(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:703, wait_time:40s
+
+20251030-22:01.02-0006(us) 26101 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:703, wait_time:41s
+
+20251030-22:01.03-866496(us) 26101 ! client_watermark_exchange (sync_util.hh:346): watermark exchange client timeout
