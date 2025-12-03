@@ -664,6 +664,7 @@ public:
     int shard_validate();
 
     // Read-only fast path methods
+    // Flag indicates the txn should route through try_commit_read_only() when no writes are present.
     void set_read_only_fast_path(bool value = true) {
         is_read_only_fast_path_ = value;
         // Note: read_timestamp_ is acquired at commit time when we know all shards
@@ -682,8 +683,9 @@ public:
         return read_timestamp_;
     }
     
-    // Acquire read timestamp for follower reads (call before doing reads)
-    // This allows follower replicas to check if they're fresh enough
+    // Acquire an initial snapshot timestamp from current watermarks so follower reads
+    // can evaluate staleness; try_commit_read_only() recomputes a conservative snapshot
+    // covering all shards in the read set before commit.
     void acquireReadTimestamp() {
         if (read_timestamp_ == 0) {
             read_timestamp_ = getMinSafeTimestamp();
@@ -935,6 +937,17 @@ public:
         if (TThread::mode() == 0)
             always_assert(!t->in_progress());
         t->start();
+    }
+
+    static void start_read_only_transaction() {
+        Transaction* t = transaction();
+        if (TThread::mode() == 0)
+            always_assert(!t->in_progress());
+        t->start();
+        // Entry point for read-only fast-path txns: mark the intent and grab a snapshot so
+        // follower read checks have a timestamp before commit-time recomputation.
+        t->set_read_only_fast_path(true);
+        t->acquireReadTimestamp();
     }
 
     static void update_threadid() {
