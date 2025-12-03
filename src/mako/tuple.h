@@ -22,7 +22,6 @@
 #include "small_unordered_map.h"
 #include "prefetch.h"
 #include "ownership_checker.h"
-#include "allocator.h"
 
 // debugging tool
 //#define TUPLE_LOCK_OWNERSHIP_CHECKING

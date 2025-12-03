@@ -32,6 +32,7 @@
 #include "static_unordered_map.h"
 #include "static_vector.h"
 #include "prefetch.h"
+#include "allocator.h"
 #include "tuple.h"
 #include "scopedperf.hh"
 #include "marked_ptr.h"
