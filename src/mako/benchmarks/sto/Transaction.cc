@@ -18,6 +18,26 @@ void register_sync_util(std::function<int()> cb) {
     callback_ = cb;
 }
 
+namespace {
+std::atomic<uint64_t> g_read_only_fast_path_commits_attempted{0};
+std::atomic<uint64_t> g_read_only_fast_path_commits_fallback{0};
+std::atomic<uint64_t> g_normal_commits_attempted{0};
+}
+
+namespace txn_fast_path_stats {
+void record_fast_path_attempt() {
+    g_read_only_fast_path_commits_attempted.fetch_add(1, std::memory_order_relaxed);
+}
+
+void record_fast_path_fallback() {
+    g_read_only_fast_path_commits_fallback.fetch_add(1, std::memory_order_relaxed);
+}
+
+void record_normal_attempt() {
+    g_normal_commits_attempted.fetch_add(1, std::memory_order_relaxed);
+}
+}
+
 Transaction::testing_type Transaction::testing;
 threadinfo_t Transaction::tinfo[MAX_THREADS];
 __thread int TThread::the_id;
@@ -366,6 +386,7 @@ void Transaction::shard_unlock(bool committed) {
 
 bool Transaction::try_commit(bool no_paxos) {
     assert(TThread::id() == threadid_);
+    txn_fast_path_stats::record_normal_attempt();
 #if ASSERT_TX_SIZE
     if (tset_size_ > TX_SIZE_LIMIT) {
         std::cerr << "transSet_ size at " << tset_size_
@@ -525,7 +546,7 @@ bool Transaction::try_commit(bool no_paxos) {
         uint32_t currentWatermark = sync_util::sync_logger::single_watermark_.load(memory_order_acquire);
         if(watermarkTimestamp > currentWatermark) {
             // Update single watermark
-            sync_util::sync_logger::single_watermark_.store(watermarkTimestamp, memory_order_release);
+            sync_util::sync_logger::setSingleWatermark(watermarkTimestamp);
         }
         if (ret > 0) {
             goto abort;
@@ -616,10 +637,13 @@ abort:
     return false;
 }
 
-// Get minimum safe timestamp across all shards involved in this transaction
-// Returns timestamp value (already divided by 10, without epoch encoding)
 uint32_t Transaction::getMinSafeTimestamp() const {
-    // Start with local watermark (encoded as timestamp*10 + epoch)
+    // Watermarks encode timestamp*10 + epoch, so we ask sync_logger::retrieveW() for the local
+    // shard and ShardClient::remoteExchangeWatermark() for any shard listed in readset_shard_bits.
+    // Dividing by 10 decodes the logical timestamp component used for Node::timestamp comparisons.
+    // Invariant: the computed min_safe_ts is a conservative closed/safe snapshot timestamp—any
+    // commit with timestamp <= min_safe_ts should already be durably replicated on every shard in
+    // this transaction's readset when the value is returned.
     uint32_t local_watermark = sync_util::sync_logger::retrieveW();
     uint32_t min_safe_ts = local_watermark / 10;  // Decode: remove epoch
     
@@ -638,11 +662,14 @@ uint32_t Transaction::getMinSafeTimestamp() const {
     return min_safe_ts;
 }
 
-// Fast-path commit for read-only transactions
-// Skips locking, write installation, and Paxos replication
 bool Transaction::try_commit_read_only() {
+    // For read-only fast-path transactions the call to getMinSafeTimestamp() chooses the snapshot
+    // timestamp (stored in read_timestamp_). Checking Node::timestamp <= read_timestamp_ ensures
+    // we never return data newer than the safe watermark, while owner()->check() and remote
+    // validation preserve serializability without acquiring locks or running Paxos.
     // Safety check: if somehow called incorrectly, fall back to normal path
     if (!is_read_only_fast_path_ || state_ != s_in_progress) {
+        txn_fast_path_stats::record_fast_path_fallback();
         return try_commit();
     }
     
@@ -653,6 +680,7 @@ bool Transaction::try_commit_read_only() {
         // Watermark not yet initialized, fall back to normal path
         // This can happen during system startup
         is_read_only_fast_path_ = false;
+        txn_fast_path_stats::record_fast_path_fallback();
         return try_commit();
     }
     
@@ -693,6 +721,7 @@ bool Transaction::try_commit_read_only() {
                         // This data item has not been replicated yet - not safe to return!
                         // Fall back to normal path which will wait for replication
                         is_read_only_fast_path_ = false;
+                        txn_fast_path_stats::record_fast_path_fallback();
                         return try_commit();
                     }
                 }
@@ -728,7 +757,7 @@ bool Transaction::try_commit_read_only() {
         // Update local watermark if remote is higher
         uint32_t currentWatermark = sync_util::sync_logger::single_watermark_.load(std::memory_order_acquire);
         if (watermark > currentWatermark) {
-            sync_util::sync_logger::single_watermark_.store(watermark, std::memory_order_release);
+            sync_util::sync_logger::setSingleWatermark(watermark);
         }
     }
     

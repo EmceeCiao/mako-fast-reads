@@ -20,8 +20,13 @@ namespace sync_util {
         // latest timestamp for disk persistence per partition
         static vector<std::atomic<uint32_t>> disk_timestamp_; // timestamp*10+epoch
 #endif
-        // Single watermark for the entire system
-        static std::atomic<uint32_t> single_watermark_; // timestamp*10+epoch
+        // Single watermark for the entire system. The encoding is timestamp*10 + epoch, so
+        // single_watermark_/10 is the closed/safe timestamp that every shard is expected to
+        // have replicated up to.
+        static std::atomic<uint32_t> single_watermark_;
+        // Instrumentation for tracking watermark progression.
+        static std::atomic<uint64_t> watermark_updates_;
+        static std::atomic<uint32_t> watermark_last_value_;
         
         static std::chrono::time_point<std::chrono::high_resolution_clock> last_update;
         static int shardIdx;
@@ -55,8 +60,8 @@ namespace sync_util {
                 disk_timestamp_[i].store(0, memory_order_relaxed);
 #endif
             }
-            // Initialize single watermark
-            single_watermark_.store(0, memory_order_relaxed);
+            // Initialize single watermark (nothing is yet safe to read)
+            recordWatermarkAdvance(0, memory_order_relaxed);
             shardIdx = shardIdx_X;
             nshards = nshards_X;
             nthreads = nthreads_X;
@@ -91,7 +96,7 @@ namespace sync_util {
               disk_timestamp_[i].store(0, memory_order_relaxed);
 #endif
            }
-           single_watermark_.store(0, memory_order_relaxed);
+           recordWatermarkAdvance(0, memory_order_relaxed);
         }
 
         static void shutdown() {
@@ -116,9 +121,9 @@ namespace sync_util {
         
         // ==================== FOLLOWER READ SUPPORT ====================
         
-        // Check if this replica (leader or follower) can serve a read at the given timestamp
-        // For leaders: always return true (leader has the latest data)
-        // For followers: check if local watermark >= requested timestamp
+        // Follower reads follow the design doc's closed timestamp semantics: a replica may serve
+        // a read at requested_ts only if its local safe timestamp (single_watermark_/10) is >= requested_ts.
+        // Leaders always return true because they advance the watermark.
         static bool can_serve_follower_read(uint32_t requested_ts) {
             // Leaders can always serve reads
             if (is_leader) return true;
@@ -131,13 +136,13 @@ namespace sync_util {
             return requested_ts <= local_safe_ts;
         }
         
-        // Get the current follower's safe timestamp (for determining read freshness)
+        // Returns the closed timestamp advertised by this replica so callers can compare requested_ts.
         static uint32_t getFollowerSafeTimestamp() {
             return single_watermark_.load(memory_order_acquire) / 10;
         }
         
-        // Check if we should redirect this read to the leader
-        // Returns true if follower is too stale and should redirect
+        // should_redirect_to_leader() is the predicate a follower uses to abort/retry (Option A).
+        // If the local safe timestamp is behind requested_ts we redirect to the leader via abort.
         static bool should_redirect_to_leader(uint32_t requested_ts) {
             if (is_leader) return false;  // Already on leader
             return !can_serve_follower_read(requested_ts);
@@ -151,6 +156,8 @@ namespace sync_util {
         // ===============================================================
         
         static uint32_t computeLocal() { // compute G immediately and strictly, tt*10+epoch
+            // Fold local replication and disk timestamps into a conservative "closed timestamp"
+            // and publish it via single_watermark_ so readers know what is safe cluster-wide.
             uint32_t min_so_far = numeric_limits<uint32_t>::max();
 
             for (int i=0; i<nthreads; i++) {
@@ -172,13 +179,13 @@ namespace sync_util {
 #if defined(COCO)
                 if ((std::chrono::high_resolution_clock::now() - last_update).count() / 1000.0 / 1000.0 >= COCO_ADVANCING_DURATION) {
 #endif
-                    single_watermark_.store(min_so_far, memory_order_release);
+                    setSingleWatermark(min_so_far);
 #if defined(COCO)
                     last_update = std::chrono::high_resolution_clock::now() ;
                 }
 #endif
             }
-            return single_watermark_.load(memory_order_acquire) ;  // invalidate the cache
+            return single_watermark_.load(memory_order_acquire) ;  // Closed timestamp snapshot
         }
 
         // In previous submission, we assume the healthy shards are always INF
@@ -196,7 +203,7 @@ namespace sync_util {
         }
         
         static uint32_t retrieveW() {
-            // Return single watermark
+            // Return the closed timestamp gating follower reads and fast-path snapshots.
             return single_watermark_.load(memory_order_acquire);
         }
 
@@ -216,12 +223,13 @@ namespace sync_util {
 
         static void setShardWBlind(uint32_t w, int sIdx) {
             // In single timestamp system, just update single watermark
-            single_watermark_.store(w, memory_order_release);
+            (void)sIdx;
+            setSingleWatermark(w);
         }
         
         // Helper for single timestamp system
         static void setSingleWatermark(uint32_t w) {
-            single_watermark_.store(w, memory_order_release);
+            recordWatermarkAdvance(w, memory_order_release);
         }
 
         static uint32_t retrieveShardW() {
@@ -267,7 +275,7 @@ namespace sync_util {
                         min_so_far = min(min_so_far, partition_min);
                 }
                 if (min_so_far!=numeric_limits<uint32_t>::max()) {
-                    // In single timestamp system, update all shards
+                    // Background thread refreshes the closed timestamp by publishing the min replica state.
                     setSingleWatermark(min_so_far);
                 }
                 
@@ -408,6 +416,13 @@ namespace sync_util {
                 Panic("remoteControl throw an error");
             }
             Warning("client for the control is terminated! control:%d, value:%lld", control, value);
+        }
+
+    private:
+        static void recordWatermarkAdvance(uint32_t w, std::memory_order order) {
+            single_watermark_.store(w, order);
+            watermark_last_value_.store(w, std::memory_order_relaxed);
+            watermark_updates_.fetch_add(1, std::memory_order_relaxed);
         }
 
     }; // end of class definition

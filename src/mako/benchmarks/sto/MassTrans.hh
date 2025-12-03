@@ -18,6 +18,27 @@
 #include "lib/common.h"
 #include "common.hh"
 #include "stdlib.h"
+#include <atomic>
+
+namespace mass_trans_instrumentation {
+inline std::atomic<uint64_t>& follower_read_served_locally_counter() {
+    static std::atomic<uint64_t> counter{0};
+    return counter;
+}
+
+inline std::atomic<uint64_t>& follower_read_aborts_stale_counter() {
+    static std::atomic<uint64_t> counter{0};
+    return counter;
+}
+
+inline void recordFollowerReadServedLocally() {
+    follower_read_served_locally_counter().fetch_add(1, std::memory_order_relaxed);
+}
+
+inline void recordFollowerReadAbortStale() {
+    follower_read_aborts_stale_counter().fetch_add(1, std::memory_order_relaxed);
+}
+}
 
 #define RCU 1
 #define ABORT_ON_WRITE_READ_CONFLICT 0
@@ -129,20 +150,23 @@ public:
     /// in the original implement, throw exception to distinguish case2
     
     // ==================== FOLLOWER READ SUPPORT ====================
-    // For read-only fast-path transactions on a follower:
-    // Check if this follower can serve the read, or redirect to leader
+    // Design doc Option A: followers only serve fast-path reads when their closed timestamp
+    // is fresh enough. Otherwise they abort so the caller can retry on a leader.
     if (TThread::txn && TThread::txn->is_read_only_fast_path()) {
       uint32_t read_ts = TThread::txn->get_read_timestamp();
       
       // If read_ts is set and follower is too stale, we need to get from leader
       // Note: read_ts == 0 means timestamp not yet acquired (will be set at commit)
-      if (read_ts > 0 && sync_util::sync_logger::should_redirect_to_leader(read_ts)) {
-        // Follower is stale - this would require fetching from leader
-        // For now, we abort and let the transaction retry
-        // In a full implementation, you would call remoteGet() to the leader
-        Sto::abort_without_throw();
-        TThread::transget_without_throw = true;
-        return false;
+      if (read_ts > 0) {
+        if (sync_util::sync_logger::should_redirect_to_leader(read_ts)) {
+          // Stale follower => abort_without_throw so higher layer can reissue on a leader.
+          mass_trans_instrumentation::recordFollowerReadAbortStale();
+          Sto::abort_without_throw();
+          TThread::transget_without_throw = true;
+          return false;
+        } else if (!sync_util::sync_logger::isLeader()) {
+          mass_trans_instrumentation::recordFollowerReadServedLocally();
+        }
       }
     }
     // ===============================================================
@@ -918,4 +942,3 @@ __thread typename MassTrans<V, Box, Opacity>::threadinfo_type MassTrans<V, Box, 
 
 template <typename V, typename Box, bool Opacity>
 constexpr typename MassTrans<V, Box, Opacity>::Version MassTrans<V, Box, Opacity>::invalid_bit;
-

@@ -315,7 +315,7 @@ static void register_paxos_follower_callback(TSharedThreadPoolMbta& replicated_d
           uint32_t new_watermark = std::stoull(local_w);
           uint32_t current = sync_util::sync_logger::single_watermark_.load(memory_order_acquire);
           if (new_watermark > current) {
-              sync_util::sync_logger::single_watermark_.store(new_watermark, memory_order_release);
+              sync_util::sync_logger::setSingleWatermark(new_watermark);
           }
         }
       }
