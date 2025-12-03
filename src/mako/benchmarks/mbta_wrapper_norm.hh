@@ -861,11 +861,15 @@ public:
 
   static __thread str_arena *thr_arena;
   void *new_txn(
-                uint64_t txn_flags,
-                str_arena &arena,
-                void *buf,
-                TxnProfileHint hint = HINT_DEFAULT) {
-    Sto::start_transaction();
+                    uint64_t txn_flags,
+                    str_arena &arena,
+                    void *buf,
+                    TxnProfileHint hint = HINT_DEFAULT) {
+    if (txn_flags & transaction_base::TXN_FLAG_READ_ONLY) {
+      Sto::start_read_only_transaction();
+    } else {
+      Sto::start_transaction();
+    }
     thr_arena = &arena;
     return NULL;
   }

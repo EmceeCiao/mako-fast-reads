@@ -384,7 +384,41 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
 
 ---
 
-### Phase 5 – CI/CD Validation and YCSB Evaluation
+### Phase 5 – Automatic Read‑Only Fast Path Promotion
+
+- **Objective:** Allow transactions that *turned out* to be read‑only (no writes) to use the fast read‑only path even if they were not explicitly started as read‑only, without breaking existing semantics.
+
+- Rationale:
+  - Today, only transactions that are explicitly marked read‑only (e.g., via `TXN_FLAG_READ_ONLY` → `Sto::start_read_only_transaction()`) can use `try_commit_read_only()`.
+  - Many workloads may have transactions that are “incidentally” read‑only (no writes performed) but are not flagged as such up front.
+  - We can increase coverage of the fast path by **auto‑promoting** such transactions to the read‑only fast path at commit time, as long as we preserve all invariants (snapshot selection, safety checks, follower gating).
+
+- Tasks:
+  - Extend `Transaction::commit()` and/or `Sto::try_commit()` to:
+    - If `!has_any_writes()` and the transaction is otherwise healthy:
+      - Either call into `try_commit_read_only()` even if `is_read_only_fast_path_` was never set, or
+      - Set `is_read_only_fast_path_` late and then route through the existing fast path.
+  - Ensure safety invariants remain intact:
+    - Snapshot timestamp selection:
+      - If `read_timestamp_` is still 0, acquire it via `getMinSafeTimestamp()` just as for explicitly read‑only txns.
+      - If `read_timestamp_` was previously chosen (e.g., via follower‑read helpers), clamp it to `safe_ts` as in Phase 2.
+    - Follower reads:
+      - Auto‑promoted transactions must still satisfy follower gating:
+        - If they ran on followers and used `MassTrans::transGet`, ensure `read_timestamp_` was set (either eagerly or lazily) so `should_redirect_to_leader()` semantics remain correct.
+    - Validation:
+      - `try_commit_read_only()` already enforces durability and version checks; auto‑promotion must still go through those checks.
+  - Instrumentation:
+    - Add a counter to track how many transactions are:
+      - Explicitly marked read‑only fast path (Phase 1).
+      - Auto‑promoted to fast path at commit time (this phase).
+
+- **Current code status:**
+  - As of Phases 1–4, only transactions started via `Sto::start_read_only_transaction()` can hit the fast path; other read‑only txns (with no writes) still use the normal path.
+  - This phase is an optimization/future enhancement; initial implementation may choose to keep explicit marking only and add auto‑promotion later once CI/YCSB results are stable.
+
+---
+
+### Phase 6 – CI/CD Validation and YCSB Evaluation
 
 - **Objective:** Validate correctness and performance using CI pipelines and YCSB, since local multi‑shard testing is not feasible.
 
@@ -406,7 +440,7 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
 
 ---
 
-### Phase 6 – Future Work: HLC and External Consistency
+### Phase 7 – Future Work: HLC and External Consistency
 
 This phase is **explicitly not part of the current implementation**, but we document it to show how the design can be extended.
 
@@ -433,7 +467,7 @@ This phase is **explicitly not part of the current implementation**, but we docu
 
 ---
 
-## 6. Summary
+## 7. Summary
 
 - We will implement a **fast read‑only transaction path** and **follower reads** in Mako by:
   - Reusing Mako’s existing **logical commit timestamps** and **watermarks** as a closed‑timestamp system.

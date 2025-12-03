@@ -157,7 +157,11 @@ public:
                 str_arena &arena,
                 void *buf,
                 TxnProfileHint hint = HINT_DEFAULT) {
-    Sto::start_transaction();
+    if (txn_flags & transaction_base::TXN_FLAG_READ_ONLY) {
+      Sto::start_read_only_transaction();
+    } else {
+      Sto::start_transaction();
+    }
     thr_arena = &arena;
     return txn;
   }
