@@ -2,6 +2,7 @@
 
 #include "abstract_db.h"
 #include "abstract_ordered_index.h"
+#include "../txn.h"
 #include "Transaction.hh"
 #include "MassTrans.hh"
 #include "../str_arena.h"

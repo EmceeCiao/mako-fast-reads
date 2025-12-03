@@ -2,6 +2,7 @@
 #include <atomic>
 #include "abstract_db.h"
 #include "abstract_ordered_index.h"
+#include "../txn.h"
 #include "sto/Transaction.hh"
 #include "sto/MassTrans.hh"
 
