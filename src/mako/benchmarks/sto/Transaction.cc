@@ -669,12 +669,14 @@ bool Transaction::try_commit_read_only() {
     // validation preserve serializability without acquiring locks or running Paxos.
     // Safety check: if somehow called incorrectly, fall back to normal path
     if (!is_read_only_fast_path_ || state_ != s_in_progress) {
+        fast_path_disabled_ = true;
         txn_fast_path_stats::record_fast_path_fallback();
         return try_commit();
     }
 
     if (has_any_writes()) {
         is_read_only_fast_path_ = false;
+        fast_path_disabled_ = true;
         txn_fast_path_stats::record_fast_path_fallback();
         return try_commit();
     }
@@ -687,6 +689,7 @@ bool Transaction::try_commit_read_only() {
         // Watermark not yet initialized, fall back to normal path
         // This can happen during system startup
         is_read_only_fast_path_ = false;
+        fast_path_disabled_ = true;
         txn_fast_path_stats::record_fast_path_fallback();
         return try_commit();
     }
@@ -733,6 +736,7 @@ bool Transaction::try_commit_read_only() {
                         // This data item has not been replicated yet - not safe to return!
                         // Fall back to normal path which will wait for replication
                         is_read_only_fast_path_ = false;
+                        fast_path_disabled_ = true;
                         txn_fast_path_stats::record_fast_path_fallback();
                         return try_commit();
                     }

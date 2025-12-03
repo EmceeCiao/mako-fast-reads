@@ -496,6 +496,7 @@ private:
         // Reset read-only fast path state
         is_read_only_fast_path_ = false;
         read_timestamp_ = 0;
+        fast_path_disabled_ = false;
         buf_.clear();
 #if STO_DEBUG_ABORTS
         abort_item_ = nullptr;
@@ -705,7 +706,7 @@ public:
 
     void commit() {
         // Auto-promote any transaction without writes into the fast-path.
-        if (!has_any_writes()) {
+        if (!has_any_writes() && !fast_path_disabled_) {
             if (!is_read_only_fast_path_) {
                 set_read_only_fast_path(true);
             }
@@ -883,6 +884,7 @@ public:
     // Read-only fast path support (follower reads)
     mutable bool is_read_only_fast_path_{false};  // Flag for read-only fast path
     mutable uint32_t read_timestamp_{0};          // Snapshot timestamp for read-only txns
+    mutable bool fast_path_disabled_{false};      // Disable auto-promotion after fallback
 
 private:
     enum {
@@ -1032,7 +1034,7 @@ public:
 
     static bool try_commit() {
         always_assert(in_progress());
-        if (!TThread::txn->has_any_writes()) {
+        if (!TThread::txn->has_any_writes() && !TThread::txn->fast_path_disabled_) {
             if (!TThread::txn->is_read_only_fast_path()) {
                 TThread::txn->set_read_only_fast_path(true);
             }
