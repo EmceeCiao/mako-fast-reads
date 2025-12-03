@@ -672,16 +672,28 @@ bool Transaction::try_commit_read_only() {
         txn_fast_path_stats::record_fast_path_fallback();
         return try_commit();
     }
+
+    if (has_any_writes()) {
+        is_read_only_fast_path_ = false;
+        txn_fast_path_stats::record_fast_path_fallback();
+        return try_commit();
+    }
     
-    // Step 1: Get safe timestamp for snapshot isolation
-    read_timestamp_ = getMinSafeTimestamp();
-    
-    if (read_timestamp_ == 0) {
+    // Step 1: Determine snapshot timestamp for snapshot isolation. If we already selected a
+    // snapshot earlier, clamp it against the current safe watermark across shards; otherwise,
+    // pick the safe watermark now.
+    uint32_t safe_ts = getMinSafeTimestamp();
+    if (safe_ts == 0) {
         // Watermark not yet initialized, fall back to normal path
         // This can happen during system startup
         is_read_only_fast_path_ = false;
         txn_fast_path_stats::record_fast_path_fallback();
         return try_commit();
+    }
+    if (read_timestamp_ == 0) {
+        read_timestamp_ = safe_ts;
+    } else if (read_timestamp_ > safe_ts) {
+        read_timestamp_ = safe_ts;
     }
     
     // Step 2: Durability check - verify all data items have timestamp <= watermark
