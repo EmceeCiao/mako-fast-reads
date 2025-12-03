@@ -150,13 +150,15 @@ public:
     /// in the original implement, throw exception to distinguish case2
     
     // ==================== FOLLOWER READ SUPPORT ====================
-    // Design doc Option A: followers only serve fast-path reads when their closed timestamp
-    // is fresh enough. Otherwise they abort so the caller can retry on a leader.
+    // Design doc Option A: ensure a snapshot timestamp exists, let followers compare it against
+    // their closed timestamp, and abort (no throw) if they must redirect the txn to a leader.
     if (TThread::txn && TThread::txn->is_read_only_fast_path()) {
       uint32_t read_ts = TThread::txn->get_read_timestamp();
+      if (read_ts == 0) {
+        TThread::txn->acquireReadTimestamp();
+        read_ts = TThread::txn->get_read_timestamp();
+      }
       
-      // If read_ts is set and follower is too stale, we need to get from leader
-      // Note: read_ts == 0 means timestamp not yet acquired (will be set at commit)
       if (read_ts > 0) {
         if (sync_util::sync_logger::should_redirect_to_leader(read_ts)) {
           // Stale follower => abort_without_throw so higher layer can reissue on a leader.
