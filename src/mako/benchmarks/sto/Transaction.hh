@@ -704,15 +704,18 @@ public:
     void shard_unlock(bool committed);
 
     void commit() {
-        // Route to fast path for read-only transactions
-        if (is_read_only_fast_path_ && !has_any_writes()) {
+        // Auto-promote any transaction without writes into the fast-path.
+        if (!has_any_writes()) {
+            if (!is_read_only_fast_path_) {
+                set_read_only_fast_path(true);
+            }
             txn_fast_path_stats::record_fast_path_attempt();
             if (!try_commit_read_only())
                 throw Abort();
-        } else {
-            if (!try_commit())
-                throw Abort();
+            return;
         }
+        if (!try_commit())
+            throw Abort();
     }
 
     bool aborted() {
@@ -1029,8 +1032,10 @@ public:
 
     static bool try_commit() {
         always_assert(in_progress());
-        // Route to fast path for read-only transactions
-        if (TThread::txn->is_read_only_fast_path() && !TThread::txn->has_any_writes()) {
+        if (!TThread::txn->has_any_writes()) {
+            if (!TThread::txn->is_read_only_fast_path()) {
+                TThread::txn->set_read_only_fast_path(true);
+            }
             txn_fast_path_stats::record_fast_path_attempt();
             return TThread::txn->try_commit_read_only();
         }

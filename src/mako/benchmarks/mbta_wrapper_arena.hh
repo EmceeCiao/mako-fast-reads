@@ -2,7 +2,6 @@
 
 #include "abstract_db.h"
 #include "abstract_ordered_index.h"
-#include "../txn.h"
 #include "Transaction.hh"
 #include "MassTrans.hh"
 #include "../str_arena.h"
@@ -158,11 +157,8 @@ public:
                 str_arena &arena,
                 void *buf,
                 TxnProfileHint hint = HINT_DEFAULT) {
-    if (txn_flags & transaction_base::TXN_FLAG_READ_ONLY) {
-      Sto::start_read_only_transaction();
-    } else {
-      Sto::start_transaction();
-    }
+    (void)txn_flags;
+    Sto::start_transaction();
     thr_arena = &arena;
     return txn;
   }

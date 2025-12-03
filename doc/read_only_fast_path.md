@@ -209,14 +209,13 @@ This section documents the pieces that already exist in the repository and wheth
 ### 3.5 Read‑Only Classification in Higher Layers
 
 - **Where:**
-  - Generic transaction flags: `src/mako/txn.h` (`TXN_FLAG_READ_ONLY`).
-  - Mako/sto path: `src/mako/benchmarks/sto/Transaction.hh`, `Sto` helpers.
+  - Generic transaction flags: `src/mako/txn.h` (`TXN_FLAG_READ_ONLY`) used by the abstract DB layer and some benchmarks.
+  - Mako/sto path: `src/mako/benchmarks/sto/Transaction.hh`, `Sto` helpers (`Sto::start_transaction`, `Sto::start_read_only_transaction`, `Sto::try_commit`).
 - **Status:**
-  - The **flagging mechanism** for read‑only transactions exists in the generic txn layer, but the new sto fast‑path flag (`is_read_only_fast_path_`) is currently only manipulated by direct API calls on `Transaction` and is **not integrated** with the higher‑level scheduler or the existing `TXN_FLAG_READ_ONLY` flag.
-  - There is **no helper** yet like `Sto::start_read_only_transaction()` that combines:
-    - `start_transaction()`
-    - `set_read_only_fast_path(true)`
-    - `acquireReadTimestamp()`.
+  - The generic **read‑only flagging mechanism** (`TXN_FLAG_READ_ONLY`) exists for higher‑level code, but the sto fast‑path flag (`is_read_only_fast_path_`) is now managed primarily inside the sto implementation:
+    - `Sto::start_transaction()` starts a generic transaction.
+    - `Sto::start_read_only_transaction()` starts a transaction with `is_read_only_fast_path_` set and an early snapshot, useful for examples/tests.
+    - At commit time, `Transaction::commit()` and `Sto::try_commit()` **auto‑promote** any transaction with no writes to the read‑only fast path, regardless of external flags (see Phase 5).
 
 ---
 
@@ -311,18 +310,16 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
 - **Objective:** Ensure the system can recognize read‑only transactions **early** and route them down the fast path.
 
 - Tasks:
-  - Introduce a helper like `Sto::start_read_only_transaction()` that:
+  - Introduce a helper `Sto::start_read_only_transaction()` that:
     - Ensures a `Transaction` exists.
     - Calls `Transaction::start()`.
     - Calls `set_read_only_fast_path(true)`.
     - Calls `acquireReadTimestamp()` so `read_timestamp_` is set before any reads.
-  - Decide how upper layers (e.g., txn scheduler, YCSB integration) mark transactions as read‑only:
-    - Option A: direct calls into the sto API (simpler).
-    - Option B: map generic `TXN_FLAG_READ_ONLY` onto `set_read_only_fast_path(true)` when using the sto path.
+  - Make this helper available to benchmarks/examples that want to **explicitly** opt into the fast path, but do not require higher layers to call it in order for the fast path to be used (auto‑promotion at commit will cover implicit read‑only txns).
   - Ensure `Transaction::start()` resets `is_read_only_fast_path_` and `read_timestamp_` (already true today).
 
 - **Current code status:**
-  - `set_read_only_fast_path()` and `acquireReadTimestamp()` exist but **have no callers**.
+  - `set_read_only_fast_path()` and `acquireReadTimestamp()` exist and are used by `Sto::start_read_only_transaction()`; higher‑level code may call this helper explicitly, but the fast path no longer depends on external flags.
   - `Transaction::start()` does reset the flags (lines ~490–498 in `Transaction.hh`).
 
 ---
@@ -367,20 +364,21 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
 
 ### Phase 4 – Integration with Scheduler & Benchmarks
 
-- **Objective:** Integrate the fast read‑only/follower‑read path with the rest of Mako’s stack and workloads (including YCSB).
+- **Objective:** Make it easy for benchmarks and higher‑level components to benefit from the fast read‑only path and follower reads, without requiring any special flags for correctness.
 
 - Tasks:
-  - Decide how the high‑level TxnScheduler (in `src/deptran`) exposes read‑only transactions:
-    - When a client or workload marks a txn as read‑only (e.g., via a flag or operation type), the scheduler should invoke the sto API that sets `is_read_only_fast_path_` and acquires `T_read`.
-  - Update internal benchmarks to exercise the fast path:
-    - E.g., add a configuration or command‑line flag to enable read‑only fast path and follower reads.
-  - Integrate with YCSB:
-    - For read‑only workloads, ensure the client sets up read‑only transactions that use the fast path.
-    - For mixed workloads, ensure only read‑only txns are marked as such.
+  - Ensure existing benchmarks (e.g., TPCC, YCSB) can run unchanged and still benefit from the fast path:
+    - Any transaction that happens to perform no writes will be auto‑promoted to the read‑only fast path at commit time.
+    - Follower reads use `read_timestamp_` and `should_redirect_to_leader()` to enforce closed‑timestamp semantics.
+  - Optionally, expose configuration knobs or hints (e.g., via `TxnProfileHint` or benchmark‑specific flags) that:
+    - Bias workloads toward read‑only access patterns when evaluating the fast path.
+    - Enable or disable follower reads for certain experiments.
+  - Keep sto’s fast‑path behavior independent of `TXN_FLAG_READ_ONLY` for correctness; such flags may still be used by higher‑level code for its own bookkeeping or optimizations, but sto relies primarily on **observed behavior** (`has_any_writes()`) and internal invariants.
 
 - **Current code status:**
-  - Generic read‑only flags exist (`TXN_FLAG_READ_ONLY`), but no end‑to‑end wiring to the sto fast path yet.
-  - YCSB integration will be done after core correctness is implemented.
+  - Auto‑promotion at commit (`!has_any_writes() → try_commit_read_only()`) is implemented in `Transaction::commit()` and `Sto::try_commit()`.
+  - Benchmarks can optionally adopt `Sto::start_read_only_transaction()` for explicit fast‑path testing, but it is not required for the fast path to be used.
+  - YCSB/TPCC wiring for follower‑read abort handling (`TThread::transget_without_throw`) is in place; further tuning and evaluation is part of Phase 6.
 
 ---
 
@@ -389,9 +387,8 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
 - **Objective:** Allow transactions that *turned out* to be read‑only (no writes) to use the fast read‑only path even if they were not explicitly started as read‑only, without breaking existing semantics.
 
 - Rationale:
-  - Today, only transactions that are explicitly marked read‑only (e.g., via `TXN_FLAG_READ_ONLY` → `Sto::start_read_only_transaction()`) can use `try_commit_read_only()`.
-  - Many workloads may have transactions that are “incidentally” read‑only (no writes performed) but are not flagged as such up front.
-  - We can increase coverage of the fast path by **auto‑promoting** such transactions to the read‑only fast path at commit time, as long as we preserve all invariants (snapshot selection, safety checks, follower gating).
+  - Many workloads have transactions that are “incidentally” read‑only (no writes performed) but are not flagged as such up front.
+  - We increase coverage of the fast path by **auto‑promoting** such transactions to the read‑only fast path at commit time, as long as we preserve all invariants (snapshot selection, safety checks, follower gating).
 
 - Tasks:
   - Extend `Transaction::commit()` and/or `Sto::try_commit()` to:
@@ -413,8 +410,8 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
       - Auto‑promoted to fast path at commit time (this phase).
 
 - **Current code status:**
-  - As of Phases 1–4, only transactions started via `Sto::start_read_only_transaction()` can hit the fast path; other read‑only txns (with no writes) still use the normal path.
-  - This phase is an optimization/future enhancement; initial implementation may choose to keep explicit marking only and add auto‑promotion later once CI/YCSB results are stable.
+  - Auto‑promotion is implemented: `Transaction::commit()` and `Sto::try_commit()` route any transaction with no writes through `try_commit_read_only()`, regardless of external flags, while preserving all durability and validation checks inside `try_commit_read_only()`.
+  - Explicit marking via `Sto::start_read_only_transaction()` remains available for tests/examples that want to exercise the fast path explicitly, but it is no longer required for correctness or for the fast path to be used.
 
 ---
 
