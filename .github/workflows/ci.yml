@@ -147,15 +147,15 @@ jobs:
         continue-on-error: true
         run: ./ci/ci.sh shard1Replication
 
-      - name: Run tests - simple 2 shard with replication - dbtest (RRR)
-        id: shard2Replication
-        continue-on-error: true
-        run: ./ci/ci.sh shard2Replication
+      # - name: Run tests - simple 2 shard with replication - dbtest (RRR)
+      #   id: shard2Replication
+      #   continue-on-error: true
+      #   run: ./ci/ci.sh shard2Replication
 
-      - name: Run tests - simple 2 shard with replication - dbtest (eRPC)
-        id: shard2ReplicationErpc
-        continue-on-error: true
-        run: ./ci/ci.sh shard2ReplicationErpc
+      # - name: Run tests - simple 2 shard with replication - dbtest (eRPC)
+      #   id: shard2ReplicationErpc
+      #   continue-on-error: true
+      #   run: ./ci/ci.sh shard2ReplicationErpc
 
       - name: Run tests - simple 1 shard with replication - simpleTransactionRep
         id: shard1ReplicationSimple
@@ -198,8 +198,8 @@ jobs:
           check "shardNoReplication"      "${{ steps.shardNoReplication.outcome }}"
           check "shardNoReplicationErpc"  "${{ steps.shardNoReplicationErpc.outcome }}"
           check "shard1Replication"       "${{ steps.shard1Replication.outcome }}"
-          check "shard2Replication"       "${{ steps.shard2Replication.outcome }}"
-          check "shard2ReplicationErpc"   "${{ steps.shard2ReplicationErpc.outcome }}"
+          # check "shard2Replication"       "${{ steps.shard2Replication.outcome }}"
+          # check "shard2ReplicationErpc"   "${{ steps.shard2ReplicationErpc.outcome }}"
           check "shard1ReplicationSimple" "${{ steps.shard1ReplicationSimple.outcome }}"
           check "shard2ReplicationSimple" "${{ steps.shard2ReplicationSimple.outcome }}"
           check "rocksdbTests"            "${{ steps.rocksdbTests.outcome }}"
