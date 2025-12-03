@@ -705,8 +705,10 @@ public:
     void shard_unlock(bool committed);
 
     void commit() {
-        // Auto-promote any transaction without writes into the fast-path.
-        if (!has_any_writes() && !fast_path_disabled_) {
+        // Auto-promote any transaction without writes into the fast-path, but only when running
+        // in replicated mode where closed timestamps / watermarks are meaningful.
+        if (BenchmarkConfig::getInstance().getIsReplicated() &&
+            !has_any_writes() && !fast_path_disabled_) {
             if (!is_read_only_fast_path_) {
                 set_read_only_fast_path(true);
             }
@@ -1034,7 +1036,8 @@ public:
 
     static bool try_commit() {
         always_assert(in_progress());
-        if (!TThread::txn->has_any_writes() && !TThread::txn->fast_path_disabled_) {
+        if (BenchmarkConfig::getInstance().getIsReplicated() &&
+            !TThread::txn->has_any_writes() && !TThread::txn->fast_path_disabled_) {
             if (!TThread::txn->is_read_only_fast_path()) {
                 TThread::txn->set_read_only_fast_path(true);
             }
