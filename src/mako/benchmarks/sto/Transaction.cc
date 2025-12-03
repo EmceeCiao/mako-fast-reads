@@ -656,10 +656,52 @@ bool Transaction::try_commit_read_only() {
         return try_commit();
     }
     
-    // Step 2: Validate all local reads
-    // For read-only transactions, we verify that all versions we read
-    // have timestamps <= read_timestamp_ (i.e., they are safely replicated)
+    // Step 2: Durability check - verify all data items have timestamp <= watermark
+    // This ensures we only return data that has been safely replicated via Paxos
     TransItem* it = nullptr;
+    for (unsigned tidx = 0; tidx != tset_size_; ++tidx) {
+        it = (tidx % tset_chunk ? it + 1 : tset_[tidx / tset_chunk]);
+        
+        if (it->has_read()) {
+            // Try to extract the data item's timestamp
+            // The timestamp is stored in mako::Node at the end of the value
+            // Note: This only works for data items, not tree structure nodes
+            void* key_ptr = it->key<void*>();
+            
+            // Check if this is a data item (not an internode)
+            // Internode items have the lowest bit set
+            if (key_ptr && !((uintptr_t)key_ptr & 1)) {
+                // This is a versioned_value - try to get timestamp from its data
+                // The data layout is: [actual_value][time_term: 4 bytes][Node structure]
+                // We need to access the Node's timestamp field
+                
+                // Cast to versioned_str_struct to access data
+                versioned_str_struct* vss = reinterpret_cast<versioned_str_struct*>(key_ptr);
+                if (vss && vss->length() >= mako::BITS_OF_NODE) {
+                    const char* data = vss->data();
+                    int len = vss->length();
+                    
+                    // Extract Node header from end of data
+                    const mako::Node* header = reinterpret_cast<const mako::Node*>(
+                        data + len - mako::BITS_OF_NODE);
+                    
+                    uint32_t item_timestamp = header->timestamp;
+                    
+                    // Durability check: item timestamp must be <= safe watermark
+                    // If item_timestamp > read_timestamp_, the data might not be replicated yet
+                    if (item_timestamp > 0 && item_timestamp > read_timestamp_) {
+                        // This data item has not been replicated yet - not safe to return!
+                        // Fall back to normal path which will wait for replication
+                        is_read_only_fast_path_ = false;
+                        return try_commit();
+                    }
+                }
+            }
+        }
+    }
+    
+    // Step 3: Version validation - verify data hasn't changed since we read it
+    it = nullptr;
     for (unsigned tidx = 0; tidx != tset_size_; ++tidx) {
         it = (tidx % tset_chunk ? it + 1 : tset_[tidx / tset_chunk]);
         
@@ -673,7 +715,7 @@ bool Transaction::try_commit_read_only() {
         }
     }
     
-    // Step 3: Validate remote reads if any
+    // Step 4: Validate remote reads if any
     if (TThread::readset_shard_bits > 0 && TThread::sclient != nullptr) {
         uint32_t watermark = 0;
         int ret = TThread::sclient->remoteValidate(watermark);
