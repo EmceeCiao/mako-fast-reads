@@ -340,7 +340,8 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
 
 - **Current code status:**
   - `getMinSafeTimestamp()` and `try_commit_read_only()` are **implemented** and integrated into `Transaction::commit()` and `Sto::try_commit()`.
-  - They are **not used in practice** because read‑only fast path flagging is not yet wired from callers.
+  - These paths are taken whenever a transaction is explicitly started in read‑only fast‑path mode (e.g., via `Sto::start_read_only_transaction()`) and has no writes.
+  - Existing TPCC/YCSB benchmarks do not yet use `Sto::start_read_only_transaction()` by default, so in the main benchmarks the fast path is only exercised in targeted experiments or tests, not in the standard mixed workloads.
 
 ---
 
@@ -358,8 +359,10 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
   - Document expected retry behavior at the benchmark/client layer.
 
 - **Current code status:**
-  - Follower helpers in `sync_util.hh` and the abort path in `MassTrans.hh::transGet()` are **in place** but **ineffective** because `read_timestamp_` is typically 0 during reads.
-  - This phase will make them actually functional by ensuring snapshot acquisition happens before the first read.
+  - Follower helpers in `sync_util.hh` and the abort path in `MassTrans.hh::transGet()` are **wired and active** for read‑only fast‑path txns:
+    - `MassTrans::transGet()` lazily calls `acquireReadTimestamp()` when it first sees a read‑only fast‑path txn with `read_timestamp_ == 0`, so follower‑staleness checks always see a non‑zero snapshot timestamp.
+    - On followers, `should_redirect_to_leader(read_timestamp_)` is consulted before serving the read; when it returns true the txn is aborted via `Sto::abort_without_throw()` and `TThread::transget_without_throw` is set.
+  - Snapshot reads for the fast path currently use `mvGET_snapshot()` to choose the newest version with `timestamp <= read_timestamp_`; this is **single‑chain MVCC**, not the dual‑slot design from Phase 5.
 
 ---
 
