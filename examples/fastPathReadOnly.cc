@@ -1,4 +1,5 @@
 #include <chrono>
+#include <cstdlib>
 #include <iostream>
 #include <map>
 #include <string>
@@ -69,6 +70,18 @@ bool run_fast_path_reads(abstract_db* db,
                          TxContext& ctx,
                          int shard_index,
                          size_t iterations) {
+    bool enable_fast_path = true;
+    if (const char* mode = std::getenv("FAST_RO_MODE")) {
+        std::string m(mode);
+        if (m == "baseline") {
+            enable_fast_path = false;
+        }
+    }
+    if (BenchmarkConfig::getInstance().getLeaderConfig()) {
+        std::cout << "FAST_RO_MODE=" << (enable_fast_path ? "fast" : "baseline")
+                  << std::endl;
+    }
+
     size_t commits = 0;
     const size_t kExistingKeys = 16;
 
@@ -76,8 +89,10 @@ bool run_fast_path_reads(abstract_db* db,
         ctx.arena.reset();
         void* txn = db->new_txn(0, ctx.arena, ctx.txn_buf());
         Transaction* sto_txn = Sto::transaction();
-        sto_txn->set_read_only_fast_path(true);
-        sto_txn->acquireReadTimestamp();
+        if (enable_fast_path) {
+            sto_txn->set_read_only_fast_path(true);
+            sto_txn->acquireReadTimestamp();
+        }
 
         std::string key = "fast_ro_key_" + std::to_string(shard_index) + "_" +
                           std::to_string(i % kExistingKeys);
