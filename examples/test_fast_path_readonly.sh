@@ -46,6 +46,10 @@ else
     exit 1
 fi
 
+echo ""
+echo "---- FAST READ-ONLY METRICS (from $LEADER_LOG) ----"
+grep "FAST_RO_STATS" "$LEADER_LOG" || echo "No FAST_RO_STATS line found"
+
 echo "========================================="
 echo "Fast-path read-only test PASSED"
 echo "========================================="

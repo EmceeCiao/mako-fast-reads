@@ -71,19 +71,22 @@ bool run_fast_path_reads(abstract_db* db,
                          int shard_index,
                          size_t iterations) {
     bool enable_fast_path = true;
+    std::string mode_str = "fast";
     if (const char* mode = std::getenv("FAST_RO_MODE")) {
         std::string m(mode);
         if (m == "baseline") {
             enable_fast_path = false;
+            mode_str = "baseline";
         }
     }
     if (BenchmarkConfig::getInstance().getLeaderConfig()) {
-        std::cout << "FAST_RO_MODE=" << (enable_fast_path ? "fast" : "baseline")
-                  << std::endl;
+        std::cout << "FAST_RO_MODE=" << mode_str << std::endl;
     }
 
     size_t commits = 0;
     const size_t kExistingKeys = 16;
+
+    auto start = std::chrono::steady_clock::now();
 
     for (size_t i = 0; i < iterations; ++i) {
         ctx.arena.reset();
@@ -113,6 +116,19 @@ bool run_fast_path_reads(abstract_db* db,
         }
     }
 
+    auto end = std::chrono::steady_clock::now();
+    auto duration_ms =
+        std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+            .count();
+    double throughput = duration_ms > 0
+                            ? (static_cast<double>(commits) * 1000.0) /
+                                  static_cast<double>(duration_ms)
+                            : 0.0;
+
+    std::cout << "FAST_RO_STATS mode=" << mode_str
+              << " iterations=" << iterations << " commits=" << commits
+              << " duration_ms=" << duration_ms
+              << " throughput_ops_per_sec=" << throughput << std::endl;
     std::cout << "Fast-path read-only commits: " << commits << std::endl;
     return commits == iterations;
 }
