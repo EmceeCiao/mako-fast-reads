@@ -165,6 +165,35 @@ public:
         return true;
     }
 
+    // Snapshot helper: return the newest version whose logical timestamp <= snapshot_ts.
+    // Used by the read-only fast path to serve reads at read_timestamp_.
+    static bool mvGET_snapshot(string& val,
+                               char* oldval_str,
+                               uint32_t snapshot_ts) {
+        (void)oldval_str;
+        if (snapshot_ts == 0) {
+            return !isDeleted(val);
+        }
+
+        mako::Node* header = reinterpret_cast<mako::Node*>(
+            (char*)(val.data() + val.length() - mako::BITS_OF_NODE));
+
+        while (true) {
+            if (header->timestamp <= snapshot_ts) {
+                return !isDeleted(val);
+            }
+
+            if (header->data_size == 0) {
+                // No older version satisfies the snapshot timestamp.
+                return false;
+            }
+
+            val.assign(header->data, (int)header->data_size);
+            header = reinterpret_cast<mako::Node*>(
+                (char*)(val.data() + val.length() - mako::BITS_OF_NODE));
+        }
+    }
+
     // kvthread.hh -> it's same as malloc vs free
     // one way to solve it: include "rcu.h"
     static void mvInstall(bool isInsert,

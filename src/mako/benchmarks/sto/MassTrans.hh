@@ -205,8 +205,26 @@ public:
         return false;
       }
       item.observe(tversion_type(elem_vers));
-      if (TThread::is_multiversion())
-        return MultiVersionValue::mvGET(retval, (char*)e->data(), TThread::txn->get_current_term(), sync_util::sync_logger::hist_timestamp);
+      if (TThread::is_multiversion()) {
+        bool snapshot_reads = (TThread::txn && TThread::txn->is_read_only_fast_path());
+        uint32_t snapshot_ts = 0;
+        if (snapshot_reads) {
+          snapshot_ts = TThread::txn->get_read_timestamp();
+          if (snapshot_ts == 0) {
+            TThread::txn->acquireReadTimestamp();
+            snapshot_ts = TThread::txn->get_read_timestamp();
+          }
+          if (snapshot_ts == 0) {
+            snapshot_reads = false;
+          }
+        }
+        if (snapshot_reads) {
+          return MultiVersionValue::mvGET_snapshot(retval, (char*)e->data(), snapshot_ts);
+        }
+        return MultiVersionValue::mvGET(retval, (char*)e->data(),
+                                        TThread::txn->get_current_term(),
+                                        sync_util::sync_logger::hist_timestamp);
+      }
     } else {
       //Warning("Not found a value");
       ensureNotFound(lp.node(), lp.full_version_value());
@@ -394,6 +412,18 @@ public:
   // range queries
   template <typename Callback, typename ValAllocator = DefaultValAllocator>
   void transQuery(Str begin, Str end, Callback callback, ValAllocator *va = NULL, threadinfo_type& ti = mythreadinfo) {
+    bool multiversion_enabled = TThread::is_multiversion();
+    bool snapshot_reads = false;
+    uint32_t snapshot_ts = 0;
+    if (multiversion_enabled && TThread::txn && TThread::txn->is_read_only_fast_path()) {
+      snapshot_ts = TThread::txn->get_read_timestamp();
+      if (snapshot_ts == 0) {
+        TThread::txn->acquireReadTimestamp();
+        snapshot_ts = TThread::txn->get_read_timestamp();
+      }
+      snapshot_reads = snapshot_ts > 0;
+    }
+
     auto node_callback = [&] (leaf_type* node, typename unlocked_cursor_type::nodeversion_value_type version) {
       this->ensureNotFound(node, version);
     };
@@ -424,14 +454,20 @@ public:
       }
       item.observe(tversion_type(v));
 
-      if (!TThread::is_multiversion())
+      if (!multiversion_enabled)
         return callback(key, val);
 
-      // key and val are both only guaranteed until callback returns
-      bool ret = MultiVersionValue::mvGET(val,
-                                          (char*)e->data(),
-                                          TThread::txn->get_current_term(), 
-                                          sync_util::sync_logger::hist_timestamp);
+      bool ret = false;
+      if (snapshot_reads) {
+        ret = MultiVersionValue::mvGET_snapshot(val,
+                                                (char*)e->data(),
+                                                snapshot_ts);
+      } else {
+        ret = MultiVersionValue::mvGET(val,
+                                       (char*)e->data(),
+                                       TThread::txn->get_current_term(),
+                                       sync_util::sync_logger::hist_timestamp);
+      }
       if (ret){
         return callback(key, val);//query_callback_overload(key, val, callback);
       }else {
@@ -449,6 +485,18 @@ public:
 
   template <typename Callback, typename ValAllocator = DefaultValAllocator>
   void transRQuery(Str begin, Str end, Callback callback, ValAllocator *va = NULL, threadinfo_type& ti = mythreadinfo) {
+    bool multiversion_enabled = TThread::is_multiversion();
+    bool snapshot_reads = false;
+    uint32_t snapshot_ts = 0;
+    if (multiversion_enabled && TThread::txn && TThread::txn->is_read_only_fast_path()) {
+      snapshot_ts = TThread::txn->get_read_timestamp();
+      if (snapshot_ts == 0) {
+        TThread::txn->acquireReadTimestamp();
+        snapshot_ts = TThread::txn->get_read_timestamp();
+      }
+      snapshot_reads = snapshot_ts > 0;
+    }
+
     auto node_callback = [&] (leaf_type* node, typename unlocked_cursor_type::nodeversion_value_type version) {
       this->ensureNotFound(node, version);
     };
@@ -477,13 +525,20 @@ public:
       }
       item.observe(tversion_type(v));
 
-      if (!TThread::is_multiversion())
+      if (!multiversion_enabled)
         return callback(key, val);
 
-      bool ret = MultiVersionValue::mvGET(val,
-                                          (char*)e->data(),
-                                          TThread::txn->get_current_term(), 
-                                          sync_util::sync_logger::hist_timestamp);
+      bool ret = false;
+      if (snapshot_reads) {
+        ret = MultiVersionValue::mvGET_snapshot(val,
+                                                (char*)e->data(),
+                                                snapshot_ts);
+      } else {
+        ret = MultiVersionValue::mvGET(val,
+                                       (char*)e->data(),
+                                       TThread::txn->get_current_term(),
+                                       sync_util::sync_logger::hist_timestamp);
+      }
       if (ret)
         return callback(key, val);//query_callback_overload(key, val, callback);
       else {

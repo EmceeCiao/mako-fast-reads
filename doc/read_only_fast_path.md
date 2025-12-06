@@ -387,6 +387,11 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
 
 - **Objective:** Explore a safer, snapshot‑based follower‑read design inspired by Mako’s paper and Silo’s high‑level approach, instead of automatic mid‑transaction promotion. The aim is to let read‑only transactions execute directly on followers by reading from a **periodic snapshot** that is known to be safe w.r.t. replication.
 
+- **Current code status (partial):**
+  - Read‑only fast‑path transactions now use `mvGET_snapshot()` in `MultiVersionValue` to pick the newest version whose logical timestamp ≤ `read_timestamp_`. This ensures fast‑path reads observe a consistent snapshot (`T_read`) while follower gating (`should_redirect_to_leader`) still enforces staleness checks.
+  - Range scans (`transQuery` / `transRQuery`) use the same snapshot helper.
+  - A dedicated checkpointing / promotion thread and the full “2‑version” steady‑state described below remain future work.
+
 - Motivation (from Mako’s paper and Silo [95]):
   - The current Mako implementation does **not** let read‑only transactions execute directly on followers.
   - Mako is compatible with an optimization where:
