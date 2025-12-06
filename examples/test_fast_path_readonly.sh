@@ -32,16 +32,17 @@ kill $PID_P1 $PID_P2 $PID_LEARNER $PID_LOCALHOST 2>/dev/null || true
 wait $PID_P1 $PID_P2 $PID_LEARNER $PID_LOCALHOST 2>/dev/null || true
 
 LOGFILE="fastpath-shard0-p1.log"
-if [ ! -f "$LOGFILE" ]; then
-    echo "Leader log $LOGFILE not found"
+LEADER_LOG="fastpath-shard0-localhost.log"
+if [ ! -f "$LEADER_LOG" ]; then
+    echo "Leader log $LEADER_LOG not found"
     exit 1
 fi
 
-if grep -q "FAST_PATH_READONLY_DONE" "$LOGFILE"; then
+if grep -q "FAST_PATH_READONLY_DONE" "$LEADER_LOG"; then
     echo "Fast-path read-only workload completed successfully."
 else
-    echo "FAST_PATH_READONLY_DONE marker not found in $LOGFILE"
-    tail -20 "$LOGFILE"
+    echo "FAST_PATH_READONLY_DONE marker not found in $LEADER_LOG"
+    tail -20 "$LEADER_LOG"
     exit 1
 fi
 
