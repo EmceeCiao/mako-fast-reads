@@ -48,6 +48,7 @@ cleanup_processes() {
 
     # Kill test executables
     pkill -9 -f simpleTransactionRep 2>/dev/null || true
+    pkill -9 -f fastPathReadOnly 2>/dev/null || true
     pkill -9 -f dbtest 2>/dev/null || true
     pkill -9 -f simplePaxos 2>/dev/null || true
     pkill -9 -f simpleTransaction 2>/dev/null || true
@@ -234,6 +235,20 @@ run_rocksdb_tests() {
     [ $test_result -eq 0 ] && [ $hanging_check -eq 0 ]
 }
 
+run_fast_path_readonly() {
+    echo "========================================="
+    echo "Running: ./ci/ci.sh fastPathReadOnly"
+    echo "========================================="
+    cleanup_processes
+    set +e
+    bash ./examples/test_fast_path_readonly.sh
+    local test_result=$?
+    set -e
+    check_for_hanging_processes "fastPathReadOnly"
+    local hanging_check=$?
+    [ $test_result -eq 0 ] && [ $hanging_check -eq 0 ]
+}
+
 run_shard_fault_tolerance() {
     echo "========================================="
     echo "Running: ./ci/ci.sh shardFaultTolerance"
@@ -319,6 +334,9 @@ case "${1:-}" in
     rocksdbTests)
         run_rocksdb_tests
         ;;
+    fastPathReadOnly)
+        run_fast_path_readonly
+        ;;
     shardFaultTolerance)
         run_shard_fault_tolerance
         ;;
@@ -342,6 +360,7 @@ case "${1:-}" in
         run_rocksdb_tests
         run_shard_fault_tolerance
         run_multi_shard_single_process
+        run_fast_path_readonly
         echo "All CI steps completed successfully!"
         ;;
 esac

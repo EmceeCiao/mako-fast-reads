@@ -172,6 +172,11 @@ jobs:
         continue-on-error: true
         run: ./ci/ci.sh rocksdbTests 
 
+      - name: Run tests - fast-path read-only
+        id: fastPathReadOnly
+        continue-on-error: true
+        run: ./ci/ci.sh fastPathReadOnly
+
       - name: Cleanup
         if: always()
         run: ./ci/ci.sh cleanup
@@ -203,6 +208,7 @@ jobs:
           check "shard1ReplicationSimple" "${{ steps.shard1ReplicationSimple.outcome }}"
           check "shard2ReplicationSimple" "${{ steps.shard2ReplicationSimple.outcome }}"
           check "rocksdbTests"            "${{ steps.rocksdbTests.outcome }}"
+          check "fastPathReadOnly"        "${{ steps.fastPathReadOnly.outcome }}"
 
           if [ "$failed" -ne 0 ]; then
             echo "One or more tests failed."
