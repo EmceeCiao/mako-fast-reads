@@ -215,7 +215,7 @@ This section documents the pieces that already exist in the repository and wheth
   - The generic **read‑only flagging mechanism** (`TXN_FLAG_READ_ONLY`) exists for higher‑level code, but the sto fast‑path flag (`is_read_only_fast_path_`) is now managed primarily inside the sto implementation:
     - `Sto::start_transaction()` starts a generic transaction.
     - `Sto::start_read_only_transaction()` starts a transaction with `is_read_only_fast_path_` set and an early snapshot, useful for examples/tests.
-    - At commit time, `Transaction::commit()` and `Sto::try_commit()` **auto‑promote** any transaction with no writes to the read‑only fast path, regardless of external flags (see Phase 5).
+    - Earlier iterations experimented with **automatic promotion at commit time** (“if no writes, treat as fast‑path read‑only”), but this proved fragile: it interacted badly with fast‑path fallbacks (leading to recursion/looping in CI) and made serializability reasoning harder. The epic now treats the fast path as an **explicit mode chosen at transaction start**, not something inferred or promoted mid‑transaction or mid‑commit.
 
 ---
 
@@ -315,7 +315,7 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
     - Calls `Transaction::start()`.
     - Calls `set_read_only_fast_path(true)`.
     - Calls `acquireReadTimestamp()` so `read_timestamp_` is set before any reads.
-  - Make this helper available to benchmarks/examples that want to **explicitly** opt into the fast path, but do not require higher layers to call it in order for the fast path to be used (auto‑promotion at commit will cover implicit read‑only txns).
+  - Make this helper available to benchmarks/examples that want to **explicitly** opt into the fast path. We deliberately do **not** rely on automatic “no‑writes ⇒ fast‑path” promotion at commit, because that complicates correctness and was observed to cause recursion/loop issues when the fast path must fall back.
   - Ensure `Transaction::start()` resets `is_read_only_fast_path_` and `read_timestamp_` (already true today).
 
 - **Current code status:**
@@ -364,54 +364,118 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
 
 ### Phase 4 – Integration with Scheduler & Benchmarks
 
-- **Objective:** Make it easy for benchmarks and higher‑level components to benefit from the fast read‑only path and follower reads, without requiring any special flags for correctness.
+- **Objective:** Make it easy for benchmarks and higher‑level components to benefit from the fast read‑only path and follower reads, while keeping the commit logic simple and avoiding mid‑transaction promotion complexity.
 
 - Tasks:
-  - Ensure existing benchmarks (e.g., TPCC, YCSB) can run unchanged and still benefit from the fast path:
-    - Any transaction that happens to perform no writes will be auto‑promoted to the read‑only fast path at commit time.
-    - Follower reads use `read_timestamp_` and `should_redirect_to_leader()` to enforce closed‑timestamp semantics.
-  - Optionally, expose configuration knobs or hints (e.g., via `TxnProfileHint` or benchmark‑specific flags) that:
-    - Bias workloads toward read‑only access patterns when evaluating the fast path.
-    - Enable or disable follower reads for certain experiments.
-  - Keep sto’s fast‑path behavior independent of `TXN_FLAG_READ_ONLY` for correctness; such flags may still be used by higher‑level code for its own bookkeeping or optimizations, but sto relies primarily on **observed behavior** (`has_any_writes()`) and internal invariants.
+  - Ensure existing benchmarks (e.g., TPCC, YCSB) can run unchanged and still benefit from the fast path when they **explicitly** opt in (e.g., via `Sto::start_read_only_transaction()` for dedicated experiments).
+  - Keep sto’s fast‑path behavior independent of `TXN_FLAG_READ_ONLY` for correctness:
+    - Higher‑level flags and hints may still be used for benchmark‑level reporting or tuning.
+    - The core sto implementation will treat “fast‑path read‑only” as an explicit mode chosen at transaction start, not something inferred mid‑transaction.
+  - Maintain a simple, well‑scoped commit path:
+    - `try_commit_read_only()` is only used for transactions that were started in read‑only fast‑path mode.
+    - Normal `try_commit()` handles all other cases (including transactions that happen to be read‑only but were not explicitly marked).
 
 - **Current code status:**
-  - Auto‑promotion at commit (`!has_any_writes() → try_commit_read_only()`) is implemented in `Transaction::commit()` and `Sto::try_commit()`.
-  - Benchmarks can optionally adopt `Sto::start_read_only_transaction()` for explicit fast‑path testing, but it is not required for the fast path to be used.
+  - `Sto::start_read_only_transaction()` is available and wires `set_read_only_fast_path(true)` + `acquireReadTimestamp()`.
+  - Benchmarks can opt in to the fast path for specific read‑only workloads; they are not required to do so for correctness.
   - YCSB/TPCC wiring for follower‑read abort handling (`TThread::transget_without_throw`) is in place; further tuning and evaluation is part of Phase 6.
 
 ---
 
-### Phase 5 – Automatic Read‑Only Fast Path Promotion
+### Phase 5 – Snapshot‑Based Follower Reads (Silo/Mako‑Style)
 
-- **Objective:** Allow transactions that *turned out* to be read‑only (no writes) to use the fast read‑only path even if they were not explicitly started as read‑only, without breaking existing semantics.
+- **Objective:** Explore a safer, snapshot‑based follower‑read design inspired by Mako’s paper and Silo’s high‑level approach, instead of automatic mid‑transaction promotion. The aim is to let read‑only transactions execute directly on followers by reading from a **periodic snapshot** that is known to be safe w.r.t. replication.
 
-- Rationale:
-  - Many workloads have transactions that are “incidentally” read‑only (no writes performed) but are not flagged as such up front.
-  - We increase coverage of the fast path by **auto‑promoting** such transactions to the read‑only fast path at commit time, as long as we preserve all invariants (snapshot selection, safety checks, follower gating).
+- Motivation (from Mako’s paper and Silo [95]):
+  - The current Mako implementation does **not** let read‑only transactions execute directly on followers.
+  - Mako is compatible with an optimization where:
+    - A dedicated checkpointing thread periodically snapshots the database.
+    - Read‑only transactions read from this snapshot instead of the live, speculative state.
+    - Each key maintains two “special” versions:
+      - One reflecting the latest value.
+      - One storing the most recent value up to the last all‑agreed vector watermark (safe for read‑only txns).
+  - This is conceptually similar to CockroachDB’s follower reads, which allow followers to serve reads at or before a **closed timestamp** that is known to be safe across replicas.
+
+- High‑level design for Mako‑style snapshot follower reads:
+  - **Checkpointing thread:**
+    - A background thread on each shard periodically:
+      - Captures a consistent snapshot of the database at a chosen timestamp `T_snap`.
+      - Ensures `T_snap` is ≤ the last all‑agreed (vector or single) watermark so that the snapshot only contains fully replicated data.
+  - **Dual versions per key (2‑version MVCC, no GC needed):**
+    - For each logical key, maintain at most two logical versions:
+      - `latest_value`, `latest_ts`: the newest value (possibly speculative, ahead of the watermark).
+      - `stable_value`, `stable_ts`: the last value known to be fully replicated and ≤ the last all‑agreed watermark (safe for read‑only txns).
+    - On a write, update only `latest_value` / `latest_ts` in place.
+    - When the watermark advances so that `latest_ts` becomes safe with respect to replication, **promote**:
+      ```cpp
+      stable_value = latest_value;
+      stable_ts    = latest_ts;
+      ```
+    - There is never an unbounded chain of versions per key; the “GC” of older snapshot versions is implicit in overwriting `stable_value`. Full MVCC garbage collection is not required for the snapshot layer.
+    - Snapshot storage can reuse existing per‑key versioned layout (Masstree + `Node::timestamp` + `MultiVersionValue`) without adding a separate version chain.
+
+  - **Why this 2‑version MVCC needs no GC:**
+    - In full MVCC, each update creates a new version (`v@t1`, `v@t2`, `v@t3`, …) and a garbage collector must eventually reclaim versions older than the oldest active snapshot.
+    - Here, each key stores **at most two versions**:
+      - A latest version (`latest_value@latest_ts`) that tracks the current state.
+      - A stable version (`stable_value@stable_ts`) that tracks the last state proven safe w.r.t. the all‑agreed watermark.
+    - When the watermark moves forward and `latest_ts` becomes safe, we simply **overwrite** the stable slot:
+      - No third version is ever created; the old stable version is discarded in place.
+      - Memory usage is therefore bounded by 2× the value size per key, and no background GC walker is needed at the MVCC layer.
+  - **Read‑only path:**
+    - Pure read‑only transactions that tolerate bounded staleness:
+      - Are routed to read from the “snapshot” versions at followers (or leaders).
+      - Do not participate in speculative 2PC/Paxos; they see a consistent view frozen at `T_snap`.
+    - The snapshot timestamp `T_snap` plays a role analogous to CockroachDB’s closed timestamp:
+      - Followers can safely serve any read at timestamps ≤ `T_snap`.
+      - New snapshots advance over time as watermarks progress.
+  - **Interaction with existing watermarks:**
+    - The snapshot timestamp `T_snap` should be derived from the all‑agreed vector/single watermark:
+      - For a multi‑shard configuration, take the min across shards (as in `getMinSafeTimestamp()`).
+      - Followers only advertise `T_snap` values that are ≤ their local and remote safe timestamps.
+  - **Consistency and isolation:**
+    - Snapshot reads are strictly read‑only and see a consistent prefix of the global history.
+    - They do not affect speculative writes or commit ordering.
+    - From the concurrency‑control perspective, a snapshot read‑only transaction is **serializable at its snapshot timestamp** (`stable_ts` / `T_snap`):
+      - Its outcome is equivalent to running atomically at logical time `T_snap` in the history.
+      - It may be **stale** relative to real time (“not linearizable to now”), but still respects serializability when combined with read‑write transactions that use Mako’s existing speculative 2PC protocol.
+    - The main correctness questions become:
+      - How to publish new snapshots (`T_snap`) without violating consistency.
+      - How to manage memory for the dual‑version representation (bounded 2‑version per key) without needing a full MVCC garbage collector.
+  - **Snapshot semantics and serializability level:**
+    - Base Mako already targets **serializable** transactions (with strict guarantees for read‑write txns via speculative 2PC and watermark‑based safety).
+    - Snapshot‑based read‑only txns that read from `stable_value@stable_ts`:
+      - Observe a consistent snapshot of the database at logical time `stable_ts` (or `T_snap`), derived from the all‑agreed watermark.
+      - Are **serializable** at that snapshot time: their outcome is equivalent to executing atomically at `stable_ts` in the history, even though they may be stale relative to “now”.
+      - Do not necessarily provide “read‑your‑writes” or wall‑clock external consistency relative to concurrent read‑write txns (they are snapshot‑isolated in time, not necessarily linearizable to real time).
+    - Follower snapshot reads should align with CockroachDB’s closed‑timestamp semantics:
+      - Followers only serve reads at timestamps ≤ a closed timestamp (`T_snap`/`stable_ts`) that is known to be safe cluster‑wide.
+      - Combined with Mako’s existing serializable commit protocol, this provides a high‑level serializable read path where:
+        - Read‑write txns remain strictly serializable.
+        - Snapshot read‑only txns are serializable at their chosen (possibly stale) snapshot timestamp.
 
 - Tasks:
-  - Extend `Transaction::commit()` and/or `Sto::try_commit()` to:
-    - If `!has_any_writes()` and the transaction is otherwise healthy:
-      - Either call into `try_commit_read_only()` even if `is_read_only_fast_path_` was never set, or
-      - Set `is_read_only_fast_path_` late and then route through the existing fast path.
-  - Ensure safety invariants remain intact:
-    - Snapshot timestamp selection:
-      - If `read_timestamp_` is still 0, acquire it via `getMinSafeTimestamp()` just as for explicitly read‑only txns.
-      - If `read_timestamp_` was previously chosen (e.g., via follower‑read helpers), clamp it to `safe_ts` as in Phase 2.
-    - Follower reads:
-      - Auto‑promoted transactions must still satisfy follower gating:
-        - If they ran on followers and used `MassTrans::transGet`, ensure `read_timestamp_` was set (either eagerly or lazily) so `should_redirect_to_leader()` semantics remain correct.
-    - Validation:
-      - `try_commit_read_only()` already enforces durability and version checks; auto‑promotion must still go through those checks.
-  - Instrumentation:
-    - Add a counter to track how many transactions are:
-      - Explicitly marked read‑only fast path (Phase 1).
-      - Auto‑promoted to fast path at commit time (this phase).
+  - Prototype a **checkpointing thread**:
+    - Decide on a snapshot interval and the representation of `T_snap`.
+    - Integrate with existing watermark logic so `T_snap` ≤ last all‑agreed watermark.
+  - Decide how to represent **snapshot versions**:
+    - Option A: encode snapshot values as part of the existing version chains (using `Node::timestamp` to identify which version belongs to which snapshot).
+    - Option B: maintain an auxiliary snapshot index that maps keys to snapshot values and timestamps.
+  - Design the **read‑only API**:
+    - A “snapshot read‑only mode” that routes transactions to snapshot storage and does **not** interfere with the main transactional path.
+    - Decide whether snapshot reads can be initiated at followers only, or at both leaders and followers, and how clients choose between “fresh” (leader) vs. “snapshot” (follower) reads.
+  - Align semantics with CockroachDB‑style follower reads:
+    - Document how `T_snap` relates to the closed timestamp concept:
+      - `T_snap` ≤ closed timestamp at all replicas serving snapshot reads.
+    - Ensure snapshot reads never see values beyond `T_snap`, even if local replication progress is ahead.
+  - Treat this as future work:
+    - This snapshot‑based design is intentionally more complex than the Phase 0–4 work and is not implemented in this repo yet.
+    - It should be evaluated carefully against Mako’s existing MVCC, watermark, and speculative 2PC machinery before implementation.
 
 - **Current code status:**
-  - Auto‑promotion is implemented: `Transaction::commit()` and `Sto::try_commit()` route any transaction with no writes through `try_commit_read_only()`, regardless of external flags, while preserving all durability and validation checks inside `try_commit_read_only()`.
-  - Explicit marking via `Sto::start_read_only_transaction()` remains available for tests/examples that want to exercise the fast path explicitly, but it is no longer required for correctness or for the fast path to be used.
+  - The current repo implements a leader‑only fast read‑only commit path plus follower safety checks based on watermarks.
+  - We **do not** implement automatic mid‑transaction promotion to the fast path, due to complexity and potential serializability pitfalls.
+  - Snapshot‑based follower reads are a **design direction** informed by Mako’s paper and Silo/CockroachDB ideas, not implemented code.
 
 ---
 

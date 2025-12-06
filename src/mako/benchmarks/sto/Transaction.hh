@@ -705,13 +705,11 @@ public:
     void shard_unlock(bool committed);
 
     void commit() {
-        // Auto-promote any transaction without writes into the fast-path, but only when running
-        // in replicated mode where closed timestamps / watermarks are meaningful.
+        // Fast path is explicit-only: we enter here only if the caller started the txn via
+        // Sto::start_read_only_transaction() (or otherwise set the flag) and the txn remained
+        // read-only. No implicit promotion based on !has_any_writes().
         if (BenchmarkConfig::getInstance().getIsReplicated() &&
-            !has_any_writes() && !fast_path_disabled_) {
-            if (!is_read_only_fast_path_) {
-                set_read_only_fast_path(true);
-            }
+            is_read_only_fast_path_ && !has_any_writes() && !fast_path_disabled_) {
             txn_fast_path_stats::record_fast_path_attempt();
             if (!try_commit_read_only())
                 throw Abort();
@@ -1037,10 +1035,9 @@ public:
     static bool try_commit() {
         always_assert(in_progress());
         if (BenchmarkConfig::getInstance().getIsReplicated() &&
-            !TThread::txn->has_any_writes() && !TThread::txn->fast_path_disabled_) {
-            if (!TThread::txn->is_read_only_fast_path()) {
-                TThread::txn->set_read_only_fast_path(true);
-            }
+            TThread::txn->is_read_only_fast_path() &&
+            !TThread::txn->has_any_writes() &&
+            !TThread::txn->fast_path_disabled_) {
             txn_fast_path_stats::record_fast_path_attempt();
             return TThread::txn->try_commit_read_only();
         }
