@@ -15,6 +15,7 @@
 #include "stuffed_str.hh"
 #include "multiversion.hh"
 #include "sync_util.hh"
+#include "benchmarks/benchmark_config.h"
 #include "lib/common.h"
 #include "common.hh"
 #include "stdlib.h"
@@ -152,7 +153,8 @@ public:
     // ==================== FOLLOWER READ SUPPORT ====================
     // Design doc Option A: ensure a snapshot timestamp exists, let followers compare it against
     // their closed timestamp, and abort (no throw) if they must redirect the txn to a leader.
-    if (TThread::txn && TThread::txn->is_read_only_fast_path()) {
+    if (BenchmarkConfig::getInstance().getIsReplicated() &&
+        TThread::txn && TThread::txn->is_read_only_fast_path()) {
       uint32_t read_ts = TThread::txn->get_read_timestamp();
       if (read_ts == 0) {
         TThread::txn->acquireReadTimestamp();
