@@ -147,15 +147,15 @@ jobs:
         continue-on-error: true
         run: ./ci/ci.sh shard1Replication
 
-      # - name: Run tests - simple 2 shard with replication - dbtest (RRR)
-      #   id: shard2Replication
-      #   continue-on-error: true
-      #   run: ./ci/ci.sh shard2Replication
+      - name: Run tests - simple 2 shard with replication - dbtest (RRR)
+        id: shard2Replication
+        continue-on-error: true
+        run: ./ci/ci.sh shard2Replication
 
-      # - name: Run tests - simple 2 shard with replication - dbtest (eRPC)
-      #   id: shard2ReplicationErpc
-      #   continue-on-error: true
-      #   run: ./ci/ci.sh shard2ReplicationErpc
+      - name: Run tests - simple 2 shard with replication - dbtest (eRPC)
+        id: shard2ReplicationErpc
+        continue-on-error: true
+        run: ./ci/ci.sh shard2ReplicationErpc
 
       - name: Run tests - simple 1 shard with replication - simpleTransactionRep
         id: shard1ReplicationSimple

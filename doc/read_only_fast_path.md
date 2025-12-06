@@ -216,6 +216,7 @@ This section documents the pieces that already exist in the repository and wheth
     - `Sto::start_transaction()` starts a generic transaction.
     - `Sto::start_read_only_transaction()` starts a transaction with `is_read_only_fast_path_` set and an early snapshot, useful for examples/tests.
     - Earlier iterations experimented with **automatic promotion at commit time** (“if no writes, treat as fast‑path read‑only”), but this proved fragile: it interacted badly with fast‑path fallbacks (leading to recursion/looping in CI) and made serializability reasoning harder. The epic now treats the fast path as an **explicit mode chosen at transaction start**, not something inferred or promoted mid‑transaction or mid‑commit.
+  - **Caveat:** The fast read‑only path depends on the closed‑timestamp / replication machinery. When `BenchmarkConfig::getInstance().getIsReplicated()` is false (single‑replica runs), fast‑path helpers are effectively disabled so the system falls back to the baseline Mako behavior. Any performance comparisons should note that follower‑read gains only apply to replicated deployments.
 
 ---
 
