@@ -117,12 +117,14 @@ bool run_fast_path_reads(abstract_db* db,
     }
 
     auto end = std::chrono::steady_clock::now();
-    auto duration_ms =
-        std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+    auto elapsed = end - start;
+    double duration_sec =
+        std::chrono::duration_cast<std::chrono::duration<double>>(elapsed)
             .count();
-    double throughput = duration_ms > 0
-                            ? (static_cast<double>(commits) * 1000.0) /
-                                  static_cast<double>(duration_ms)
+    long long duration_ms =
+        std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
+    double throughput = duration_sec > 0.0
+                            ? static_cast<double>(commits) / duration_sec
                             : 0.0;
 
     std::cout << "FAST_RO_STATS mode=" << mode_str
@@ -196,7 +198,7 @@ int main(int argc, char** argv) {
                                       table,
                                       ctx,
                                       benchConfig.getShardIndex(),
-                                      /*iterations=*/100);
+                                      /*iterations=*/2000);
 
         std::this_thread::sleep_for(std::chrono::seconds(2));
         mako::stop_erpc_server();

@@ -524,7 +524,7 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
         - Opens the `customer_0` Masstree table via `mbta_sharded_ordered_index`.
         - Inserts **16 keys** `fast_ro_key_0_i` (for `i = 0..15`) with values `fast_ro_value_0_i` using normal replicated transactions (no fast‑path flags).
       - Read‑only benchmark phase:
-        - Runs `iterations = 100` transactions in a tight loop.
+        - Runs `iterations = 2000` transactions in a tight loop.
         - Each transaction:
           - Calls `db->new_txn(0, arena, buf)` via `mbta_wrapper`, which internally uses `Sto::start_transaction()`.
           - If fast‑path mode is enabled (see below), obtains the sto transaction via `Sto::transaction()` and calls:
@@ -543,10 +543,11 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
         - The leader logs a single structured line summarizing the microbenchmark:
           ```text
           FAST_RO_STATS mode=<baseline|fast> iterations=<N> commits=<N>
-                         duration_ms=<wall time of 100 txns>
-                         throughput_ops_per_sec=<commits / (duration_ms/1000)>
+                         duration_ms=<wall time of all read-only txns>
+                         throughput_ops_per_sec=<commits / duration_sec>
           ```
-        - The CI script `examples/test_fast_path_readonly.sh` greps this line from the leader’s log (`fastpath-shard0-localhost.log`) and echoes it into the GitHub Actions log for easy comparison.
+          where `duration_sec` is computed from a high‑precision `std::chrono::duration<double>` so that very fast runs still yield a non‑zero throughput. `duration_ms` is also logged for human readability.
+        - The CI script `examples/test_fast_path_readonly.sh` greps this line from the leader’s log (`fastpath-shard0-localhost.log`) and echoes it into the GitHub Actions log for easy comparison between `mode=baseline` and `mode=fast`.
       - CI wiring:
         - Workflow: `.github/workflows/ci.yml`.
         - Two steps run the same test with different modes:
