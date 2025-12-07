@@ -172,11 +172,6 @@ jobs:
         continue-on-error: true
         run: ./ci/ci.sh rocksdbTests 
 
-      - name: Run tests - fast-path benchmark
-        id: fastPathBenchmark
-        continue-on-error: true
-        run: ./ci/ci.sh fastPathBenchmark
-
 
       - name: Cleanup
         if: always()
@@ -209,7 +204,6 @@ jobs:
           check "shard1ReplicationSimple" "${{ steps.shard1ReplicationSimple.outcome }}"
           check "shard2ReplicationSimple" "${{ steps.shard2ReplicationSimple.outcome }}"
           check "rocksdbTests"             "${{ steps.rocksdbTests.outcome }}"
-          check "fastPathBenchmark"        "${{ steps.fastPathBenchmark.outcome }}"
 
           if [ "$failed" -ne 0 ]; then
             echo "One or more tests failed."

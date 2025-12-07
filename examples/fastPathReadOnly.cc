@@ -1,12 +1,10 @@
 #include <chrono>
 #include <cstdlib>
 #include <iostream>
-#include <iomanip>
 #include <map>
 #include <string>
 #include <thread>
 #include <vector>
-#include <sstream>
 
 #include <mako.hh>
 
@@ -133,11 +131,6 @@ bool run_fast_path_reads(abstract_db* db,
               << " iterations=" << iterations << " commits=" << commits
               << " duration_ms=" << duration_ms
               << " throughput_ops_per_sec=" << throughput << std::endl;
-    std::ostringstream summary_stream;
-    summary_stream << std::fixed << std::setprecision(2) << throughput;
-    std::cout << "FAST_RO_SUMMARY " << mode_str
-              << " throughput=" << summary_stream.str()
-              << " ops/sec duration_ms=" << duration_ms << std::endl;
     std::cout << "Fast-path read-only commits: " << commits << std::endl;
     return commits == iterations;
 }
