@@ -51,6 +51,13 @@ public:
   {
     void * const txn = db->new_txn(txn_flags, arena, txn_buf(), abstract_db::HINT_KV_GET_PUT);
     scoped_str_arena s_arena(arena);
+    if (const char *fast_ro = getenv("YCSB_FAST_RO")) {
+      if (fast_ro[0] != '\0') {
+        Transaction *sto_txn = Sto::transaction();
+        sto_txn->set_read_only_fast_path(true);
+        sto_txn->acquireReadTimestamp();
+      }
+    }
     try {
       const uint64_t k = r.next() % nkeys;
       ALWAYS_ASSERT(tbl->get(txn, u64_varkey(k).str(obj_key0), obj_v));
