@@ -167,6 +167,16 @@ jobs:
         continue-on-error: true
         run: ./ci/ci.sh shard2ReplicationSimple
 
+      - name: Run tests - simple 1 shard replication (fast read-only path)
+        id: shard1ReplicationFastRO
+        continue-on-error: true
+        run: ./ci/ci.sh shard1ReplicationFastRO
+
+      - name: Run tests - simple 2 shard replication (fast read-only path)
+        id: shard2ReplicationFastRO
+        continue-on-error: true
+        run: ./ci/ci.sh shard2ReplicationFastRO
+
       - name: Run tests - RocksDB persistence and partitioned queues
         id: rocksdbTests
         continue-on-error: true
@@ -203,6 +213,8 @@ jobs:
           # check "shard2ReplicationErpc"   "${{ steps.shard2ReplicationErpc.outcome }}"
           check "shard1ReplicationSimple" "${{ steps.shard1ReplicationSimple.outcome }}"
           check "shard2ReplicationSimple" "${{ steps.shard2ReplicationSimple.outcome }}"
+          check "shard1ReplicationFastRO" "${{ steps.shard1ReplicationFastRO.outcome }}"
+          check "shard2ReplicationFastRO" "${{ steps.shard2ReplicationFastRO.outcome }}"
           check "rocksdbTests"             "${{ steps.rocksdbTests.outcome }}"
 
           if [ "$failed" -ne 0 ]; then
