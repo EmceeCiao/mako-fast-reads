@@ -505,9 +505,8 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
     - Number of follower‑staleness aborts.
 
 - **Current code status:**
-  - CI scripts exist for the baseline replication tests (`ci/ci.sh`, various `test_*replication*.sh`) which validate mixed workloads and report `agg_*` throughput metrics.
-  - CI now also runs `examples/test_1shard_replication_fast_ro.sh` and `examples/test_2shard_replication_fast_ro.sh` via `./ci/ci.sh shard{1,2}ReplicationFastRO`. These start `simpleTransactionRep` in a read-only fast-path mode, reuse the existing throughput logging (`agg_throughput`, `agg_persist_throughput`, etc.), and mirror the follower replay checks from the `_simple` scripts so fast-path runs are comparable to the baseline.
-  - Broader fast read-only path performance (e.g., YCSB/TPCC-style workloads) will still be evaluated outside of CI for deeper comparisons.
+  - CI scripts exist for replication tests (`ci/ci.sh`, various `test_*replication*.sh`) which validate baseline replicated behavior.
+  - Fast read-only path performance will be evaluated via YCSB/TPCC-style workloads outside of CI; there is no dedicated CI microbenchmark for throughput comparisons.
 
 ---
 

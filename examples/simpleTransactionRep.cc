@@ -7,64 +7,14 @@
 #include <thread>
 #include <vector>
 #include <map>
-#include <atomic>
-#include <algorithm>
-#include <cctype>
-#include <cstdlib>
 #include <mako.hh>
 #include "examples/common.h"
 #include "benchmarks/rpc_setup.h"
 #include "../src/mako/spinbarrier.h"
 #include "../src/mako/benchmarks/mbta_sharded_ordered_index.hh"
-#include "../src/mako/benchmarks/sto/Transaction.hh"
 
 using namespace std;
 using namespace mako;
-
-namespace {
-enum class SimpleRepMode {
-    kDefault = 0,
-    kFastReadOnly
-};
-
-SimpleRepMode DetectSimpleRepMode() {
-    const char* env = std::getenv("SIMPLE_REP_MODE");
-    if (!env) {
-        return SimpleRepMode::kDefault;
-    }
-    std::string mode(env);
-    std::transform(mode.begin(), mode.end(), mode.begin(),
-                   [](unsigned char c) { return std::tolower(c); });
-    if (mode == "read_only_fast_path" || mode == "fast_ro" || mode == "fast-read-only") {
-        return SimpleRepMode::kFastReadOnly;
-    }
-    return SimpleRepMode::kDefault;
-}
-
-SimpleRepMode g_simple_rep_mode = DetectSimpleRepMode();
-constexpr size_t kFastROKeyspace = 4096;
-constexpr size_t kFastROReadsPerTxn = 4;
-
-struct FastRoMetrics {
-    std::atomic<uint64_t> commits{0};
-    std::atomic<uint64_t> aborts{0};
-};
-
-FastRoMetrics g_fast_ro_metrics;
-
-bool is_fast_ro_mode() {
-    return g_simple_rep_mode == SimpleRepMode::kFastReadOnly;
-}
-
-void reset_fast_ro_metrics() {
-    g_fast_ro_metrics.commits.store(0, std::memory_order_relaxed);
-    g_fast_ro_metrics.aborts.store(0, std::memory_order_relaxed);
-}
-
-std::string format_fast_ro_key(int shard_index, size_t slot) {
-    return "fast_ro_key_" + std::to_string(shard_index) + "_" + std::to_string(slot);
-}
-} // namespace
 
 class TransactionWorker {
 public:
@@ -434,51 +384,6 @@ public:
         }
     }
 
-    void run_read_only_fast_path_workload() {
-        auto& benchConfig = BenchmarkConfig::getInstance();
-        const int shard_index = benchConfig.getShardIndex();
-        mbta_sharded_ordered_index *table = db->open_sharded_index("customer_0");
-
-        const size_t runtime_seconds = benchConfig.getRuntime() ? benchConfig.getRuntime() : 30;
-        const auto workload_deadline =
-            std::chrono::steady_clock::now() + std::chrono::seconds(runtime_seconds);
-        size_t cursor = worker_id_ % kFastROKeyspace;
-        size_t commits = 0;
-        size_t aborts = 0;
-
-        printf("[FAST_RO] [Shard %d Worker %d] Starting read-only workload on thread %ld\n",
-               shard_index, worker_id_, std::this_thread::get_id());
-
-        while (std::chrono::steady_clock::now() < workload_deadline &&
-               benchConfig.isRunning()) {
-            arena.reset();
-            Sto::start_read_only_transaction();
-            void *txn = db->new_txn(0, arena, txn_buf());
-
-            try {
-                for (size_t r = 0; r < kFastROReadsPerTxn; ++r) {
-                    const size_t key_slot = (cursor + r) % kFastROKeyspace;
-                    std::string key = format_fast_ro_key(shard_index, key_slot);
-                    std::string value;
-                    table->get(txn, key, value);
-                }
-                db->commit_txn(txn);
-                ++commits;
-                g_fast_ro_metrics.commits.fetch_add(1, std::memory_order_relaxed);
-            } catch (abstract_db::abstract_abort_exception &) {
-                db->abort_txn(txn);
-                ++aborts;
-                g_fast_ro_metrics.aborts.fetch_add(1, std::memory_order_relaxed);
-                std::this_thread::sleep_for(std::chrono::microseconds(100));
-            }
-
-            cursor = (cursor + kFastROReadsPerTxn) % kFastROKeyspace;
-        }
-
-        printf("[FAST_RO] [Shard %d Worker %d] commits=%zu aborts=%zu\n",
-               shard_index, worker_id_, commits, aborts);
-    }
-
 protected:
     abstract_db *const db;
     int worker_id_;
@@ -501,31 +406,23 @@ void run_worker_tests(abstract_db *db, int worker_id,
     barrier_ready->count_down();
     barrier_start->wait_for();
 
-    if (is_fast_ro_mode()) {
-        worker->run_read_only_fast_path_workload();
-    } else {
-        worker->test_basic_transactions();
-        worker->test_single_key_contention();
-        worker->test_overlapping_keys();
-        worker->test_cross_shard_contention();
-        worker->test_read_write_contention();
-    }
+    // Run all tests
+    worker->test_basic_transactions();
+    worker->test_single_key_contention();
+    worker->test_overlapping_keys();
+    worker->test_cross_shard_contention();
+    worker->test_read_write_contention();
 
     printf("[Worker %d] Completed\n", worker_id);
 }
 
 void run_tests(abstract_db* db) {
-    auto& benchConfig = BenchmarkConfig::getInstance();
-    size_t nthreads = benchConfig.getNthreads();
+    // Pre-open tables ONCE before creating threads to avoid serialization
+    size_t nthreads = BenchmarkConfig::getInstance().getNthreads();
     std::vector<std::thread> worker_threads;
     worker_threads.reserve(nthreads);
     spin_barrier barrier_ready(nthreads);
     spin_barrier barrier_start(1);
-
-    if (is_fast_ro_mode()) {
-        reset_fast_ro_metrics();
-    }
-    const auto benchmark_start = std::chrono::steady_clock::now();
 
     for (size_t i = 0; i < nthreads; ++i) {
         worker_threads.emplace_back(run_worker_tests, db, i,
@@ -540,60 +437,6 @@ void run_tests(abstract_db* db) {
     for (auto& t : worker_threads) {
         t.join();
     }
-
-    const auto benchmark_end = std::chrono::steady_clock::now();
-    if (is_fast_ro_mode()) {
-        const double elapsed_sec =
-            std::chrono::duration_cast<std::chrono::duration<double>>(benchmark_end - benchmark_start).count();
-        const uint64_t commits = g_fast_ro_metrics.commits.load(std::memory_order_relaxed);
-        const uint64_t aborts = g_fast_ro_metrics.aborts.load(std::memory_order_relaxed);
-        const double agg_throughput = elapsed_sec > 0.0 ? double(commits) / elapsed_sec : 0.0;
-        const double avg_per_core = nthreads ? agg_throughput / double(nthreads) : 0.0;
-        const double agg_abort_rate = elapsed_sec > 0.0 ? double(aborts) / elapsed_sec : 0.0;
-        const double avg_abort_rate = nthreads ? agg_abort_rate / double(nthreads) : 0.0;
-
-        std::cerr << "agg_throughput: " << agg_throughput << " ops/sec" << std::endl;
-        std::cerr << "avg_per_core_throughput: " << avg_per_core << " ops/sec/core" << std::endl;
-        std::cerr << "agg_persist_throughput: " << agg_throughput << " ops/sec" << std::endl;
-        std::cerr << "avg_per_core_persist_throughput: " << avg_per_core << " ops/sec/core" << std::endl;
-        std::cerr << "agg_abort_rate: " << agg_abort_rate << " aborts/sec" << std::endl;
-        std::cerr << "avg_per_core_abort_rate: " << avg_abort_rate << " aborts/sec/core" << std::endl;
-    }
-}
-
-void warmup_fast_ro_dataset(abstract_db* db) {
-    if (!is_fast_ro_mode()) {
-        return;
-    }
-
-    auto& benchConfig = BenchmarkConfig::getInstance();
-    const int shard_index = benchConfig.getShardIndex();
-    mbta_sharded_ordered_index *table = db->open_sharded_index("customer_0");
-
-    str_arena arena;
-    std::string txn_obj_buf;
-    txn_obj_buf.reserve(str_arena::MinStrReserveLength);
-    txn_obj_buf.resize(db->sizeof_txn_object(0));
-
-    for (size_t slot = 0; slot < kFastROKeyspace; ++slot) {
-        const std::string key = format_fast_ro_key(shard_index, slot);
-        const std::string value = mako::Encode("fast_ro_value_" + std::to_string(shard_index) + "_" + std::to_string(slot));
-        bool done = false;
-        while (!done) {
-            arena.reset();
-            void *txn = db->new_txn(0, arena, txn_obj_buf.data());
-            try {
-                table->put(txn, key, value);
-                db->commit_txn(txn);
-                done = true;
-            } catch (abstract_db::abstract_abort_exception &) {
-                db->abort_txn(txn);
-                std::this_thread::sleep_for(std::chrono::milliseconds(1));
-            }
-        }
-    }
-
-    printf("[FAST_RO] Primed %zu keys on shard %d for read-only workload\n", kFastROKeyspace, shard_index);
 }
 
 int main(int argc, char **argv) {
@@ -634,9 +477,6 @@ int main(int argc, char **argv) {
     abstract_db* replicated_db = init_env();
 
     printf("=== Mako Transaction Tests  ===\n");
-    if (is_fast_ro_mode() && benchConfig.getLeaderConfig()) {
-        printf("[FAST_RO] SIMPLE_REP_MODE=read_only_fast_path enabled on leader\n");
-    }
     
     abstract_db* db = initWithDB();
 
@@ -653,9 +493,6 @@ int main(int argc, char **argv) {
         mako::setup_helper(db, std::ref(open_tables));
 
         std::this_thread::sleep_for(std::chrono::seconds(5)); // Wait all shards finish setup
-        if (is_fast_ro_mode()) {
-            warmup_fast_ro_dataset(db);
-        }
     }
 
     if (benchConfig.getLeaderConfig()) {

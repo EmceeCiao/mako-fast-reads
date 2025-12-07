@@ -1064,9 +1064,7 @@ public:
                 void *buf,
                 TxnProfileHint hint = HINT_DEFAULT) {
     (void)txn_flags;
-    if (!Sto::in_progress()) {
-      Sto::start_transaction();
-    }
+    Sto::start_transaction();
     thr_arena = &arena;
     return NULL;
   }

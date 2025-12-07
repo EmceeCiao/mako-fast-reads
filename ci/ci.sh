@@ -220,34 +220,6 @@ run_2shard_replication_simple() {
     [ $test_result -eq 0 ] && [ $hanging_check -eq 0 ]
 }
 
-run_1shard_replication_fast_ro() {
-    echo "========================================="
-    echo "Running: ./ci/ci.sh shard1ReplicationFastRO"
-    echo "========================================="
-    cleanup_processes
-    set +e
-    bash ./examples/test_1shard_replication_fast_ro.sh
-    local test_result=$?
-    set -e
-    check_for_hanging_processes "shard1ReplicationFastRO"
-    local hanging_check=$?
-    [ $test_result -eq 0 ] && [ $hanging_check -eq 0 ]
-}
-
-run_2shard_replication_fast_ro() {
-    echo "========================================="
-    echo "Running: ./ci/ci.sh shard2ReplicationFastRO"
-    echo "========================================="
-    cleanup_processes
-    set +e
-    bash ./examples/test_2shard_replication_fast_ro.sh
-    local test_result=$?
-    set -e
-    check_for_hanging_processes "shard2ReplicationFastRO"
-    local hanging_check=$?
-    [ $test_result -eq 0 ] && [ $hanging_check -eq 0 ]
-}
-
 run_rocksdb_tests() {
     echo "========================================="
     echo "Running: ./ci/ci.sh rocksdbTests"
@@ -345,12 +317,6 @@ case "${1:-}" in
     shard2ReplicationSimple)
         run_2shard_replication_simple
         ;;
-    shard1ReplicationFastRO)
-        run_1shard_replication_fast_ro
-        ;;
-    shard2ReplicationFastRO)
-        run_2shard_replication_fast_ro
-        ;;
     rocksdbTests)
         run_rocksdb_tests
         ;;
@@ -374,8 +340,6 @@ case "${1:-}" in
         run_2shard_replication
         run_1shard_replication_simple
         run_2shard_replication_simple
-        run_1shard_replication_fast_ro
-        run_2shard_replication_fast_ro
         run_rocksdb_tests
         run_shard_fault_tolerance
         run_multi_shard_single_process
