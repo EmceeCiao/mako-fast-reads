@@ -44,8 +44,6 @@ cleanup_processes() {
     result=ci_results_${RUN_NUM}_${RUN_INDEX}
     mkdir -p ~/results/$result
     rm -f nfs_*
-    USERNAME=${USER:-unknown}
-    rm -rf /tmp/${USERNAME}_mako_rocksdb_shard*
     echo "Cleaning up any lingering test processes..."
 
     # Kill test executables

@@ -9,10 +9,8 @@ echo "========================================="
 echo "Testing 2-shard setup without replication"
 echo "========================================="
 
-# Clean up old log files and RocksDB state
+# Clean up old log files
 rm -f nfs_sync_*
-USERNAME=${USER:-unknown}
-rm -rf /tmp/${USERNAME}_mako_rocksdb_shard*
 
 trd=${1:-6}
 script_name="$(basename "$0")"
