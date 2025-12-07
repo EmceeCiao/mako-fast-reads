@@ -263,6 +263,20 @@ run_multi_shard_single_process() {
     [ $test_result -eq 0 ] && [ $hanging_check -eq 0 ]
 }
 
+run_fast_path_benchmark() {
+    echo "========================================="
+    echo "Running: ./ci/ci.sh fastPathBenchmark"
+    echo "========================================="
+    cleanup_processes
+    set +e
+    bash ./examples/test_fast_path_benchmark.sh
+    local test_result=$?
+    set -e
+    check_for_hanging_processes "fastPathBenchmark"
+    local hanging_check=$?
+    [ $test_result -eq 0 ] && [ $hanging_check -eq 0 ]
+}
+
 run_rrr_unit_tests() {
     echo "========================================="
     echo "Running: ./ci/ci.sh rrrTests"
@@ -325,6 +339,9 @@ case "${1:-}" in
         ;;
     multiShardSingleProcess)
         run_multi_shard_single_process
+        ;;
+    fastPathBenchmark)
+        run_fast_path_benchmark
         ;;
     rrrTests)
         run_rrr_unit_tests
