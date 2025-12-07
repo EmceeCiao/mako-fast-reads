@@ -452,10 +452,8 @@ public:
         while (std::chrono::steady_clock::now() < workload_deadline &&
                benchConfig.isRunning()) {
             arena.reset();
+            Sto::start_read_only_transaction();
             void *txn = db->new_txn(0, arena, txn_buf());
-            Transaction* sto_txn = Sto::transaction();
-            sto_txn->set_read_only_fast_path(true);
-            sto_txn->acquireReadTimestamp();
 
             try {
                 for (size_t r = 0; r < kFastROReadsPerTxn; ++r) {
