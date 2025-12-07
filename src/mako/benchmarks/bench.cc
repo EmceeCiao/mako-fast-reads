@@ -690,11 +690,6 @@ bench_runner::run()
     for (int i=0;i<sizeof(txn_ratio)/sizeof(txn_ratio[0]); i++) {
       if (agg_txn_counts.find(txn_ratio[i]+"_Local")!=agg_txn_counts.end() 
           && agg_txn_counts.find(txn_ratio[i]+"_Remote")!=agg_txn_counts.end()) {
-        // *_Remote counters are incremented in bench_worker::run() whenever a txn_result
-        // reports ret.second % 10 == 1 (i.e., the TPCC txn touched a remote warehouse).
-        // Thus NewOrder_remote_abort_ratio below is simply remote abort attempts /
-        // (remote commits + remote aborts) and counts all abort causes (validation,
-        // timeout, network, etc.) for those remote NewOrder attempts.
         cerr << "  " << txn_ratio[i] << "_remote_ratio: " << 100*(agg_txn_counts[txn_ratio[i]+"_Remote"]+agg_txn_counts[txn_ratio[i]+"_Remote_abort"]) / (agg_txn_counts[txn_ratio[i]+"_Local"]+agg_txn_counts[txn_ratio[i]+"_Local_abort"]+agg_txn_counts[txn_ratio[i]+"_Remote"]+agg_txn_counts[txn_ratio[i]+"_Remote_abort"] + 0.0) << " %"<< endl;
         cerr << "  " << txn_ratio[i] << "_remote_abort_ratio: " << 100*agg_txn_counts[txn_ratio[i]+"_Remote_abort"] / (agg_txn_counts[txn_ratio[i]+"_Remote_abort"] + agg_txn_counts[txn_ratio[i]+"_Remote"] + 0.0) << " %" << endl;
         cerr << "  " << txn_w1[i] << "_remote_commit_latency: " << agg_txn_counts[txn_w1[i]+"_Remote_NANO"] / (agg_txn_counts[txn_w1[i]+"_Remote"] + 0.0) / 1000000.0 << " ms" << endl;
