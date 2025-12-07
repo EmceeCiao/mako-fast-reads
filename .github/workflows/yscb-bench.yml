@@ -1,0 +1,102 @@
+name: Bench YCSB
+
+on:
+  workflow_dispatch:
+    inputs:
+      scale_factor:
+        description: "YCSB scale factor"
+        default: "100000"
+        required: false
+      num_threads:
+        description: "Number of benchmark threads"
+        default: "28"
+        required: false
+      runtime:
+        description: "Runtime in seconds"
+        default: "60"
+        required: false
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  bench:
+    runs-on: [self-hosted, linux, c-ci-runner]
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Force Rust 1.91 into PATH
+        run: |
+          if [ -x /usr/local/bin/rustc ]; then
+            echo "/usr/local/bin" >> "$GITHUB_PATH"
+          fi
+          if [ -x "$HOME/.local-rust/bin/rustc" ]; then
+            echo "$HOME/.local-rust/bin" >> "$GITHUB_PATH"
+          fi
+
+      - name: Link build target to NVMe
+        run: |
+          echo "Linking build target to NVMe SSD"
+          sudo mkdir -p /mnt/nvme-build/mako_target
+          sudo chown -R "$USER:$USER" /mnt/nvme-build
+          if [ -L target ] || [ -d target ]; then
+            rm -rf target
+          fi
+          ln -s /mnt/nvme-build/mako_target "$GITHUB_WORKSPACE/target"
+          echo "LINKED!"
+
+      - name: Build dbtest
+        run: make -j32 dbtest
+
+      - name: Run baseline YCSB
+        run: |
+          set -euo pipefail
+          ./dbtest --bench ycsb --db-type ndb-proto2 \
+            --scale-factor "${{ inputs.scale_factor }}" \
+            --num-threads "${{ inputs.num_threads }}" \
+            --bench-opts '--workload-mix 80,0,20,0' \
+            --parallel-loading \
+            --runtime "${{ inputs.runtime }}" \
+            --verbose \
+            --numa-memory 48G \
+            > baseline.log 2>&1
+
+      - name: Run fast-path YCSB
+        env:
+          YCSB_FAST_RO: "1"
+        run: |
+          set -euo pipefail
+          ./dbtest --bench ycsb --db-type ndb-proto2 \
+            --scale-factor "${{ inputs.scale_factor }}" \
+            --num-threads "${{ inputs.num_threads }}" \
+            --bench-opts '--workload-mix 80,0,20,0' \
+            --parallel-loading \
+            --runtime "${{ inputs.runtime }}" \
+            --verbose \
+            --numa-memory 48G \
+            > fastpath.log 2>&1
+
+      - name: Upload YCSB artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ycsb-${{ github.run_number }}
+          path: |
+            baseline.log
+            fastpath.log
+            results/**
+          if-no-files-found: warn
+          retention-days: 10
+
+      - name: Cleanup target symlink
+        if: always()
+        run: |
+          if [ -L "$GITHUB_WORKSPACE/target" ]; then
+            rm "$GITHUB_WORKSPACE/target"
+          fi
