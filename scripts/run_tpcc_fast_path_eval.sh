@@ -7,6 +7,7 @@ THREADS=${THREADS:-6}
 RUNTIME=${RUNTIME:-60}
 RESULT_DIR=${RESULT_DIR:-results/tpcc_fast_path_eval}
 WAIT_FOR_METRIC_SECS=${WAIT_FOR_METRIC_SECS:-30}
+FOLLOWER_READY_TIMEOUT=${FOLLOWER_READY_TIMEOUT:-120}
 
 export MAKO_TPCC_WORKLOAD_MIX="${MAKO_TPCC_WORKLOAD_MIX:-}"
 export MAKO_FAST_RO_MODE="${MAKO_FAST_RO_MODE:-}"
@@ -89,6 +90,26 @@ start_shard_proc() {
     SHARD_PIDS+=($!)
 }
 
+wait_for_follower_ready() {
+    local log_file=$1
+    local label=$2
+    local waited=0
+    local interval=5
+    local max_wait=$FOLLOWER_READY_TIMEOUT
+    while [ $waited -lt $max_wait ]; do
+        if [ -f "$log_file" ]; then
+            if grep -q "starting benchmark" "$log_file"; then
+                log "Follower $label ready (detected 'starting benchmark')."
+                return 0
+            fi
+        fi
+        sleep "$interval"
+        waited=$((waited + interval))
+    done
+    log "Follower $label did not signal readiness within ${max_wait}s"
+    return 1
+}
+
 leader_log="${RESULT_DIR}/shard${SHARD_INDEX}-localhost-${THREADS}.log"
 learner_log="${RESULT_DIR}/shard${SHARD_INDEX}-learner-${THREADS}.log"
 p2_log="${RESULT_DIR}/shard${SHARD_INDEX}-p2-${THREADS}.log"
@@ -99,6 +120,11 @@ start_shard_proc learner "$learner_log"
 start_shard_proc p2 "$p2_log"
 sleep 1
 start_shard_proc p1 "$p1_log"
+
+log "Waiting for replicas to finish load/start benchmark (timeout=${FOLLOWER_READY_TIMEOUT}s)"
+wait_for_follower_ready "$learner_log" "learner" || true
+wait_for_follower_ready "$p1_log" "p1" || true
+wait_for_follower_ready "$p2_log" "p2" || true
 
 log "Cluster started; sleeping for ${RUNTIME}s to gather throughput"
 sleep "$RUNTIME"
