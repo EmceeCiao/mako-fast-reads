@@ -51,6 +51,7 @@ cleanup_processes() {
     pkill -9 -f dbtest 2>/dev/null || true
     pkill -9 -f simplePaxos 2>/dev/null || true
     pkill -9 -f simpleTransaction 2>/dev/null || true
+    pkill -9 -f fastPathReadOnly 2>/dev/null || true
 
     # Kill test wrapper scripts (2shard tests with/without replication)
     pkill -9 -f "test_2shard_no_replication.sh" 2>/dev/null || true
@@ -69,6 +70,7 @@ cleanup_processes() {
     done
 
     cp *.log ~/results/$result/  2>/dev/null || true
+    rm -rf fastpath-benchmark-logs 2>/dev/null || true
     echo "Cleanup complete."
 }
 
