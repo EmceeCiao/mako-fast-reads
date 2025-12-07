@@ -3374,8 +3374,12 @@ tpcc_worker::txn_stock_level()
           auto ret=tbl_stock(warehouse_id)->get(txn, EncodeK(obj_key0, k_s), obj_v, nbytesread);
           if(TThread::transget_without_stable){TThread::transget_without_stable=false;}
           if(TThread::transget_without_throw){TThread::transget_without_throw=false;db->abort_txn_local(txn);return txn_result(false,0);}
-          if(!ret){ 
+          if(!ret){
             Warning("ERROR warehouse_id:%d, cid:%d, maxbytes:%d", warehouse_id, p.first,nbytesread);
+            if (TpccFastReadOnlyModeEnabled()) {
+              db->abort_txn_local(txn);
+              return txn_result(false,0);
+            }
           }
           ALWAYS_ERROR(ret);
         }
