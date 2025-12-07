@@ -47,6 +47,8 @@ public:
     // for each worker thread, we set a global variable to ease programming
     // this structure is relatively slow, please avoid visiting it frequently
     static __thread HashWrapper* tprops;
+    // indicate a request that the next transaction should use the read-only fast path
+    static __thread bool fast_ro_txn_requested;
     // indicate which shards the write-/write-set of the current transaction cover
     static __thread unsigned int readset_shard_bits;
     static __thread unsigned int writeset_shard_bits;
@@ -159,6 +161,16 @@ public:
 
     static int get_tprops(std::string k) {
         return tprops->get_tprops(k);
+    }
+
+    static void request_fast_ro_txn() {
+        fast_ro_txn_requested = true;
+    }
+
+    static bool consume_fast_ro_txn_request() {
+        bool requested = fast_ro_txn_requested;
+        fast_ro_txn_requested = false;
+        return requested;
     }
 };
 

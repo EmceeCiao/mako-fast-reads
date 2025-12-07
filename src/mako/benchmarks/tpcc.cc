@@ -78,11 +78,7 @@ MaybeEnableFastReadOnlyTxn()
 {
   if (!TpccFastReadOnlyModeEnabled())
     return;
-  Transaction *sto_txn = Sto::transaction();
-  if (sto_txn) {
-    sto_txn->set_read_only_fast_path(true);
-    sto_txn->acquireReadTimestamp();
-  }
+  TThread::request_fast_ro_txn();
 }
 
 static inline ALWAYS_INLINE size_t 
@@ -3152,8 +3148,8 @@ tpcc_worker::txn_order_status()
     g_disable_read_only_scans ?
       abstract_db::HINT_TPCC_ORDER_STATUS :
       abstract_db::HINT_TPCC_ORDER_STATUS_READ_ONLY;
-  void *txn = db->new_txn(BenchmarkConfig::getInstance().getTxnFlags() | read_only_mask, arena, txn_buf(), hint);
   MaybeEnableFastReadOnlyTxn();
+  void *txn = db->new_txn(BenchmarkConfig::getInstance().getTxnFlags() | read_only_mask, arena, txn_buf(), hint);
   scoped_str_arena s_arena(arena);
   // NB: since txn_order_status() is a RO txn, we assume that
   // locking is un-necessary (since we can just read from some old snapshot)
@@ -3337,8 +3333,8 @@ tpcc_worker::txn_stock_level()
     g_disable_read_only_scans ?
       abstract_db::HINT_TPCC_STOCK_LEVEL :
       abstract_db::HINT_TPCC_STOCK_LEVEL_READ_ONLY;
-  void *txn = db->new_txn(BenchmarkConfig::getInstance().getTxnFlags() | read_only_mask, arena, txn_buf(), hint);
   MaybeEnableFastReadOnlyTxn();
+  void *txn = db->new_txn(BenchmarkConfig::getInstance().getTxnFlags() | read_only_mask, arena, txn_buf(), hint);
   scoped_str_arena s_arena(arena);
   // NB: since txn_stock_level() is a RO txn, we assume that
   // locking is un-necessary (since we can just read from some old snapshot)

@@ -63,6 +63,7 @@ __thread bool TThread::isRemoteShard;
 __thread int TThread::skipBeforeRemotePayment;
 __thread unsigned int TThread::readset_shard_bits;
 __thread unsigned int TThread::writeset_shard_bits;
+__thread bool TThread::fast_ro_txn_requested;
 Transaction::epoch_state __attribute__((aligned(128))) Transaction::global_epochs = {
     1, 0, TransactionTid::increment_value, true
 };

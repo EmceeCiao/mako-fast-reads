@@ -1064,7 +1064,11 @@ public:
                 void *buf,
                 TxnProfileHint hint = HINT_DEFAULT) {
     (void)txn_flags;
-    Sto::start_transaction();
+    if (TThread::consume_fast_ro_txn_request()) {
+      Sto::start_read_only_transaction();
+    } else {
+      Sto::start_transaction();
+    }
     thr_arena = &arena;
     return NULL;
   }
