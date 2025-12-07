@@ -66,6 +66,21 @@ log "NSHARDS=$NSHARDS SHARD_INDEX=$SHARD_INDEX THREADS=$THREADS RUNTIME=${RUNTIM
 log "MAKO_TPCC_WORKLOAD_MIX=${MAKO_TPCC_WORKLOAD_MIX:-default}"
 log "MAKO_FAST_RO_MODE=${MAKO_FAST_RO_MODE:-baseline}"
 
+ensure_paxos_config() {
+    local paxos_file="config/1leader_2followers/paxos${THREADS}_shardidx${SHARD_INDEX}.yml"
+    if [ -f "$paxos_file" ]; then
+        return
+    fi
+    log "Missing $paxos_file, generating Paxos configs via config/1leader_2followers/generator.py"
+    (cd config/1leader_2followers && python3 generator.py)
+    if [ ! -f "$paxos_file" ]; then
+        echo "ERROR: Failed to generate $paxos_file" >&2
+        exit 1
+    fi
+}
+
+ensure_paxos_config
+
 start_shard_proc() {
     local cluster_name=$1
     local log_file=$2
