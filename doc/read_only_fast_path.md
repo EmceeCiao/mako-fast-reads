@@ -488,25 +488,28 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
 
 ---
 
-### Phase 6 – CI/CD Validation and YCSB Evaluation
+### Phase 6 – CI/CD Validation and TPCC Evaluation
 
-- **Objective:** Validate correctness and performance using CI pipelines and YCSB, since local multi‑shard testing is not feasible.
+- **Objective:** Validate correctness and performance using CI pipelines and TPCC/YCSB-style workloads while keeping the standard CI flow unchanged.
 
-- Tasks:
-  - Extend CI to run:
-    - 1‑shard and 2‑shard replication tests with read‑only fast path enabled.
-    - Scenarios where followers lag (e.g., introducing artificial delays) to exercise abort‑and‑retry behavior.
-  - Run YCSB benchmarks:
-    - Baseline: current Mako behavior without fast path/follower reads.
-    - Experimental: with fast read‑only path and follower reads enabled.
-    - Compare throughput and latency, focusing on read‑heavy workloads.
-  - Monitor and log:
-    - Number of fast‑path commits vs. normal commits.
-    - Number of follower‑staleness aborts.
+- **What Phase 6 now provides:**
+  - A configurable TPCC mix controlled by `MAKO_TPCC_WORKLOAD_MIX` (e.g. `"10,10,0,40,40"` for an 80% read-only / 20% write split). This is injected through the existing `dbtest` + `start_workers_tpcc()` path, so every evaluation uses the same binaries and harness that CI already trusts.
+  - An opt-in fast-path toggle via `MAKO_FAST_RO_MODE=fast`. When set, `tpcc_worker::txn_order_status()` and `tpcc_worker::txn_stock_level()` request the read-only fast path without affecting the default behavior of other workloads.
+  - A repeatable benchmark harness (`scripts/run_tpcc_fast_path_eval.sh`) that starts the replicated `dbtest` cluster, waits for `RUNTIME` seconds, scrapes the leader log for `agg_persist_throughput`, and prints an `EVAL_RESULT ... agg_persist_throughput=X` summary. The script exports the same env vars it consumes so it can be used both locally and from automation.
+  - A GitHub Actions workflow (`.github/workflows/tpcc-fast-path-eval.yml`) that reuses the existing runner setup (Rust toolchain/NVMe mount), builds the repo, and runs the evaluation script with the 80/20 mix. The workflow is `workflow_dispatch`-only, so it never interferes with `.github/workflows/ci.yml` but can be triggered on any branch (baseline vs. fast-path changes).
 
-- **Current code status:**
-  - CI scripts exist for replication tests (`ci/ci.sh`, various `test_*replication*.sh`) which validate baseline replicated behavior.
-  - Fast read-only path performance will be evaluated via YCSB/TPCC-style workloads outside of CI; there is no dedicated CI microbenchmark for throughput comparisons.
+- **How to run Phase 6 evaluations:**
+  1. Build (`make -j32`) and ensure `scripts/run_tpcc_fast_path_eval.sh` is executable.
+  2. Choose the workload mode:
+     - Baseline: leave `MAKO_FAST_RO_MODE` unset (or explicitly `baseline`).
+     - Fast-path: `export MAKO_FAST_RO_MODE=fast` on a branch that wires the fast path.
+     - For either mode set `MAKO_TPCC_WORKLOAD_MIX="10,10,0,40,40"` to get the 80/20 workload.
+  3. Run `NSHARDS=1 THREADS=6 RUNTIME=60 bash scripts/run_tpcc_fast_path_eval.sh`.
+  4. Inspect `${RESULT_DIR:-results/tpcc_fast_path_eval}/shard0-localhost-6.log` for the `agg_persist_throughput` lines and rely on the emitted `EVAL_RESULT ... agg_persist_throughput=<value>` summary for dashboards.
+
+- **CI/CD coverage:**
+  - `.github/workflows/ci.yml` and `ci/ci.sh` remain unchanged for regression / functional testing.
+  - `.github/workflows/tpcc-fast-path-eval.yml` is the opt-in validation hook for TPCC throughput comparisons and feeds the same `agg_persist_throughput` metric that engineers watch when running `examples/test_*replication.sh`.
 
 ---
 

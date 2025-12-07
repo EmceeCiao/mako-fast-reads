@@ -60,6 +60,31 @@ static bool is_sampling_remote_calls = false;
 static int sampling_number = 100;
 static int f_mode = 0;
 
+static bool
+TpccFastReadOnlyModeEnabled()
+{
+  static const bool enabled = []() {
+    const char *mode = getenv("MAKO_FAST_RO_MODE");
+    if (!mode)
+      return false;
+    std::string value(mode);
+    return value == "fast";
+  }();
+  return enabled;
+}
+
+static inline ALWAYS_INLINE void
+MaybeEnableFastReadOnlyTxn()
+{
+  if (!TpccFastReadOnlyModeEnabled())
+    return;
+  Transaction *sto_txn = Sto::transaction();
+  if (sto_txn) {
+    sto_txn->set_read_only_fast_path(true);
+    sto_txn->acquireReadTimestamp();
+  }
+}
+
 static inline ALWAYS_INLINE size_t 
 NumWarehouses()
 {
@@ -3128,6 +3153,7 @@ tpcc_worker::txn_order_status()
       abstract_db::HINT_TPCC_ORDER_STATUS :
       abstract_db::HINT_TPCC_ORDER_STATUS_READ_ONLY;
   void *txn = db->new_txn(BenchmarkConfig::getInstance().getTxnFlags() | read_only_mask, arena, txn_buf(), hint);
+  MaybeEnableFastReadOnlyTxn();
   scoped_str_arena s_arena(arena);
   // NB: since txn_order_status() is a RO txn, we assume that
   // locking is un-necessary (since we can just read from some old snapshot)
@@ -3312,6 +3338,7 @@ tpcc_worker::txn_stock_level()
       abstract_db::HINT_TPCC_STOCK_LEVEL :
       abstract_db::HINT_TPCC_STOCK_LEVEL_READ_ONLY;
   void *txn = db->new_txn(BenchmarkConfig::getInstance().getTxnFlags() | read_only_mask, arena, txn_buf(), hint);
+  MaybeEnableFastReadOnlyTxn();
   scoped_str_arena s_arena(arena);
   // NB: since txn_stock_level() is a RO txn, we assume that
   // locking is un-necessary (since we can just read from some old snapshot)

@@ -51,6 +51,41 @@ Possible values for the -m parameter are [listed here](https://github.com/NYU-NE
 
 The scripts to build an aws environment, scripts/deploy_single.sh and scripts/deploy_multi.sh, will automatically generate the hosts file for the created ec2 instances.
 
+## Manual fast-path TPCC evaluation
+
+Phase 6 introduces a standalone benchmark wrapper that exercises the replicated `dbtest` + TPCC path with an 80% read-only mix (matching what CI uses internally). This is useful for validating the read-only fast path locally or from the new workflow (`.github/workflows/tpcc-fast-path-eval.yml`), without touching the default CI suite.
+
+Prerequisites:
+
+1. Linux host (the scripts rely on GNU `ps`, `pkill`, etc.).
+2. Build the tree once: `make -j32`.
+3. Ensure no previous `dbtest` instances are running (the script will clean them up, but it is best to start from a clean shell).
+
+Example commands (run from the repo root):
+
+```bash
+export NSHARDS=1
+export THREADS=6
+export RUNTIME=60
+export MAKO_TPCC_WORKLOAD_MIX="10,10,0,40,40"   # 80% read-only / 20% write mix
+
+# Baseline branch (no fast path wiring):
+unset MAKO_FAST_RO_MODE
+bash scripts/run_tpcc_fast_path_eval.sh
+
+# Fast-path branch (after wiring txn_order_status/stock_level):
+export MAKO_FAST_RO_MODE=fast
+bash scripts/run_tpcc_fast_path_eval.sh
+```
+
+The script spawns a single-shard replicated cluster via `bash/shard.sh`, waits `RUNTIME` seconds, kills the processes, and greps the leader log for `agg_persist_throughput`. Logs are stored under `${RESULT_DIR:-results/tpcc_fast_path_eval}` with one file per replica (`shard0-localhost-6.log`, etc.). On success it prints a single summary line such as:
+
+```
+EVAL_RESULT workload=tpcc_80_20 nshards=1 shard=0 threads=6 runtime_s=60 mix=10,10,0,40,40 fast_ro_mode=fast agg_persist_throughput=39500.4
+```
+
+That output is what the GitHub Actions workflow captures; you can also parse it locally to compare baseline vs. fast-path branches.
+
 ## Debug tips
 
 The output of a distributed trial will be included in the log directory.
@@ -59,4 +94,3 @@ Add this line to /etc/security/limits.conf (Ubuntu) to enable core dump globally
 ```
 *  soft  core  unlimited
 ```
-

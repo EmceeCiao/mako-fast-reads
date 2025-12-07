@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <thread>
 #include <vector>
+#include <cstdlib>
 #include "bench.h"
 #include "benchmarks/sto/ReplayDB.h"
 #include "benchmarks/sto/sync_util.hh"
@@ -52,6 +53,12 @@ bench_runner * start_workers_tpcc(int leader_config, /*leader or learner (new le
     std::string bench_opts = "--f_mode=0";
     if (skip_load) {
         bench_opts = "--f_mode=1";
+    }
+    if (const char *mix = getenv("MAKO_TPCC_WORKLOAD_MIX")) {
+        if (mix[0] != '\0') {
+            bench_opts.append(" --workload-mix ");
+            bench_opts.append(mix);
+        }
     }
 
     vector<string> bench_toks = split_ws(bench_opts);
