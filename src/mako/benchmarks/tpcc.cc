@@ -113,12 +113,17 @@ WarehouseGlobal2Local(int g_wid) {
 static inline ALWAYS_INLINE
 void ALWAYS_ERROR(bool aa){
   if (likely(aa)){
+    // Expected case - condition is true
   }else{
     if(TThread::transget_without_throw){
-      //found the key, but invalid. 
-      //  in the previous implementation, it throw an exception.
-      //  but we don't want stack unwinding, just abort transaction
-
+      // Already aborted via fast path (found key but invalid, or follower stale)
+      // Don't panic - just let the caller handle the abort
+    }else if(TpccFastReadOnlyModeEnabled()){
+      // Fast RO mode: treat invariant failure as graceful abort, not panic
+      // This handles cases where scans return empty/unexpected results due to
+      // MVCC snapshot reads not finding data at the read timestamp
+      Sto::abort_without_throw();
+      TThread::transget_without_throw = true;
     }else{
       Panic("the error for ALWAYS ERROR!");
     }
@@ -3181,7 +3186,11 @@ tpcc_worker::txn_order_status()
 
       static_limit_callback<NMaxCustomerIdxScanElems> c(s_arena.get(), true); // probably a safe bet for now
       tbl_customer_name_idx(warehouse_id)->scan(txn, Encode(obj_key0, k_c_idx_0), &Encode(obj_key1, k_c_idx_1), c, s_arena.get());
+      // Fast-path abort check: scan may have aborted due to stale follower
+      if(TThread::transget_without_throw){TThread::transget_without_throw=false;db->abort_txn_local(txn);return txn_result(false,0);}
       ALWAYS_ERROR(c.size() > 0);
+      // Fast-path abort check: ALWAYS_ERROR may have set abort flag if c.size() == 0 in fast mode
+      if(TThread::transget_without_throw){TThread::transget_without_throw=false;db->abort_txn_local(txn);return txn_result(false,0);}
       INVARIANT(c.size() < NMaxCustomerIdxScanElems); // we should detect this
       int index = c.size() / 2;
       if (c.size() % 2 == 0)
@@ -3230,12 +3239,18 @@ tpcc_worker::txn_order_status()
         ANON_REGION("OrderStatusOOrderScan:", &order_status_probe0_cg);
         tbl_oorder_c_id_idx(warehouse_id)->scan(txn, Encode(obj_key0, k_oo_idx_0), &Encode(obj_key1, k_oo_idx_1), c_oorder, s_arena.get());
       }
+      // Fast-path abort check after oorder scan
+      if(TThread::transget_without_throw){TThread::transget_without_throw=false;db->abort_txn_local(txn);return txn_result(false,0);}
       ALWAYS_ERROR(c_oorder.size());
+      if(TThread::transget_without_throw){TThread::transget_without_throw=false;db->abort_txn_local(txn);return txn_result(false,0);}
     } else {
       latest_key_callback c_oorder(*newest_o_c_id, 1);
       const oorder_c_id_idx::key k_oo_idx_hi(warehouse_id, districtID, k_c.c_id, numeric_limits<int32_t>::max());
       tbl_oorder_c_id_idx(warehouse_id)->rscan(txn, Encode(obj_key0, k_oo_idx_hi), nullptr, c_oorder, s_arena.get());
+      // Fast-path abort check after oorder rscan
+      if(TThread::transget_without_throw){TThread::transget_without_throw=false;db->abort_txn_local(txn);return txn_result(false,0);}
       ALWAYS_ERROR(c_oorder.size() == 1);
+      if(TThread::transget_without_throw){TThread::transget_without_throw=false;db->abort_txn_local(txn);return txn_result(false,0);}
     }
 
     oorder_c_id_idx::key k_oo_idx_temp;
@@ -3246,7 +3261,10 @@ tpcc_worker::txn_order_status()
     const order_line::key k_ol_0(warehouse_id, districtID, o_id, 0);
     const order_line::key k_ol_1(warehouse_id, districtID, o_id, numeric_limits<int32_t>::max());
     tbl_order_line(warehouse_id)->scan(txn, Encode(obj_key0, k_ol_0), &Encode(obj_key1, k_ol_1), c_order_line, s_arena.get());
+    // Fast-path abort check after order_line scan
+    if(TThread::transget_without_throw){TThread::transget_without_throw=false;db->abort_txn_local(txn);return txn_result(false,0);}
     ALWAYS_ERROR(c_order_line.n >= 5 && c_order_line.n <= 15);
+    if(TThread::transget_without_throw){TThread::transget_without_throw=false;db->abort_txn_local(txn);return txn_result(false,0);}
 
     //measure_txn_counters(txn, "txn_order_status");
     if (likely(db->commit_txn(txn)))
@@ -3360,6 +3378,8 @@ tpcc_worker::txn_stock_level()
       ANON_REGION("StockLevelOrderLineScan:", &stock_level_probe0_cg);
       tbl_order_line(warehouse_id)->scan(txn, Encode(obj_key0, k_ol_0), &Encode(obj_key1, k_ol_1), c, s_arena.get());
     }
+    // Fast-path abort check after order_line scan in stock_level
+    if(TThread::transget_without_throw){TThread::transget_without_throw=false;db->abort_txn_local(txn);return txn_result(false,0);}
     {
       small_unordered_map<uint, bool, 512> s_i_ids_distinct;
       for (auto &p : c.s_i_ids) {

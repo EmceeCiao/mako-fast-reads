@@ -424,6 +424,23 @@ public:
       snapshot_reads = snapshot_ts > 0;
     }
 
+    // ==================== FOLLOWER READ SUPPORT FOR SCANS ====================
+    // Check if follower can serve this scan at the requested snapshot timestamp.
+    // This mirrors the staleness check in transGet() (lines 153-176).
+    if (BenchmarkConfig::getInstance().getIsReplicated() &&
+        TThread::txn && TThread::txn->is_read_only_fast_path()) {
+      uint32_t read_ts = snapshot_ts;
+      if (read_ts > 0) {
+        if (sync_util::sync_logger::should_redirect_to_leader(read_ts)) {
+          mass_trans_instrumentation::recordFollowerReadAbortStale();
+          Sto::abort_without_throw();
+          TThread::transget_without_throw = true;
+          return;  // void return - scan aborted due to stale follower
+        }
+      }
+    }
+    // ==========================================================================
+
     auto node_callback = [&] (leaf_type* node, typename unlocked_cursor_type::nodeversion_value_type version) {
       this->ensureNotFound(node, version);
     };
@@ -496,6 +513,23 @@ public:
       }
       snapshot_reads = snapshot_ts > 0;
     }
+
+    // ==================== FOLLOWER READ SUPPORT FOR REVERSE SCANS ====================
+    // Check if follower can serve this reverse scan at the requested snapshot timestamp.
+    // This mirrors the staleness check in transGet() (lines 153-176).
+    if (BenchmarkConfig::getInstance().getIsReplicated() &&
+        TThread::txn && TThread::txn->is_read_only_fast_path()) {
+      uint32_t read_ts = snapshot_ts;
+      if (read_ts > 0) {
+        if (sync_util::sync_logger::should_redirect_to_leader(read_ts)) {
+          mass_trans_instrumentation::recordFollowerReadAbortStale();
+          Sto::abort_without_throw();
+          TThread::transget_without_throw = true;
+          return;  // void return - reverse scan aborted due to stale follower
+        }
+      }
+    }
+    // =================================================================================
 
     auto node_callback = [&] (leaf_type* node, typename unlocked_cursor_type::nodeversion_value_type version) {
       this->ensureNotFound(node, version);
