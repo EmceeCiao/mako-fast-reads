@@ -51,13 +51,13 @@ jobs:
           ln -s /mnt/nvme-build/mako_target "$GITHUB_WORKSPACE/target"
           echo "LINKED!"
 
-      - name: Build dbtest (makefile script)
-        run: ./compile-makefile.sh
+      - name: Build (CMake via top-level make)
+        run: make -j32
 
       - name: Run baseline YCSB
         run: |
           set -euo pipefail
-          ./dbtest --bench ycsb --db-type ndb-proto2 \
+          ./build/dbtest --bench ycsb --db-type ndb-proto2 \
             --scale-factor "${{ inputs.scale_factor }}" \
             --num-threads "${{ inputs.num_threads }}" \
             --bench-opts '--workload-mix 80,0,20,0' \
@@ -72,7 +72,7 @@ jobs:
           YCSB_FAST_RO: "1"
         run: |
           set -euo pipefail
-          ./dbtest --bench ycsb --db-type ndb-proto2 \
+          ./build/dbtest --bench ycsb --db-type ndb-proto2 \
             --scale-factor "${{ inputs.scale_factor }}" \
             --num-threads "${{ inputs.num_threads }}" \
             --bench-opts '--workload-mix 80,0,20,0' \
