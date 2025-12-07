@@ -22,6 +22,8 @@
 using namespace std;
 using namespace util;
 
+static inline BenchmarkConfig& cfg() { return BenchmarkConfig::getInstance(); }
+
 static size_t nkeys;
 static const size_t YCSBRecordSize = 100;
 
@@ -49,7 +51,7 @@ public:
   txn_result
   txn_read()
   {
-    void * const txn = db->new_txn(txn_flags, arena, txn_buf(), abstract_db::HINT_KV_GET_PUT);
+    void * const txn = db->new_txn(cfg().getTxnFlags(), arena, txn_buf(), abstract_db::HINT_KV_GET_PUT);
     scoped_str_arena s_arena(arena);
     if (const char *fast_ro = getenv("YCSB_FAST_RO")) {
       if (fast_ro[0] != '\0') {
@@ -80,7 +82,7 @@ public:
   txn_result
   txn_write()
   {
-    void * const txn = db->new_txn(txn_flags, arena, txn_buf(), abstract_db::HINT_KV_GET_PUT);
+    void * const txn = db->new_txn(cfg().getTxnFlags(), arena, txn_buf(), abstract_db::HINT_KV_GET_PUT);
     scoped_str_arena s_arena(arena);
     try {
       auto s = u64_varkey(r.next() % nkeys).str(str());
@@ -104,7 +106,7 @@ public:
   txn_result
   txn_rmw()
   {
-    void * const txn = db->new_txn(txn_flags, arena, txn_buf(), abstract_db::HINT_KV_RMW);
+    void * const txn = db->new_txn(cfg().getTxnFlags(), arena, txn_buf(), abstract_db::HINT_KV_RMW);
     scoped_str_arena s_arena(arena);
     try {
       const uint64_t key = r.next() % nkeys;
@@ -141,7 +143,7 @@ public:
   txn_result
   txn_scan()
   {
-    void * const txn = db->new_txn(txn_flags, arena, txn_buf(), abstract_db::HINT_KV_SCAN);
+    void * const txn = db->new_txn(cfg().getTxnFlags(), arena, txn_buf(), abstract_db::HINT_KV_SCAN);
     scoped_str_arena s_arena(arena);
     const size_t kstart = r.next() % nkeys;
     const string &kbegin = u64_varkey(kstart).str(obj_key0);
@@ -204,10 +206,10 @@ protected:
   virtual void
   on_run_setup() OVERRIDE
   {
-    if (!pin_cpus)
+    if (!cfg().getPinCpus())
       return;
     const size_t a = worker_id % coreid::num_cpus_online();
-    const size_t b = a % nthreads;
+    const size_t b = a % cfg().getNthreads();
     rcu::s_instance.pin_current_thread(b);
   }
 
@@ -237,8 +239,8 @@ ycsb_load_keyrange(
     uint64_t txn_flags,
     void *txn_buf)
 {
-  if (pin_cpus) {
-    ALWAYS_ASSERT(pinid < nthreads);
+  if (cfg().getPinCpus()) {
+    ALWAYS_ASSERT(pinid < cfg().getNthreads());
     rcu::s_instance.pin_current_thread(pinid);
     rcu::s_instance.fault_region();
   }
@@ -269,7 +271,7 @@ ycsb_load_keyrange(
       db->abort_txn(txn);
     }
   }
-  if (verbose)
+  if (cfg().getVerbose())
     cerr << "[INFO] finished loading USERTABLE range [kstart="
       << keystart << ", kend=" << keyend << ") - nkeys: " << nkeys << endl;
 }
@@ -287,8 +289,8 @@ protected:
   load()
   {
     abstract_ordered_index *tbl = open_tables.at("USERTABLE");
-    const size_t nkeysperthd = nkeys / nthreads;
-    for (size_t i = 0; i < nthreads; i++) {
+    const size_t nkeysperthd = nkeys / cfg().getNthreads();
+    for (size_t i = 0; i < cfg().getNthreads(); i++) {
       const size_t keystart = i * nkeysperthd;
       const size_t keyend = min((i + 1) * nkeysperthd, nkeys);
       ycsb_load_keyrange(
@@ -316,7 +318,7 @@ public:
       pinid(pinid), keystart(keystart), keyend(keyend)
   {
     INVARIANT(keyend > keystart);
-    if (verbose)
+    if (cfg().getVerbose())
       cerr << "[INFO] YCSB par loader cpu " << pinid
            << " [" << keystart << ", " << keyend << ")" << endl;
   }
@@ -333,7 +335,7 @@ protected:
         db,
         tbl,
         arena,
-        txn_flags,
+        cfg().getTxnFlags(),
         txn_buf());
   }
 
@@ -358,10 +360,10 @@ protected:
   {
     vector<bench_loader *> ret;
     const unsigned long ncpus = coreid::num_cpus_online();
-    if (enable_parallel_loading && nkeys >= nthreads) {
+    if (cfg().getEnableParallelLoading() && nkeys >= cfg().getNthreads()) {
       // divide the key space amongst all the loaders
       const size_t nkeysperloader = nkeys / ncpus;
-      if (nthreads > ncpus) {
+      if (cfg().getNthreads() > ncpus) {
         for (size_t i = 0; i < ncpus; i++) {
           const uint64_t kend = (i + 1 == ncpus) ?
             nkeys : (i + 1) * nkeysperloader;
@@ -375,7 +377,7 @@ protected:
         //
         // XXX: here we hardcode an assumption about the NUMA topology of
         // the system
-        const vector<unsigned> numa_nodes_used = get_numa_nodes_used(nthreads);
+        const vector<unsigned> numa_nodes_used = get_numa_nodes_used(cfg().getNthreads());
 
         // assign loaders to cores based on numa node assignment in RR fashion
         const unsigned loaders_per_node = ncpus / numa_nodes_used.size();
@@ -391,7 +393,7 @@ protected:
         for (size_t i = 0; i < numa_nodes_used.size(); i++) {
           // allocate loaders_per_node loaders to this numa node
           const vector<unsigned> cpus = numa_node_to_cpus(numa_nodes_used[i]);
-          const vector<unsigned> cpus_avail = exclude(cpus, nthreads);
+          const vector<unsigned> cpus_avail = exclude(cpus, cfg().getNthreads());
           const unsigned nloaders = node_allocations[i];
           for (size_t j = 0; j < nloaders; j++, loader_i++) {
             const uint64_t kend = (loader_i + 1 == ncpus) ?
@@ -414,12 +416,12 @@ protected:
   {
     const unsigned alignment = coreid::num_cpus_online();
     const int blockstart =
-      coreid::allocate_contiguous_aligned_block(nthreads, alignment);
+      coreid::allocate_contiguous_aligned_block(cfg().getNthreads(), alignment);
     ALWAYS_ASSERT(blockstart >= 0);
     ALWAYS_ASSERT((blockstart % alignment) == 0);
     fast_random r(8544290);
     vector<bench_worker *> ret;
-    for (size_t i = 0; i < nthreads; i++)
+    for (size_t i = 0; i < cfg().getNthreads(); i++)
       ret.push_back(
         new ycsb_worker(
           blockstart + i, r.next(), db, open_tables,
@@ -471,7 +473,7 @@ private:
 void
 ycsb_do_test(abstract_db *db, int argc, char **argv)
 {
-  const double scale_factor = BenchmarkConfig::getInstance().getScaleFactor();
+  const double scale_factor = cfg().getScaleFactor();
   nkeys = size_t(scale_factor * 1000.0);
   ALWAYS_ASSERT(nkeys > 0);
 
@@ -517,7 +519,7 @@ ycsb_do_test(abstract_db *db, int argc, char **argv)
     }
   }
 
-  if (verbose) {
+  if (cfg().getVerbose()) {
     cerr << "ycsb settings:" << endl;
     cerr << "  workload_mix: "
          << format_list(g_txn_workload_mix, g_txn_workload_mix + ARRAY_NELEMS(g_txn_workload_mix))
