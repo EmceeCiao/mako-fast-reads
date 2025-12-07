@@ -503,17 +503,29 @@ void run_worker_tests(abstract_db *db, int worker_id,
     barrier_ready->count_down();
     barrier_start->wait_for();
 
-    if (is_fast_ro_mode()) {
-        worker->run_read_only_fast_path_workload();
-    } else {
-        worker->test_basic_transactions();
-        worker->test_single_key_contention();
-        worker->test_overlapping_keys();
-        worker->test_cross_shard_contention();
-        worker->test_read_write_contention();
-    }
+    worker->test_basic_transactions();
+    worker->test_single_key_contention();
+    worker->test_overlapping_keys();
+    worker->test_cross_shard_contention();
+    worker->test_read_write_contention();
 
     printf("[Worker %d] Completed\n", worker_id);
+}
+
+void run_worker_fast_ro(abstract_db *db, int worker_id,
+                        spin_barrier *barrier_ready,
+                        spin_barrier *barrier_start) {
+    printf("[FAST_RO Worker %d] Starting on thread %ld\n", worker_id, std::this_thread::get_id());
+
+    auto worker = new TransactionWorker(db, worker_id);
+    worker->initialize();
+
+    barrier_ready->count_down();
+    barrier_start->wait_for();
+
+    worker->run_read_only_fast_path_workload();
+
+    printf("[FAST_RO Worker %d] Completed\n", worker_id);
 }
 
 void run_tests(abstract_db* db) {
@@ -523,11 +535,6 @@ void run_tests(abstract_db* db) {
     worker_threads.reserve(nthreads);
     spin_barrier barrier_ready(nthreads);
     spin_barrier barrier_start(1);
-
-    if (is_fast_ro_mode()) {
-        reset_fast_ro_metrics();
-    }
-    const auto benchmark_start = std::chrono::steady_clock::now();
 
     for (size_t i = 0; i < nthreads; ++i) {
         worker_threads.emplace_back(run_worker_tests, db, i,
@@ -543,24 +550,47 @@ void run_tests(abstract_db* db) {
         t.join();
     }
 
-    const auto benchmark_end = std::chrono::steady_clock::now();
-    if (is_fast_ro_mode()) {
-        const double elapsed_sec =
-            std::chrono::duration_cast<std::chrono::duration<double>>(benchmark_end - benchmark_start).count();
-        const uint64_t commits = g_fast_ro_metrics.commits.load(std::memory_order_relaxed);
-        const uint64_t aborts = g_fast_ro_metrics.aborts.load(std::memory_order_relaxed);
-        const double agg_throughput = elapsed_sec > 0.0 ? double(commits) / elapsed_sec : 0.0;
-        const double avg_per_core = nthreads ? agg_throughput / double(nthreads) : 0.0;
-        const double agg_abort_rate = elapsed_sec > 0.0 ? double(aborts) / elapsed_sec : 0.0;
-        const double avg_abort_rate = nthreads ? agg_abort_rate / double(nthreads) : 0.0;
+}
 
-        std::cerr << "agg_throughput: " << agg_throughput << " ops/sec" << std::endl;
-        std::cerr << "avg_per_core_throughput: " << avg_per_core << " ops/sec/core" << std::endl;
-        std::cerr << "agg_persist_throughput: " << agg_throughput << " ops/sec" << std::endl;
-        std::cerr << "avg_per_core_persist_throughput: " << avg_per_core << " ops/sec/core" << std::endl;
-        std::cerr << "agg_abort_rate: " << agg_abort_rate << " aborts/sec" << std::endl;
-        std::cerr << "avg_per_core_abort_rate: " << avg_abort_rate << " aborts/sec/core" << std::endl;
+void run_fast_ro_benchmark(abstract_db* db) {
+    auto& benchConfig = BenchmarkConfig::getInstance();
+    size_t nthreads = benchConfig.getNthreads();
+    std::vector<std::thread> worker_threads;
+    worker_threads.reserve(nthreads);
+    spin_barrier barrier_ready(nthreads);
+    spin_barrier barrier_start(1);
+
+    reset_fast_ro_metrics();
+    const auto benchmark_start = std::chrono::steady_clock::now();
+
+    for (size_t i = 0; i < nthreads; ++i) {
+        worker_threads.emplace_back(run_worker_fast_ro, db, i,
+                                    &barrier_ready, &barrier_start);
     }
+
+    barrier_ready.wait_for();
+    barrier_start.count_down();
+
+    for (auto& t : worker_threads) {
+        t.join();
+    }
+
+    const auto benchmark_end = std::chrono::steady_clock::now();
+    const double elapsed_sec =
+        std::chrono::duration_cast<std::chrono::duration<double>>(benchmark_end - benchmark_start).count();
+    const uint64_t commits = g_fast_ro_metrics.commits.load(std::memory_order_relaxed);
+    const uint64_t aborts = g_fast_ro_metrics.aborts.load(std::memory_order_relaxed);
+    const double agg_throughput = elapsed_sec > 0.0 ? double(commits) / elapsed_sec : 0.0;
+    const double avg_per_core = nthreads ? agg_throughput / double(nthreads) : 0.0;
+    const double agg_abort_rate = elapsed_sec > 0.0 ? double(aborts) / elapsed_sec : 0.0;
+    const double avg_abort_rate = nthreads ? agg_abort_rate / double(nthreads) : 0.0;
+
+    std::cerr << "agg_throughput: " << agg_throughput << " ops/sec" << std::endl;
+    std::cerr << "avg_per_core_throughput: " << avg_per_core << " ops/sec/core" << std::endl;
+    std::cerr << "agg_persist_throughput: " << agg_throughput << " ops/sec" << std::endl;
+    std::cerr << "avg_per_core_persist_throughput: " << avg_per_core << " ops/sec/core" << std::endl;
+    std::cerr << "agg_abort_rate: " << agg_abort_rate << " aborts/sec" << std::endl;
+    std::cerr << "avg_per_core_abort_rate: " << avg_abort_rate << " aborts/sec/core" << std::endl;
 }
 
 void warmup_fast_ro_dataset(abstract_db* db) {
@@ -655,13 +685,14 @@ int main(int argc, char **argv) {
         mako::setup_helper(db, std::ref(open_tables));
 
         std::this_thread::sleep_for(std::chrono::seconds(5)); // Wait all shards finish setup
-        if (is_fast_ro_mode()) {
-            warmup_fast_ro_dataset(db);
-        }
     }
 
     if (benchConfig.getLeaderConfig()) {
         run_tests(db);
+        if (is_fast_ro_mode()) {
+            warmup_fast_ro_dataset(db);
+            run_fast_ro_benchmark(db);
+        }
     }
 
     std::this_thread::sleep_for(std::chrono::seconds(5));
