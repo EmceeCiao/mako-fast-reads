@@ -93,10 +93,3 @@ jobs:
             results/**
           if-no-files-found: warn
           retention-days: 10
-
-      - name: Cleanup target symlink
-        if: always()
-        run: |
-          if [ -L "$GITHUB_WORKSPACE/target" ]; then
-            rm "$GITHUB_WORKSPACE/target"
-          fi
