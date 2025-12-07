@@ -3381,7 +3381,8 @@ tpcc_worker::txn_stock_level()
               return txn_result(false,0);
             }
           }
-          ALWAYS_ERROR(ret);
+          if (!TpccFastReadOnlyModeEnabled())
+            ALWAYS_ERROR(ret);
         }
        // INVARIANT(obj_v.size() <= nbytesread);
         const uint8_t *ptr = (const uint8_t *) obj_v.data();
