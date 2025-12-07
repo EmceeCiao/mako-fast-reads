@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <mako.hh>
 
 using namespace std;
@@ -11,11 +12,22 @@ static void parse_command_line_args(int argc,
                                     int &is_replicated,
                                     string& site_name,
                                     vector<string>& paxos_config_file,
-                                    string& local_shards_str)
+                                    string& local_shards_str,
+                                    string& bench_name,
+                                    string& bench_opts,
+                                    double& scale_factor,
+                                    uint64_t& runtime,
+                                    int& enable_parallel_loading,
+                                    int& verbose,
+                                    string& db_type,
+                                    string& numa_memory_spec)
 {
+  optind = 1;
   while (1) {
     static struct option long_options[] =
     {
+      {"bench"                     , required_argument , 0                          , 'b'} ,
+      {"bench-opts"                , required_argument , 0                          , 'o'} ,
       {"num-threads"                , required_argument , 0                          , 't'} ,
       {"shard-index"                , required_argument , 0                          , 'g'} ,
       {"shard-config"               , required_argument , 0                          , 'q'} ,
@@ -23,12 +35,18 @@ static void parse_command_line_args(int argc,
       {"paxos-proc-name"            , required_argument , 0                          , 'P'} ,
       {"site-name"                  , required_argument , 0                          , 'N'} ,
       {"local-shards"               , required_argument , 0                          , 'L'} ,
+      {"scale-factor"               , required_argument , 0                          , 's'} ,
+      {"runtime"                    , required_argument , 0                          , 'r'} ,
+      {"parallel-loading"           , no_argument       , &enable_parallel_loading   ,   1} ,
+      {"verbose"                    , no_argument       , &verbose                   ,   1} ,
+      {"db-type"                    , required_argument , 0                          , 'd'} ,
+      {"numa-memory"                , required_argument , 0                          , 'M'} ,
       {"is-micro"                   , no_argument       , &is_micro                  ,   1} ,
       {"is-replicated"              , no_argument       , &is_replicated             ,   1} ,
       {0, 0, 0, 0}
     };
     int option_index = 0;
-    int c = getopt_long(argc, argv, "t:g:q:F:P:N:L:", long_options, &option_index);
+    int c = getopt_long(argc, argv, "b:o:t:g:q:F:P:N:L:s:r:d:M:", long_options, &option_index);
     if (c == -1)
       break;
 
@@ -37,6 +55,16 @@ static void parse_command_line_args(int argc,
       if (long_options[option_index].flag != 0)
         break;
       abort();
+      break;
+
+    case 'b': {
+      bench_name = string(optarg);
+      }
+      break;
+
+    case 'o': {
+      bench_opts = string(optarg);
+      }
       break;
 
     case 't': {
@@ -65,6 +93,28 @@ static void parse_command_line_args(int argc,
 
     case 'L':
       local_shards_str = string(optarg);
+      break;
+
+    case 's': {
+      double sf = strtod(optarg, nullptr);
+      ALWAYS_ASSERT(sf > 0);
+      scale_factor = sf;
+      }
+      break;
+
+    case 'r': {
+      uint64_t rt = strtoull(optarg, nullptr, 10);
+      ALWAYS_ASSERT(rt > 0);
+      runtime = rt;
+      }
+      break;
+
+    case 'd':
+      db_type = string(optarg); // currently parsed for compatibility
+      break;
+
+    case 'M':
+      numa_memory_spec = string(optarg); // currently parsed for compatibility
       break;
 
     case 'q': {
@@ -149,10 +199,33 @@ main(int argc, char **argv)
   vector<string> paxos_config_file{};
   string site_name = "";  // For new config format
   string local_shards_str = "";  // For multi-shard mode: comma-separated list
+  string bench_name = "tpcc";
+  string bench_opts = "";
 
   auto& benchConfig = BenchmarkConfig::getInstance();
+  double scale_factor = benchConfig.getScaleFactor();
+  uint64_t runtime = benchConfig.getRuntime();
+  int enable_parallel_loading = benchConfig.getEnableParallelLoading();
+  int verbose = benchConfig.getVerbose();
+  string db_type;
+  string numa_memory_spec;
+
   // Parse command line arguments
-  parse_command_line_args(argc, argv, is_micro, is_replicated, site_name, paxos_config_file, local_shards_str);
+  parse_command_line_args(argc,
+                          argv,
+                          is_micro,
+                          is_replicated,
+                          site_name,
+                          paxos_config_file,
+                          local_shards_str,
+                          bench_name,
+                          bench_opts,
+                          scale_factor,
+                          runtime,
+                          enable_parallel_loading,
+                          verbose,
+                          db_type,
+                          numa_memory_spec);
 
   // Handle new configuration format if site name is provided
   if (!site_name.empty() && benchConfig.getConfig() != nullptr) {
@@ -162,6 +235,10 @@ main(int argc, char **argv)
   benchConfig.setIsMicro(is_micro);
   benchConfig.setIsReplicated(is_replicated);
   benchConfig.setPaxosConfigFile(paxos_config_file);
+  benchConfig.setScaleFactor(scale_factor);
+  benchConfig.setRuntime(runtime);
+  benchConfig.setEnableParallelLoading(enable_parallel_loading);
+  benchConfig.setVerbose(verbose);
 
   // Parse local shards if specified
   if (!local_shards_str.empty() && benchConfig.getConfig() != nullptr) {
@@ -181,6 +258,32 @@ main(int argc, char **argv)
   }
 
   init_env();
+
+  // YCSB dispatch
+  if (bench_name == "ycsb") {
+    vector<string> ycsb_args;
+    ycsb_args.push_back(argv[0]);
+    if (!bench_opts.empty()) {
+      istringstream iss(bench_opts);
+      string tok;
+      while (iss >> tok) {
+        ycsb_args.push_back(tok);
+      }
+    }
+    vector<char*> ycsb_argv;
+    ycsb_argv.reserve(ycsb_args.size());
+    for (auto& arg : ycsb_args) {
+      ycsb_argv.push_back(const_cast<char*>(arg.c_str()));
+    }
+    int ycsb_argc = static_cast<int>(ycsb_argv.size());
+
+    abstract_db * db = initWithDB(); // Single-shard YCSB run
+    if (benchConfig.getLeaderConfig()) {
+      ycsb_do_test(db, ycsb_argc, ycsb_argv.data());
+    }
+    db_close();
+    return 0;
+  }
 
   // Check if running in multi-shard mode
   if (benchConfig.getConfig() && benchConfig.getConfig()->multi_shard_mode) {

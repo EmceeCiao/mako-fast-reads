@@ -471,6 +471,7 @@ private:
 void
 ycsb_do_test(abstract_db *db, int argc, char **argv)
 {
+  const double scale_factor = BenchmarkConfig::getInstance().getScaleFactor();
   nkeys = size_t(scale_factor * 1000.0);
   ALWAYS_ASSERT(nkeys > 0);
 
