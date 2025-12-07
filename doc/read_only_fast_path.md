@@ -494,19 +494,23 @@ Below is the concrete multi‑phase plan, annotated with **current status** so i
 
 - Tasks:
   - Extend CI to run:
-    - 1‑shard and 2‑shard replication tests with read‑only fast path enabled.
-    - Scenarios where followers lag (e.g., introducing artificial delays) to exercise abort‑and‑retry behavior.
+    - 1-shard and 2-shard replication tests with read-only fast path enabled.
+    - Scenarios where followers lag (e.g., introducing artificial delays) to exercise abort-and-retry behavior.
   - Run YCSB benchmarks:
     - Baseline: current Mako behavior without fast path/follower reads.
-    - Experimental: with fast read‑only path and follower reads enabled.
-    - Compare throughput and latency, focusing on read‑heavy workloads.
+    - Experimental: with fast read-only path and follower reads enabled.
+    - Compare throughput and latency, focusing on read-heavy workloads.
   - Monitor and log:
-    - Number of fast‑path commits vs. normal commits.
-    - Number of follower‑staleness aborts.
+    - Number of fast-path commits vs. normal commits.
+    - Number of follower-staleness aborts.
+  - CI now includes a dedicated `fastPathBenchmark` step:
+    - `ci/ci.sh fastPathBenchmark` launches the `examples/test_fast_path_benchmark.sh` helper, which spins up the 1-shard simpleTransactionRep-style replicated topology (leader at `localhost`, followers at `p1/p2/learner`).
+    - The helper seeds data and runs the `fastPathReadOnly` binary twice (baseline vs. fast mode) so both code paths execute under identical conditions and finish in under a minute each.
+    - Each run emits `FAST_RO_SUMMARY baseline throughput=...` / `FAST_RO_SUMMARY fast throughput=...` lines that summarize ops/sec and duration; the CI workflow copies those summaries into the GitHub Actions log for quick comparisons across commits.
 
 - **Current code status:**
   - CI scripts exist for replication tests (`ci/ci.sh`, various `test_*replication*.sh`) which validate baseline replicated behavior.
-  - Fast read-only path performance will be evaluated via YCSB/TPCC-style workloads outside of CI; there is no dedicated CI microbenchmark for throughput comparisons.
+  - Fast read-only path performance is sampled on every CI run via `fastPathBenchmark`, while larger-scale YCSB/TPCC workloads remain the path for deeper evaluation.
 
 ---
 
