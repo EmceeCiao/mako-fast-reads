@@ -38,4 +38,5 @@ echo "  Micro benchmark:   $([ "$is_micro" == "1" ] && echo "enabled" || echo "d
 echo "  Replicated mode:   $([ "$is_replicated" == "1" ] && echo "enabled" || echo "disabled")"
 echo "========================================="
 
+echo "Running command: $CMD"
 eval $CMD 
