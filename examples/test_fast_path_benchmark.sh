@@ -72,6 +72,12 @@ run_mode() {
     fi
 
     for pid in "$PID_P1" "$PID_P2" "$PID_LEARNER"; do
+        if [ -n "${pid:-}" ] && kill -0 "$pid" 2>/dev/null; then
+            kill "$pid" 2>/dev/null || true
+        fi
+    done
+
+    for pid in "$PID_P1" "$PID_P2" "$PID_LEARNER"; do
         if [ -n "${pid:-}" ]; then
             set +e
             wait "$pid"
