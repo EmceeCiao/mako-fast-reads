@@ -489,9 +489,7 @@ public:
         return callback(key, val);//query_callback_overload(key, val, callback);
       }else {
         deleted_cnt++;
-        // In fast-path snapshot reads, tolerate more missing versions due to replication lag
-        int delete_threshold = snapshot_reads ? 100 : 10;
-        if (deleted_cnt > delete_threshold){
+        if (deleted_cnt>10){
           return false; // TODO, it's better to keep new_order id for taking over
         }
         return true;//skip the deleted items
@@ -579,9 +577,7 @@ public:
         return callback(key, val);//query_callback_overload(key, val, callback);
       else {
         deleted_cnt++;
-        // In fast-path snapshot reads, tolerate more missing versions due to replication lag
-        int delete_threshold = snapshot_reads ? 100 : 10;
-        if (deleted_cnt > delete_threshold){
+        if (deleted_cnt>10){
           return false; // TODO, it's better to keep new_order id for taking over
         }
         return true;//skip the deleted items
