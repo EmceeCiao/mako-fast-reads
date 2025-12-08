@@ -1,0 +1,59 @@
+name: TPCC Read-Only Evaluation
+
+on:
+  workflow_dispatch:
+    inputs:
+      fast_ro_mode:
+        description: 'Optional MAKO_FAST_RO_MODE (set to "fast" on fast-path branches, leave blank for baseline)'
+        required: false
+        default: ''
+
+jobs:
+  tpcc-readonly:
+    runs-on: [self-hosted, linux, c-ci-runner]
+    env:
+      RESULT_DIR: results/tpcc_readonly_eval
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Force Rust 1.91 into PATH
+        run: |
+          if [ -x /usr/local/bin/rustc ]; then
+            echo "/usr/local/bin" >> "$GITHUB_PATH"
+          fi
+          if [ -x "$HOME/.local-rust/bin/rustc" ]; then
+            echo "$HOME/.local-rust/bin" >> "$GITHUB_PATH"
+          fi
+
+      - name: Link Build Target to SSD
+        run: |
+          echo "Linking Session to NVMe SSD"
+          sudo mkdir -p /mnt/nvme-build/mako_target
+          sudo chown -R $USER:$USER /mnt/nvme-build
+          ln -s /mnt/nvme-build/mako_target $GITHUB_WORKSPACE/target || true
+          echo "LINKED!"
+
+      - name: Build
+        run: make -j32
+
+      - name: TPCC read-only evaluation (100% OrderStatus)
+        env:
+          NSHARDS: 1
+          THREADS: 6
+          RUNTIME: 60
+          MAKO_TPCC_WORKLOAD_MIX: "0,0,0,100,0"
+          MAKO_FAST_RO_MODE: ${{ github.event.inputs.fast_ro_mode }}
+          RESULT_DIR: ${{ env.RESULT_DIR }}
+        run: bash scripts/run_tpcc_readonly_eval.sh
+
+      - name: Upload TPCC read-only logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tpcc-readonly-logs-${{ github.run_id }}
+          path: ${{ env.RESULT_DIR }}
+          if-no-files-found: ignore
