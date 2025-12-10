@@ -4,32 +4,26 @@ on:
   workflow_dispatch:
     inputs:
       nshards:
-        description: 'Number of shards (default: 4)'
+        description: 'Number of shards (2, 3, or 4)'
         required: false
-        default: '4'
+        default: '3'
       threads:
-        description: 'Threads per replica (default: 2)'
+        description: 'Threads per replica'
         required: false
         default: '2'
       runtime:
-        description: 'Runtime in seconds (default: 60)'
+        description: 'Runtime in seconds'
         required: false
         default: '60'
-      comparison_mode:
-        description: 'Run comparison (baseline vs fast-path)'
+      fast_ro_mode:
+        description: 'Fast RO mode (fast or blank for baseline)'
         required: false
-        default: 'true'
-        type: choice
-        options:
-          - 'true'
-          - 'false'
+        default: 'fast'
 
 jobs:
-  multishard-follower-eval:
+  multishard-eval:
     runs-on: [self-hosted, linux, c-ci-runner]
-    env:
-      RESULT_DIR: results/multishard_follower_eval
-      RESULT_BASE_DIR: results/multishard_comparison
+    timeout-minutes: 20   # Prevent hanging - 20 min max
 
     steps:
       - name: Checkout
@@ -52,57 +46,55 @@ jobs:
           sudo mkdir -p /mnt/nvme-build/mako_target
           sudo chown -R $USER:$USER /mnt/nvme-build
           ln -s /mnt/nvme-build/mako_target $GITHUB_WORKSPACE/target || true
-          echo "LINKED!"
 
       - name: Build
         run: make -j32
 
-      - name: Multi-Shard Follower Read Comparison
-        if: ${{ github.event.inputs.comparison_mode == 'true' }}
-        env:
-          NSHARDS: ${{ github.event.inputs.nshards }}
-          NREPLICAS: 4
-          THREADS: ${{ github.event.inputs.threads }}
-          RUNTIME: ${{ github.event.inputs.runtime }}
-          MAKO_TPCC_WORKLOAD_MIX: "10,10,0,40,40"
-          RESULT_BASE_DIR: ${{ env.RESULT_BASE_DIR }}
+      - name: Cleanup Previous State
         run: |
-          chmod +x scripts/compare_follower_read_benefit.sh
-          chmod +x scripts/run_multishard_follower_read_eval.sh
-          bash scripts/compare_follower_read_benefit.sh
+          pkill -9 dbtest 2>/dev/null || true
+          pkill -9 simplePaxos 2>/dev/null || true
+          pkill -9 -f "bash/shard.sh" 2>/dev/null || true
+          rm -f nfs_sync_* 2>/dev/null || true
+          rm -rf /tmp/${USER}_mako_rocksdb_shard* 2>/dev/null || true
+          sleep 2
 
-      - name: Multi-Shard Fast-Path Only
-        if: ${{ github.event.inputs.comparison_mode == 'false' }}
+      - name: Run Multi-Shard Evaluation
         env:
           NSHARDS: ${{ github.event.inputs.nshards }}
-          NREPLICAS: 4
           THREADS: ${{ github.event.inputs.threads }}
           RUNTIME: ${{ github.event.inputs.runtime }}
           MAKO_TPCC_WORKLOAD_MIX: "10,10,0,40,40"
-          MAKO_FAST_RO_MODE: "fast"
-          RESULT_DIR: ${{ env.RESULT_DIR }}
+          MAKO_FAST_RO_MODE: ${{ github.event.inputs.fast_ro_mode }}
+          RESULT_DIR: results/multishard_follower_eval
         run: |
           chmod +x scripts/run_multishard_follower_read_eval.sh
           bash scripts/run_multishard_follower_read_eval.sh
+        timeout-minutes: 10
 
-      - name: Display Results Summary
+      - name: Display Results
         if: always()
         run: |
-          echo "=== Evaluation Results ==="
-          if [ -f "${{ env.RESULT_BASE_DIR }}/comparison_summary.txt" ]; then
-            cat "${{ env.RESULT_BASE_DIR }}/comparison_summary.txt"
-          elif [ -f "${{ env.RESULT_DIR }}/summary.txt" ]; then
-            cat "${{ env.RESULT_DIR }}/summary.txt"
+          echo "=== Results Summary ==="
+          if [ -f results/multishard_follower_eval/summary.txt ]; then
+            cat results/multishard_follower_eval/summary.txt
           else
             echo "No summary file found"
+            echo "Checking for log files..."
+            ls -la results/multishard_follower_eval/ 2>/dev/null || echo "No results directory"
           fi
 
-      - name: Upload Evaluation Logs
+      - name: Final Cleanup
+        if: always()
+        run: |
+          pkill -9 dbtest 2>/dev/null || true
+          pkill -9 simplePaxos 2>/dev/null || true
+          pkill -9 -f "bash/shard.sh" 2>/dev/null || true
+
+      - name: Upload Logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: multishard-follower-logs-${{ github.run_id }}
-          path: |
-            ${{ env.RESULT_DIR }}
-            ${{ env.RESULT_BASE_DIR }}
+          name: multishard-logs-${{ github.run_id }}
+          path: results/multishard_follower_eval/
           if-no-files-found: ignore

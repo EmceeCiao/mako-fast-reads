@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/bash
 
 #############################################################################
 # Follower Read Benefit Comparison Script
@@ -7,61 +6,32 @@ set -euo pipefail
 # Runs the same workload twice:
 # 1. Baseline mode (no fast path) - all reads go to leader
 # 2. Fast-path mode - read-only transactions can be served by followers
-#
-# Then compares the throughput to demonstrate follower read benefits.
-#
-# Ideal for demonstrating:
-# - Read scalability: N followers can serve N times the read load
-# - Latency improvement: Local reads avoid network round-trip to leader
 #############################################################################
 
-NSHARDS=${NSHARDS:-4}
-NREPLICAS=${NREPLICAS:-4}
-THREADS=${THREADS:-2}          # 4 shards x 4 replicas x 2 threads = 32 cores
+echo "========================================="
+echo "Follower Read Benefit Comparison"
+echo "========================================="
+
+NSHARDS=${NSHARDS:-3}
+THREADS=${THREADS:-2}
 RUNTIME=${RUNTIME:-60}
 RESULT_BASE_DIR=${RESULT_BASE_DIR:-results/follower_read_comparison}
 
-# 80% read-only workload to maximize follower read benefit
+# 80% read-only workload
 export MAKO_TPCC_WORKLOAD_MIX="${MAKO_TPCC_WORKLOAD_MIX:-10,10,0,40,40}"
 
-log() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"
-}
+echo "Configuration:"
+echo "  NSHARDS: $NSHARDS"
+echo "  THREADS: $THREADS"
+echo "  Total processes: $((NSHARDS * 4))"
+echo "  Total cores: $((NSHARDS * 4 * THREADS))"
+echo "  RUNTIME: ${RUNTIME}s"
+echo "  WORKLOAD_MIX: $MAKO_TPCC_WORKLOAD_MIX"
+echo "========================================="
 
-run_evaluation() {
-    local mode=$1
-    local result_dir="${RESULT_BASE_DIR}/${mode}"
+mkdir -p "$RESULT_BASE_DIR"
 
-    log "=============================================="
-    log "Running evaluation: MODE=$mode"
-    log "=============================================="
-
-    export MAKO_FAST_RO_MODE="$mode"
-    export RESULT_DIR="$result_dir"
-    export NSHARDS="$NSHARDS"
-    export NREPLICAS="$NREPLICAS"
-    export THREADS="$THREADS"
-    export RUNTIME="$RUNTIME"
-
-    mkdir -p "$result_dir"
-
-    # Run the evaluation script
-    if ! bash scripts/run_multishard_follower_read_eval.sh; then
-        log "WARNING: Evaluation for mode=$mode may have had issues"
-    fi
-
-    # Extract the result
-    local summary="${result_dir}/summary.txt"
-    if [ -f "$summary" ]; then
-        local throughput
-        throughput=$(grep "^TOTAL:" "$summary" | awk '{print $2}' || echo "0")
-        echo "$throughput"
-    else
-        echo "0"
-    fi
-}
-
-extract_result() {
+extract_total_throughput() {
     local result_dir=$1
     local summary="${result_dir}/summary.txt"
     if [ -f "$summary" ]; then
@@ -72,54 +42,50 @@ extract_result() {
 }
 
 #############################################################################
-# Main
+# Run BASELINE
 #############################################################################
 
-TOTAL_PROCESSES=$((NSHARDS * NREPLICAS))
-TOTAL_CORES=$((TOTAL_PROCESSES * THREADS))
+echo ""
+echo ">>> PHASE 1: Running BASELINE mode (all reads to leader)"
+echo "========================================="
 
-log "=============================================="
-log "Follower Read Benefit Comparison"
-log "=============================================="
-log "Configuration:"
-log "  NSHARDS: $NSHARDS"
-log "  NREPLICAS: $NREPLICAS (per shard)"
-log "  THREADS: $THREADS (per replica)"
-log "  Total processes: $TOTAL_PROCESSES"
-log "  Total cores: $TOTAL_CORES"
-log "  RUNTIME: ${RUNTIME}s"
-log "  WORKLOAD_MIX: $MAKO_TPCC_WORKLOAD_MIX"
-log "=============================================="
+export MAKO_FAST_RO_MODE=""
+export RESULT_DIR="${RESULT_BASE_DIR}/baseline"
 
-mkdir -p "$RESULT_BASE_DIR"
+bash scripts/run_multishard_follower_read_eval.sh
 
-# Run baseline first
-log ""
-log ">>> PHASE 1: Running BASELINE mode (all reads to leader)"
-run_evaluation "baseline" > /dev/null 2>&1 || true
-baseline_throughput=$(extract_result "${RESULT_BASE_DIR}/baseline")
-log "Baseline throughput: $baseline_throughput ops/sec"
+baseline_throughput=$(extract_total_throughput "$RESULT_DIR")
+echo "Baseline throughput: $baseline_throughput ops/sec"
 
-# Cool down between runs
-log ""
-log "Cooling down for 10 seconds..."
-sleep 10
-
-# Run fast-path mode
-log ""
-log ">>> PHASE 2: Running FAST-PATH mode (follower reads enabled)"
-run_evaluation "fast" > /dev/null 2>&1 || true
-fast_throughput=$(extract_result "${RESULT_BASE_DIR}/fast")
-log "Fast-path throughput: $fast_throughput ops/sec"
+# Cool down
+echo ""
+echo "Cooling down for 15 seconds..."
+sleep 15
 
 #############################################################################
-# Results comparison
+# Run FAST-PATH
 #############################################################################
 
-log ""
-log "=============================================="
-log "COMPARISON RESULTS"
-log "=============================================="
+echo ""
+echo ">>> PHASE 2: Running FAST-PATH mode (follower reads enabled)"
+echo "========================================="
+
+export MAKO_FAST_RO_MODE="fast"
+export RESULT_DIR="${RESULT_BASE_DIR}/fast"
+
+bash scripts/run_multishard_follower_read_eval.sh
+
+fast_throughput=$(extract_total_throughput "$RESULT_DIR")
+echo "Fast-path throughput: $fast_throughput ops/sec"
+
+#############################################################################
+# Compare Results
+#############################################################################
+
+echo ""
+echo "========================================="
+echo "COMPARISON RESULTS"
+echo "========================================="
 
 # Calculate improvement
 if [ -n "$baseline_throughput" ] && [ "$baseline_throughput" != "0" ] && [ -n "$fast_throughput" ]; then
@@ -130,46 +96,39 @@ else
     speedup="N/A"
 fi
 
-log ""
-log "  BASELINE (all reads to leader):"
-log "    Throughput: $baseline_throughput ops/sec"
-log ""
-log "  FAST-PATH (follower reads enabled):"
-log "    Throughput: $fast_throughput ops/sec"
-log ""
-log "  IMPROVEMENT:"
-log "    Speedup: ${speedup}x"
-log "    Percent improvement: ${improvement}%"
-log ""
-log "=============================================="
+echo ""
+echo "  BASELINE (all reads to leader):"
+echo "    Throughput: $baseline_throughput ops/sec"
+echo ""
+echo "  FAST-PATH (follower reads enabled):"
+echo "    Throughput: $fast_throughput ops/sec"
+echo ""
+echo "  IMPROVEMENT:"
+echo "    Speedup: ${speedup}x"
+echo "    Percent improvement: ${improvement}%"
+echo ""
+echo "========================================="
 
 # Write comparison summary
-comparison_file="${RESULT_BASE_DIR}/comparison_summary.txt"
-{
-    echo "Follower Read Benefit Comparison"
-    echo "================================"
-    echo "Date: $(date)"
-    echo ""
-    echo "Configuration:"
-    echo "  NSHARDS: $NSHARDS"
-    echo "  THREADS: $THREADS"
-    echo "  RUNTIME: ${RUNTIME}s"
-    echo "  WORKLOAD_MIX: $MAKO_TPCC_WORKLOAD_MIX (80% read-only)"
-    echo ""
-    echo "Results:"
-    echo "  Baseline throughput: $baseline_throughput ops/sec"
-    echo "  Fast-path throughput: $fast_throughput ops/sec"
-    echo "  Speedup: ${speedup}x"
-    echo "  Improvement: ${improvement}%"
-    echo ""
-    echo "Expected benefits of follower reads:"
-    echo "  - With 3 followers per shard, read capacity can scale ~3x"
-    echo "  - Read-only transactions avoid 2PC coordination overhead"
-    echo "  - Local reads reduce network latency"
-} > "$comparison_file"
+cat > "${RESULT_BASE_DIR}/comparison_summary.txt" << EOF
+Follower Read Benefit Comparison
+================================
+Date: $(date)
 
-log "Comparison summary: $comparison_file"
-log ""
+Configuration:
+  NSHARDS: $NSHARDS
+  THREADS: $THREADS
+  RUNTIME: ${RUNTIME}s
+  WORKLOAD_MIX: $MAKO_TPCC_WORKLOAD_MIX (80% read-only)
+
+Results:
+  Baseline throughput: $baseline_throughput ops/sec
+  Fast-path throughput: $fast_throughput ops/sec
+  Speedup: ${speedup}x
+  Improvement: ${improvement}%
+EOF
+
+echo "Summary: ${RESULT_BASE_DIR}/comparison_summary.txt"
 
 # Machine-readable output
 echo "COMPARISON_RESULT nshards=$NSHARDS threads=$THREADS runtime_s=$RUNTIME mix=${MAKO_TPCC_WORKLOAD_MIX} baseline_throughput=${baseline_throughput} fast_throughput=${fast_throughput} speedup=${speedup} improvement_pct=${improvement}"
