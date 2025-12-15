@@ -1,251 +1,174 @@
-# Mako
+# Mako Fast Reads
 
 <div align="center">
 
 ![CI](https://github.com/makodb/mako/actions/workflows/ci.yml/badge.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![OSDI'25](https://img.shields.io/badge/OSDI'25-Mako-orange.svg)](#)
 
 **High-Performance Distributed Transactional Key-Value Store with Geo-Replication Support**
-
-[Why Choose Mako](#why-choose-mako) • [Quick Start](#quick-start) • [Use Cases](#use-cases) • [Benchmarks](#benchmarks)
 
 </div>
 
 ---
 
-## What is Mako?
+## What is Mako Fast Reads? 
 
-**Mako** is a high-performance distributed transactional key-value store system with geo-replication support, built on cutting-edge systems research.
-Mako's core design-level innovation is **decoupling transaction execution from replication** using a novel speculative 2PC protocol. Unlike traditional systems where transactions must wait for replication and persistence before committing, Mako allows distributed transactions to execute speculatively without blocking on cross-datacenter consensus. Transactions run at full speed locally while replication happens asynchronously in the background, achieving fault-tolerance without sacrificing performance. The system employs novel mechanisms to prevent unbounded cascading aborts when shards fail during replication, ensuring both high throughput (processing **3.66M TPC-C transactions per second** with 10 shards replicated cross the continent) and strong consistency guarantees. More details can be found in our [OSDI'25 paper](https://www.usenix.org/conference/osdi25/presentation/shen-weihai).
+This repository is a fork of **Mako**, a high-performance distributed transactional key-value store system with geo-replication support, built on cutting-edge systems research. For more information on **Mako** please check out the original [repository]([https://github.com/makodb/mako]) and the paper submitted to [OSDI'25](https://www.usenix.org/conference/osdi25/presentation/shen-weihai). We thank the original developers of **Mako** for all their hard work.  
 
----
-
-## Why Choose Mako?
-
-### Proven Research & Performance
-- Backed by peer-reviewed research published at OSDI'25, one of the top-tier systems conferences
-- **8.6× higher throughput** than state-of-the-art geo-replicated systems
-- Processing **3.66M TPC-C transactions per second** with geo-replication
-
-### Core Capabilities
-- **Serializable Transactions**: Strongest isolation level with full ACID guarantees across distributed partitions
-- **Geo-Replication**: Multi-datacenter support with configurable consistency for disaster recovery
-- **High-Performance Storage**: Built on **Masstree** for in-memory indexing; RocksDB backend for persistence
-- **Horizontal Scalability**: Automatic sharding and data partitioning across nodes
-- **Fault Tolerance**: Crash recovery and replication for high availability
-- **Advanced Networking**: DPDK support for kernel bypass and ultra-low latency
-- **Rust-like memory safety** by using RustyCpp for borrow checking and lifetime analysis.
-
-### Developer-Friendly
-- **Industry-standard benchmarks**: TPC-C, TPC-A, read-write workloads, and micro-benchmarks
-- **RocksDB-like interface** for easy migration from single-node deployments
-- **Redis-compatible layer** for familiar API with enhanced consistency
-- Comprehensive test suite
-- Modular architecture for extensions
+Within this repository we build upon **Mako** exploring and implementing a read-only fast path for **Mako** that executes read-only transactions on follower-safe snapshots selected via shard replication watermarks, bypassing 2PC while preserving serializability through optimistic validation and conservative fallback. This design trades snapshot freshness for performance without weakening correctness guarantees. Across TPC-C workloads, the fast path improves throughput by up to 4.2× and reduces latency by up to 4.6×, including multi-shard configurations, while increasing abort rates that remain a small fraction of total executions.
 
 ---
 
-## Quick Start
+## What is the design behind Fast Read-Only Transaction Paths?
 
-### Prerequisites
+**Why a fast path:** Two-Phase Commit (2PC) provides atomic commit across machines, but it is excessive for **read-only** transactions because nothing is written or committed. In Mako, the baseline path can also force reads to wait until replication becomes safe, adding latency and creating leader-side bottlenecks.
 
-Tested on **Debian 12** and **Ubuntu 22.04**.
+**Core idea:** Choose a **follower-safe snapshot** *up front* using shard replication watermarks, then execute/validate the read-only transaction at that snapshot. If any safety condition is not met, **fall back** to the baseline (2PC) path. This trades snapshot freshness for performance while preserving correctness.
 
-### Installation
+Our Fast read-only execution proceeds in three phases:
 
-```bash
-# 1. Clone the repository with submodules
-git clone --recursive https://github.com/makodb/mako.git
-cd mako
+1. **Classify + fallback**
+   - Execute reads normally to collect the read set.
+   - If the transaction performs any writes: **use the baseline 2PC path**.
+   - Otherwise: attempt the read-only fast path; fall back if prerequisites fail.
 
-# 2. Install dependencies
-bash apt_packages.sh
-source install_rustc.sh
+2. **Durability / global snapshot validation**
+   - Fetch replication **watermarks** for the shards involved in the read set and take the **minimum** as the conservative snapshot timestamp.
+   - Check that every fetched item’s timestamp is ≤ this snapshot (i.e., the read is within the follower-safe replicated prefix).
+   - If the check fails: **fall back to baseline 2PC**.
 
-# 3. Build (use fewer cores on PC, e.g., -j4)
-make -j32
-```
-
-### Run Tests
-
-```bash
-# Run all integration tests
-./ci/ci.sh all
-
-# Run specific tests
-./ci/ci.sh simpleTransaction    # Simple transactions
-./ci/ci.sh simplePaxos           # Paxos replication
-./ci/ci.sh shard1Replication     # 1-shard with replication
-./ci/ci.sh shard2Replication     # 2-shards with replication
-```
+3. **Consistency / optimistic validation**
+   - Validate that each read item’s version still matches the version in the local Masstree (detecting concurrent updates).
+   - If any mismatch is observed: **abort** (caller may retry).
+   - If validation succeeds: complete without 2PC, releasing resources and cleaning up.
 
 ---
 
-## Architecture
+## Files We Changed 
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Client Applications                   │
-└─────────────────────┬───────────────────────────────────┘
-                      │
-┌─────────────────────▼───────────────────────────────────┐
-│              Transaction Coordinators                    │
-│  ┌──────────┬──────────┬──────────┬──────────┐         │
-│  │  Mako    │   2PL    │   OCC    │   Paxos  │         │
-│  └──────────┴──────────┴──────────┴──────────┘         │
-└─────────────────────┬───────────────────────────────────┘
-                      │
-┌─────────────────────▼───────────────────────────────────┐
-│                RPC Communication Layer                   │
-│        (TCP/IP, DPDK, RDMA, eRPC)                       │
-└─────────────────────┬───────────────────────────────────┘
-                      │
-┌─────────────────────▼───────────────────────────────────┐
-│              Sharded Data Partitions                     │
-│  ┌─────────────┬─────────────┬─────────────┐           │
-│  │   Shard 1   │   Shard 2   │   Shard N   │           │
-│  │  (Replicas) │  (Replicas) │  (Replicas) │           │
-│  └─────────────┴─────────────┴─────────────┘           │
-└─────────────────────┬───────────────────────────────────┘
-                      │
-┌─────────────────────▼───────────────────────────────────┐
-│              Storage Backends                            │
-│    Masstree (In-Memory)  |  RocksDB (Persistent)        │
-└─────────────────────────────────────────────────────────┘
-```
+Major changes in the repository were made in the following files: 
+- **Fast read-only path / follower-safe reads (core transaction + watermark logic):**
+  - `src/mako/benchmarks/sto/MassTrans.hh`
+  - `src/mako/benchmarks/sto/Transaction.cc`
+  - `src/mako/benchmarks/sto/Transaction.hh`
+  - `src/mako/benchmarks/sto/TransactionStats.hh` (added)
+  - `src/mako/benchmarks/sto/multiversion.hh`
+  - `src/mako/benchmarks/sto/sync_util.hh`
+  - `src/mako/benchmarks/sync_util_init.cc`
+  - `src/mako/mako.hh`
+  - `src/mako/txn.h`
 
 ---
 
 ## Benchmarks
 
-Performance results from our OSDI'25 evaluation on Azure cloud infrastructure (TPC-C benchmark):
+Performance results from our evaluation on AWS c6id.8xlarge (32 cores, 64 GB RAM) instances using the TPC-C Benchmarks with different workload mixes:
 
-### Mako Performance
+### TPC-C Read Heavy Workload 
 
-| Configuration | Shards | Threads/Shard | Throughput | Median Latency | Notes |
-|--------------|--------|---------------|------------|----------------|-------|
-| Single Shard | 1      | 24            | 960K TPS   | -              | 22.5× faster than Calvin |
-| Geo-Replicated | 10   | 24            | 3.66M TPS  | 121 ms*        | 8.6× faster than Calvin |
+- This workload was ran on the `mehadi_TPCC branch`, the github workflow file for this is found at `.github/workflows/tpcc-fast-path-eval.yml`, the
+evaluation script being ran can be found at `scripts/run_tpcc_fast_path_eval.sh` 
+- Workload mix: 10% NewOrder, 10% Payment, 0% Delivery, 40% OrderStatus, 40% StockLevel (`MAKO_TPCC_WORKLOAD_MIX="10,10,0,40,40"`).
+- Setup: single shard, replication enabled, 6 threads.
 
-\* Median latency breakdown: ~50 ms cross-datacenter RTT, 13 ms batching, rest for watermark advancement
+| Measurement | Baseline | Fast Path | Fast Path vs Baseline |
+|---|---:|---:|---:|
+| Aggregated Throughput (ops/s) | ~263,078 | ~1,109,300 | ~4.2× Increase |
+| Latency (ms) | ~0.022238 | ~0.00484236 | ~4.6× Faster |
+| Aggregated Abort Rate (aborts/s) | ~37.2275 | ~33,249.5 | ~900× Higher |
 
-### Performance Advantages
+- For the summary results they can be found in `fast-path-results/Summary_Results/TPCC_ReadHeavy` and the full results are in `fast-path-results/Full_Result_Files/TPCC_ReadHeavy`
 
-- **8.6× higher throughput** than Calvin (state-of-the-art geo-replicated system)
-- **22.5× higher throughput** than Calvin at single shard
-- **32.2× higher throughput** than OCC+OR at 10 shards
-- **~10× lower latency** than traditional 2PC at high throughput (due to reduced aborts)
+### TPC-C Read Only Workload   
 
-*Results from OSDI'25 paper evaluation on Azure. Performance varies based on hardware, network topology, and workload characteristics.*
+- This workload was ran on the `mehadi_tpcc_read_only branch`, the github workflow file for this is found at `.github/workflows/tpcc-readonly-eval.yml`, the evaluation script being ran can be found at `scripts/run_tpcc_readonly_eval.sh` 
+- Workload mix: 0% NewOrder, 0% Payment, 0% Delivery, 100% OrderStatus, 0% StockLevel (`MAKO_TPCC_WORKLOAD_MIX="0,0,0,100,0"`).
+- Setup: single shard, replication enabled, 6 threads.
 
----
+| Measurement | Baseline | Fast Path | Fast Path vs Baseline |
+|---|---:|---:|---:|
+| Aggregated Throughput (ops/s) | ~2,299,650 | ~2,613,880 | 1.137× Increase |
+| Latency (ms) | 0.00207439 | 0.00174061 | 1.2× Faster |
+| Aggregated Abort Rate (aborts/s) | 0 | 0 | Same |
 
-## Documentation
+- For the summary results they can be found in `fast-path-results/Summary_Results/TPCC_ReadOnly` and the full results are in `fast-path-results/Full_Result_Files/TPCC_ReadOnly` 
 
-### Getting Started
-- [Installation Guide](docs/install.md) - Detailed installation instructions
-- [Configuration Guide](docs/config.md) - YAML configuration reference
-- [Deployment Guide](docs/deploy.md) - Distributed deployment instructions
+### TPC-C Write Heavy Workload  
 
-### Development
-- [Architecture Overview](CLAUDE.md) - System architecture and design
-- [Protocol Implementation](docs/protocols.md) - Adding new protocols
-- [Benchmarking Guide](docs/benchmarks.md) - Running and analyzing benchmarks
+- This workload was ran on the `mehadi_tpcc_write_heavy branch`, the github workflow file for this is found at `.github/workflows/tpcc-writeheavy-eval.yml`, the evaluation script being ran can be found at `scripts/run_tpcc_writeheavy_eval.sh` 
+- Workload mix: 40% NewOrder, 40% Payment, 0% Delivery, 10% OrderStatus, 10% StockLevel (`MAKO_TPCC_WORKLOAD_MIX="40,40,0,10,10"`).
+- Setup: single shard, replication enabled, 6 threads.
 
----
+| Measurement | Baseline | Fast Path | Fast Path vs Baseline |
+|---|---:|---:|---:|
+| Aggregated Throughput (ops/s) | 329,154 | 442,401 | 1.34× Increase |
+| Latency (ms) | 0.017645 | 0.0129555 | 1.36× Faster |
+| Aggregated Abort Rate (aborts/s) | 92.6137 | 3,712.44 | 40× Higher |
 
-## Use Cases
+- For the summary results they can be found in `fast-path-results/Summary_Results/TPCC_WriteHeavy` and the full results are in `fast-path-results/Full_Result_Files/TPCC_WriteHeavy`
 
-### Distributed RocksDB Alternative
+### TPC-C MultiSharded Workload  
 
-Need a high-performance distributed database with a RocksDB-like interface? Mako provides a familiar key-value API with the added benefits of distributed transactions, geo-replication, and fault tolerance. Perfect for applications that have outgrown single-node RocksDB and need:
-- **Horizontal scalability** across multiple nodes
-- **ACID transactions** spanning multiple keys or partitions
-- **Geographic replication** for disaster recovery and low-latency global access
-- **Drop-in replacement** with minimal code changes from existing RocksDB applications
+- This workload was ran on the `mehadi_tpcc_multi_shard branch`, the github workflow file for this is found at `.github/workflows/multishard-follower-read-eval.yml`, the evaluation script being ran can be found at `scripts/run_multishard_follower_read_eval.sh` 
+- Workload mix: same as read-heavy (`MAKO_TPCC_WORKLOAD_MIX="10,10,0,40,40"`).
+- Setup: 3 shards, 2 threads per shard; shards co-located on one machine to emulate a geo-replicated environment.
 
-### Redis Alternative with Transactions
+| Measurement | Baseline | Fast Path | Fast Path vs Baseline |
+|---|---:|---:|---:|
+| Aggregated Throughput (ops/s) | 114,374.2 | 244,040.7 | 2.1× Increase |
+| Average Latency (ms) | ~0.026 | ~0.005 | 5.2× Faster |
+| Aggregated Abort Rate (aborts/s) | 157.484 | ~2,676.243 | 17× Higher | 
 
-Mako includes a Redis-compatible layer, making it an excellent alternative to Redis when you need:
-- **Strong consistency** with serializable transactions instead of Redis's eventual consistency
-- **Multi-key atomic operations** with full ACID guarantees
-- **Geographic distribution** with automatic failover and replication
-- **Persistent storage** with both in-memory (Masstree) and disk-based (RocksDB) backends
-- **Familiar Redis API** for easy migration with enhanced reliability and consistency guarantees
+- For the full results they can be found in `fast-path-results/Full_Result_Files/TPCC_MultiShard`
 
----
+### Mako Fast Path Performance Summary & Advantages
 
-## Development
+**Single-shard benchmarks (1 shard, 6 threads):**
 
-### Building Different Configurations
+| Benchmark | Throughput | Latency | Abort Rate |
+|---|---:|---:|---:|
+| TPCC-Read Heavy | 4.2× Increase | 4.6× Faster | 900× Higher |
+| TPCC-Read Only | 1.137× Increase | 1.2× Faster | Same |
+| TPCC-Write Heavy | 1.34× Increase | 1.36× Faster | 40× Higher |
 
-```bash
-# Full build with all features
-make build
+**Multi-shard benchmark (3 shards, 2 threads/shard):**
 
-# Build specific components
-make dbtest        # Database tests
-make configure     # CMake configuration only
-make clean         # Clean all build artifacts
-```
+| Benchmark | Throughput | Latency | Abort Rate |
+|---|---:|---:|---:|
+| TPCC Multi-Sharded Read-Heavy | 2.1× Increase | 5.2× Faster | 17× Higher |
 
-### Running Tests
+- TPCC-Read Heavy (single shard): 4.2× higher throughput, 4.6× lower latency, 900× higher abort rate
+- TPCC-Read Only (single shard): 1.137× higher throughput, 1.2× lower latency, same abort rate
+- TPCC-Write Heavy (single shard): 1.34× higher throughput, 1.36× lower latency, 40× higher abort rate
+- TPCC Multi-Sharded Read-Heavy (3 shards): 2.1× higher throughput, 5.2× lower latency, 17× higher abort rate 
 
-```bash
-# CTest integration
-make test                 # Run all tests
-make test-verbose         # Verbose test output
-make test-parallel        # Parallel test execution
-```
-
-### Code Organization
-
-```
-mako/
-├── src/
-│   ├── deptran/        # Transaction protocols (2PL, OCC, RCC, etc.)
-│   ├── mako/           # Mako system with Masstree
-│   ├── bench/          # Benchmark implementations (TPC-C, TPC-A)
-│   └── rrr/            # Custom RPC framework
-├── config/             # YAML configuration files
-├── test/               # Test configurations and scripts
-├── third-party/        # External dependencies
-└── rust-lib/           # Rust components
-```
+*Results from evaluation on AWS. Performance varies based on hardware, network topology, and workload characteristics.*
 
 ---
 
-## Contributing
-
-We welcome contributions! Here's how you can help:
-
-### Reporting Issues
-- Use GitHub Issues for bug reports
-- Include reproduction steps and environment details
-- Check existing issues before creating new ones
-
-### Pull Requests
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes with tests
-4. Ensure all tests pass (`make test`)
-5. Submit a pull request
-
-### Code Style
-- Follow existing code conventions
-- Use C++17 features where appropriate
-- Document complex logic with comments
-- Add tests for new functionality
-
 ---
 
-## Community
+## Future Work
 
-### Getting Help
-- **Documentation**: Check the [docs](docs/) directory
-- **Issues**: Search existing GitHub Issues
-- **Discussions**: Use GitHub Discussions for questions
+Several directions could further strengthen and extend this work:
+
+1. **Adaptive Fast-Path Eligibility**
+   Currently, read-only transactions either attempt the fast path or fall back to the baseline path based on fixed safety checks. Future work could dynamically enable or disable the fast path based on observed abort rates, workload mix, or shard skew.
+
+2. **Improved Snapshot Selection**
+   The current snapshot selection strategy is conservative to preserve safety. More aggressive snapshot selection or bounded staleness techniques (similar to CockroachDB’s follower reads) could reduce aborts while maintaining acceptable consistency guarantees.
+
+3. **Fine-Grained Abort Attribution**
+   Abort rates increased under certain workloads, but identifying *which* safety condition caused a fallback remains coarse-grained. Adding structured abort reasons and metrics would enable more targeted optimization.
+
+4. **Expanded Benchmarking**
+   While this project focuses on TPCC-based workloads, future evaluations could include YCSB-style microbenchmarks and latency-sensitive read workloads to better isolate read-only performance gains.
+
+5. **Integration with Full MVCC Metadata**
+   Deeper integration with Mako’s MVCC metadata (e.g., richer version tracking or commit watermarks) could enable safer fast-path execution with fewer conservative checks.
+
+6. **Automated Experiment Orchestration**
+   Experiment reproducibility was a challenge due to distributed execution and resource constraints. Future work could formalize experiment orchestration using parameterized workflows and result validation.
 
 ---
 
@@ -261,12 +184,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Contributors**: All researchers and students who have contributed
 - **Dependencies**: Built on excellent open-source projects including Janus, Masstree, RocksDB, eRPC, and many others
 
----
-
-<div align="center">
-
-**⭐ Star this repository if you find it useful! ⭐**
-
-[Report Bug](https://github.com/makodb/mako/issues) • [Request Feature](https://github.com/makodb/mako/issues) • [Documentation](docs/)
-
-</div>
+## References  
+[Mako OSDI Paper](https://www.usenix.org/system/files/osdi25-shen-weihai.pdf)   
+[CockroachDB Blogs](https://www.cockroachlabs.com/blog/)    
+[Spanner](https://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf)    
