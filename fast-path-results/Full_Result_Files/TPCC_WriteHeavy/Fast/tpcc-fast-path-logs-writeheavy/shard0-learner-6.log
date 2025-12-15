@@ -1,0 +1,392 @@
+=========================================
+Configuration:
+=========================================
+  Number of shards:  1
+  Shard index:       0
+  Number of threads: 6
+  Cluster:           learner
+  Micro benchmark:   disabled
+  Replicated mode:   enabled
+=========================================
+20251108-05:00.03-866605(us) 24297 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:78] 2025-12-08 05:00:03.867 | PWD : /opt/actions-runner/_work/mako-fast-reads/mako-fast-reads
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:276] 2025-12-08 05:00:03.867 | starting process 24297
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/config.cc:290] 2025-12-08 05:00:03.867 | LoadYML: config/1leader_2followers/paxos6_shardidx0.yml
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/config.cc:290] 2025-12-08 05:00:03.867 | LoadYML: config/occ_paxos.yml
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:285] 2025-12-08 05:00:03.867 | server_infos, number of sites: 6, proc_name: learner
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:00:03.872 | parition id of each Paxos group is 5, site-name: s406, site-id: 23
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:00:03.877 | parition id of each Paxos group is 4, site-name: s405, site-id: 19
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:00:03.883 | parition id of each Paxos group is 3, site-name: s404, site-id: 15
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:00:03.888 | parition id of each Paxos group is 2, site-name: s403, site-id: 11
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:00:03.893 | parition id of each Paxos group is 1, site-name: s402, site-id: 7
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:00:03.899 | parition id of each Paxos group is 0, site-name: s401, site-id: 3
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:297] 2025-12-08 05:00:03.899 | running machine-id: 3
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:00:03.899 | launching site: 7, bind address 0.0.0.0:17302
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:00:03.899 | launching site: f, bind address 0.0.0.0:17304
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:00:03.899 | launching site: 13, bind address 0.0.0.0:17305
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:00:03.899 | [service]loc_id: 3, name: s402, proc: learner, id: 7
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:106] 2025-12-08 05:00:03.899 | waiting for server setup threads.
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:00:03.899 | launching site: 17, bind address 0.0.0.0:17306
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:00:03.899 | launching site: 3, bind address 0.0.0.0:17301
+starting server at 0.0.0.0:17302
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:00:03.899 | [service]loc_id: 3, name: s405, proc: learner, id: 19
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:00:03.899 | [service]loc_id: 3, name: s404, proc: learner, id: 15
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:00:03.899 | [service]loc_id: 3, name: s406, proc: learner, id: 23
+starting server at 0.0.0.0:17305
+starting server at 0.0.0.0:17304
+starting server at 0.0.0.0:17306
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:00:03.900 | [service]loc_id: 3, name: s401, proc: learner, id: 3
+starting server at 0.0.0.0:17301
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:00:03.900 | launching site: b, bind address 0.0.0.0:17303
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:00:03.900 | Server s402 ready at 0.0.0.0:17302
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:00:03.900 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:03.900 | connect to site: 127.0.0.1:17001 (attempt 0)
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:00:03.900 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:00:03.900 | Server s406 ready at 0.0.0.0:17306
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:00:03.900 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:03.900 | connect to site: 127.0.0.1:17001 (attempt 0)
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:00:03.900 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:00:03.900 | Server s405 ready at 0.0.0.0:17305
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:00:03.900 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:03.900 | connect to site: 127.0.0.1:17001 (attempt 0)
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:00:03.901 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:00:03.901 | [service]loc_id: 3, name: s403, proc: learner, id: 11
+starting server at 0.0.0.0:17303
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:00:03.901 | Server s404 ready at 0.0.0.0:17304
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:00:03.901 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:03.901 | connect to site: 127.0.0.1:17001 (attempt 0)
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:00:03.901 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:00:03.902 | Server s403 ready at 0.0.0.0:17303
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:00:03.902 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:03.902 | connect to site: 127.0.0.1:17001 (attempt 0)
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:00:03.902 | rrr::Client: connect(127.0.0.1:17001): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:00:03.902 | Server s401 ready at 0.0.0.0:17301
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:00:03.902 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:03.902 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:03.902 | connect to site: 127.0.0.1:17101 (attempt 0)
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:00:03.902 | rrr::Client: connect(127.0.0.1:17101): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17001 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17001 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:00:04.900 | site 7 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.900 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17001 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:00:04.901 | site 23 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:00:04.901 | site 19 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17001 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.901 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:00:04.902 | site 15 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17001 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17101 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:00:04.902 | site 11 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.902 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.903 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.920 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:00:04.920 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:00:04.920 | site 3 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:110] 2025-12-08 05:00:04.920 | done waiting for server setup threads.
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:00:04.920 | heartbeat setup for s401 on 0.0.0.0:27301
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:00:04.920 | heartbeat setup for s402 on 0.0.0.0:27302
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:00:04.921 | heartbeat setup for s403 on 0.0.0.0:27303
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:00:04.921 | heartbeat setup for s404 on 0.0.0.0:27304
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:00:04.921 | heartbeat setup for s405 on 0.0.0.0:27305
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:00:04.921 | heartbeat setup for s406 on 0.0.0.0:27306
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:117] 2025-12-08 05:00:04.921 | server workers' communicators setup
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:756] 2025-12-08 05:00:04.921 | start a heartbeatBackground, addr:127.0.0.1:27001
+tpcc settings:
+  cross_partition_transactions : 1
+  read_only_snapshots          : 1
+  partition_locks              : 0
+  separate_tree_per_partition  : 1
+  new_order_remote_item_pct    : 1
+  new_order_fast_id_gen        : 1
+  uniform_item_dist            : 0
+  order_status_scan_hack       : 0
+  workload_mix                 : [40, 40, 0, 10, 10]
+20251108-05:00.07-921969(us) 24297 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:00.07-922028(us) 24297 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+reinitializing partitions under failure
+reinitializing partitions under failure - DONE
+[TRANSPORT] Using default: rrr
+[TRANSPORT] Using default: rrr
+20251108-05:00.07-923666(us) 24297 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251108-05:00.07-923703(us) 24297 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:34011 (listening on 0.0.0.0:34011)
+20251108-05:00.07-923712(us) 24297 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:34011
+20251108-05:00.07-923720(us) 24297 * RunEventLoop    (rrr_rpc_backend.cc:518): RrrRpcBackend::RunEventLoop: Starting event loop
+20251108-05:00.07-923732(us) 24297 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251108-05:00.07-923764(us) 24297 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:34012 (listening on 0.0.0.0:34012)
+20251108-05:00.07-923770(us) 24297 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:34012
+20251108-05:00.07-923775(us) 24297 * RunEventLoop    (rrr_rpc_backend.cc:518): RrrRpcBackend::RunEventLoop: Starting event loop
+20251108-05:00.07-923818(us) 24297 ! modeMonitor     (common2.h:100):    start for modeMonitor, running:0
+start worker:2331
+allocator::Initialize()
+  hugepgsize: 2097152
+  use MADV_WILLNEED: 1
+  mmap() region [0x7bb912e00000, 0x7bb953800000)
+cpu0 owns [0x7bb912e00000, 0x7bb91da00000)
+cpu1 owns [0x7bb91da00000, 0x7bb928600000)
+cpu2 owns [0x7bb928600000, 0x7bb933200000)
+cpu3 owns [0x7bb933200000, 0x7bb93de00000)
+cpu4 owns [0x7bb93de00000, 0x7bb948a00000)
+cpu5 owns [0x7bb948a00000, 0x7bb953600000)
+Database Benchmark:
+  pid: 24297
+settings:
+  num-cpus    : 32
+  num-threads : 6
+  shardIndex  : 0
+  paxos_proc_name  : learner
+  nshards     : 1
+  is_micro    : 0
+  is_replicated : 1
+  var-encode  : yes
+  allocator   : jemalloc
+system properties:
+  tuple_prefetch          : no
+  btree_node_prefetch     : yes
+20251108-05:00.08-924062(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:460, wait_time:1s
+
+20251108-05:00.09-924154(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:466, wait_time:2s
+
+20251108-05:00.10-924261(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:470, wait_time:3s
+
+20251108-05:00.11-924340(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:474, wait_time:4s
+
+we can start a advancer
+start the advancer thread...
+20251108-05:00.12-924421(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:1402, wait_time:5s
+
+20251108-05:00.13-924516(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:2367, wait_time:6s
+
+20251108-05:00.14-924588(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:3327, wait_time:7s
+
+20251108-05:00.15-924686(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:4284, wait_time:8s
+
+20251108-05:00.16-924778(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:5225, wait_time:9s
+
+20251108-05:00.17-924877(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:6153, wait_time:10s
+
+20251108-05:00.18-924984(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:7082, wait_time:11s
+
+20251108-05:00.19-925076(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:7998, wait_time:12s
+
+20251108-05:00.20-925163(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:8907, wait_time:13s
+
+20251108-05:00.21-925252(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:9810, wait_time:14s
+
+20251108-05:00.22-925339(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:10715, wait_time:15s
+
+20251108-05:00.23-925439(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:11610, wait_time:16s
+
+20251108-05:00.24-925547(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:12502, wait_time:17s
+
+20251108-05:00.25-925656(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:13389, wait_time:18s
+
+20251108-05:00.26-925748(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:14286, wait_time:19s
+
+20251108-05:00.27-925841(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:15178, wait_time:20s
+
+20251108-05:00.28-927127(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:16066, wait_time:21s
+
+20251108-05:00.29-927256(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:16935, wait_time:22s
+
+20251108-05:00.30-927346(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:17807, wait_time:23s
+
+20251108-05:00.31-927442(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:18676, wait_time:24s
+
+20251108-05:00.32-927534(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:19536, wait_time:25s
+
+20251108-05:00.33-927751(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:20402, wait_time:26s
+
+20251108-05:00.34-927841(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:21254, wait_time:27s
+
+20251108-05:00.35-927943(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:22111, wait_time:28s
+
+20251108-05:00.36-928038(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:22971, wait_time:29s
+
+20251108-05:00.37-928138(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:23829, wait_time:30s
+
+20251108-05:00.38-928343(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:24670, wait_time:31s
+
+20251108-05:00.39-928441(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:25510, wait_time:32s
+
+20251108-05:00.40-928554(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:26359, wait_time:33s
+
+20251108-05:00.41-928671(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:27208, wait_time:34s
+
+20251108-05:00.42-928773(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/6, noops_cnt:0, replay_batch:27412, wait_time:35s
+
+20251108-05:00.43-189685(us) 24297 ! operator()      (mako.hh:233):      Recieved a zero length log
+20251108-05:00.43-192223(us) 24297 ! operator()      (mako.hh:233):      Recieved a zero length log
+20251108-05:00.43-192680(us) 24297 ! operator()      (mako.hh:233):      Recieved a zero length log
+20251108-05:00.43-192999(us) 24297 ! operator()      (mako.hh:233):      Recieved a zero length log
+20251108-05:00.43-193031(us) 24297 ! operator()      (mako.hh:233):      Recieved a zero length log
+20251108-05:00.43-194449(us) 24297 ! operator()      (mako.hh:233):      Recieved a zero length log
+20251108-05:00.43-929580(us) 24297 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 6/6, noops_cnt:0, replay_batch:27424, wait_time:36s
+
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:00:43.189 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:00:43.192 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:00:43.192 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:00:43.192 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:00:43.193 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:00:43.194 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:999] 2025-12-08 05:00:45.929 | shutdown Server Control Service after task finish total submit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:00:45.929 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:00:45.929 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:00:45.929 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:00:45.929 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:00:45.929 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:00:45.929 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:311] 2025-12-08 05:00:45.930 | all server workers have shut down.
+20251108-05:00.46-308448(us) 24297 ! modeMonitorRun  (common2.h:81):     start for modeMonitorRun, running:0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:770] 2025-12-08 05:00:45.934 | heartbeatBackground is ended!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:00:46.030 | site s401 deleting services, num: 1 0 0 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:00:46.080 | site par 0, loc 3: prepare 0, accept 0, commit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:00:46.080 | site s402 deleting services, num: 1 0 0 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:00:46.131 | site par 1, loc 3: prepare 0, accept 0, commit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:00:46.131 | site s403 deleting services, num: 1 0 0 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:00:46.181 | site par 2, loc 3: prepare 0, accept 0, commit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:00:46.181 | site s404 deleting services, num: 1 0 0 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:00:46.182 | site par 3, loc 3: prepare 0, accept 0, commit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:00:46.182 | site s405 deleting services, num: 1 0 0 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:00:46.184 | site par 4, loc 3: prepare 0, accept 0, commit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:00:46.184 | site s406 deleting services, num: 1 0 0 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:00:46.234 | site par 5, loc 3: prepare 0, accept 0, commit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:00:46.284 | Ending worker with n_tot 0 and n_current 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:00:46.289 | Ending worker with n_tot 0 and n_current 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:00:46.293 | Ending worker with n_tot 0 and n_current 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:00:46.297 | Ending worker with n_tot 0 and n_current 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:00:46.301 | Ending worker with n_tot 0 and n_current 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:00:46.304 | Ending worker with n_tot 0 and n_current 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:332] 2025-12-08 05:00:46.308 | exit process.
+END of advancer

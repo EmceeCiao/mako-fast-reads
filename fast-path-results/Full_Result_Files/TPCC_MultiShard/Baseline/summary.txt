@@ -1,0 +1,9 @@
+Multi-Shard Follower Read Evaluation
+=====================================
+NSHARDS: 3
+THREADS: 2
+RUNTIME: 60s
+WORKLOAD_MIX: 10,10,0,40,40
+FAST_RO_MODE: baseline
+
+TOTAL: 114374.2 ops/sec

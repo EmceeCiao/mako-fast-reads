@@ -1,0 +1,718 @@
+=========================================
+Configuration:
+=========================================
+  Number of shards:  1
+  Shard index:       0
+  Number of threads: 6
+  Cluster:           localhost
+  Micro benchmark:   disabled
+  Replicated mode:   enabled
+=========================================
+20251108-05:13.43-283730(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:78] 2025-12-08 05:13:43.284 | PWD : /opt/actions-runner/_work/mako-fast-reads/mako-fast-reads
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:276] 2025-12-08 05:13:43.284 | starting process 19429
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/config.cc:290] 2025-12-08 05:13:43.284 | LoadYML: config/1leader_2followers/paxos6_shardidx0.yml
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/config.cc:290] 2025-12-08 05:13:43.284 | LoadYML: config/occ_paxos.yml
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:285] 2025-12-08 05:13:43.284 | server_infos, number of sites: 6, proc_name: localhost
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:13:43.290 | parition id of each Paxos group is 5, site-name: s106, site-id: 20
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:13:43.296 | parition id of each Paxos group is 4, site-name: s105, site-id: 16
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:13:43.301 | parition id of each Paxos group is 3, site-name: s104, site-id: 12
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:13:43.307 | parition id of each Paxos group is 2, site-name: s103, site-id: 8
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:13:43.313 | parition id of each Paxos group is 1, site-name: s102, site-id: 4
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-08 05:13:43.318 | parition id of each Paxos group is 0, site-name: s101, site-id: 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:297] 2025-12-08 05:13:43.318 | running machine-id: 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:13:43.318 | launching site: 0, bind address 0.0.0.0:17001
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:13:43.318 | launching site: 4, bind address 0.0.0.0:17002
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:13:43.318 | launching site: 8, bind address 0.0.0.0:17003
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:13:43.318 | [service]loc_id: 0, name: s101, proc: localhost, id: 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:13:43.318 | launching site: c, bind address 0.0.0.0:17004
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:13:43.318 | [service]loc_id: 0, name: s102, proc: localhost, id: 4
+starting server at 0.0.0.0:17001
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:13:43.319 | Server s101 ready at 0.0.0.0:17001
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:13:43.319 | launching site: 10, bind address 0.0.0.0:17005
+starting server at 0.0.0.0:17002
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:13:43.319 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:13:43.319 | [service]loc_id: 0, name: s103, proc: localhost, id: 8
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:13:43.319 | Server s102 ready at 0.0.0.0:17002
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:13:43.319 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:13:43.319 | [service]loc_id: 0, name: s104, proc: localhost, id: 12
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:106] 2025-12-08 05:13:43.319 | waiting for server setup threads.
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-08 05:13:43.319 | launching site: 14, bind address 0.0.0.0:17006
+starting server at 0.0.0.0:17003
+starting server at 0.0.0.0:17004
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:13:43.319 | Server s103 ready at 0.0.0.0:17003
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:13:43.319 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:13:43.319 | [service]loc_id: 0, name: s105, proc: localhost, id: 16
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:13:43.319 | Server s104 ready at 0.0.0.0:17004
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:13:43.319 | setup paxos communicator
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:13:43.319 | rrr::Client: connect(127.0.0.1:17101): Connection refused
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:13:43.319 | rrr::Client: connect(127.0.0.1:17101): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17001 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17101 (attempt 0)
+starting server at 0.0.0.0:17005
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:13:43.319 | rrr::Client: connect(127.0.0.1:17101): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-08 05:13:43.319 | [service]loc_id: 0, name: s106, proc: localhost, id: 20
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:13:43.319 | Server s105 ready at 0.0.0.0:17005
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:13:43.319 | setup paxos communicator
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:13:43.319 | rrr::Client: connect(127.0.0.1:17101): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17001 (attempt 0)
+starting server at 0.0.0.0:17006
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-08 05:13:43.319 | Server s106 ready at 0.0.0.0:17006
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-08 05:13:43.319 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17101 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17001 (attempt 0)
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:13:43.319 | rrr::Client: connect(127.0.0.1:17101): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:43.319 | connect to site: 127.0.0.1:17101 (attempt 0)
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-08 05:13:43.319 | rrr::Client: connect(127.0.0.1:17101): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17101 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17101 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17101 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17101 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17101 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17101 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:13:44.319 | site 8 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:13:44.319 | site 0 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.319 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:13:44.331 | site 4 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:13:44.331 | site 16 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17003 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17103 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17203 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17303 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17004 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17104 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:13:44.331 | site 12 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17204 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17304 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17005 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17105 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.331 | connect to site: 127.0.0.1:17205 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.332 | connect to site: 127.0.0.1:17305 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.332 | connect to site: 127.0.0.1:17006 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.332 | connect to site: 127.0.0.1:17106 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.332 | connect to site: 127.0.0.1:17206 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-08 05:13:44.332 |Disk persistence disabled by DISABLE_DISK flag
+ connect to site: 127.0.0.1:17306 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-08 05:13:44.332 | site 20 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:110] 2025-12-08 05:13:44.332 | done waiting for server setup threads.
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:13:44.332 | heartbeat setup for s101 on 0.0.0.0:27001
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:13:44.332 | heartbeat setup for s102 on 0.0.0.0:27002
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:13:44.332 | heartbeat setup for s103 on 0.0.0.0:27003
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:13:44.332 | heartbeat setup for s104 on 0.0.0.0:27004
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:13:44.332 | heartbeat setup for s105 on 0.0.0.0:27005
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-08 05:13:44.332 | heartbeat setup for s106 on 0.0.0.0:27006
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:117] 2025-12-08 05:13:44.332 | server workers' communicators setup
+allocator::Initialize()
+  hugepgsize: 2097152
+  use MADV_WILLNEED: 1
+  mmap() region [0x704283a00000, 0x7042c4400000)
+cpu0 owns [0x704283a00000, 0x70428e600000)
+cpu1 owns [0x70428e600000, 0x704299200000)
+cpu2 owns [0x704299200000, 0x7042a3e00000)
+cpu3 owns [0x7042a3e00000, 0x7042aea00000)
+cpu4 owns [0x7042aea00000, 0x7042b9600000)
+cpu5 owns [0x7042b9600000, 0x7042c4200000)
+Database Benchmark:
+  pid: 19429
+settings:
+  num-cpus    : 32
+  num-threads : 6
+  shardIndex  : 0
+  paxos_proc_name  : localhost
+  nshards     : 1
+  is_micro    : 0
+  is_replicated : 1
+  var-encode  : yes
+  allocator   : jemalloc
+system properties:
+  tuple_prefetch          : no
+  btree_node_prefetch     : yes
+tpcc settings:
+  cross_partition_transactions : 1
+  read_only_snapshots          : 1
+  partition_locks              : 0
+  separate_tree_per_partition  : 1
+  new_order_remote_item_pct    : 1
+  new_order_fast_id_gen        : 1
+  uniform_item_dist            : 0
+  order_status_scan_hack       : 0
+  workload_mix                 : [40, 40, 0, 10, 10]
+new table is createded with name: customer_0, table-id: 1, on shard-server id:0
+new table is createded with name: customer_1, table-id: 2, on shard-server id:0
+new table is createded with name: customer_2, table-id: 3, on shard-server id:0
+new table is createded with name: customer_3, table-id: 4, on shard-server id:0
+new table is createded with name: customer_4, table-id: 5, on shard-server id:0
+new table is createded with name: customer_5, table-id: 6, on shard-server id:0
+new table is createded with name: customer_name_idx_0, table-id: 7, on shard-server id:0
+new table is createded with name: customer_name_idx_1, table-id: 8, on shard-server id:0
+new table is createded with name: customer_name_idx_2, table-id: 9, on shard-server id:0
+new table is createded with name: customer_name_idx_3, table-id: 10, on shard-server id:0
+new table is createded with name: customer_name_idx_4, table-id: 11, on shard-server id:0
+new table is createded with name: customer_name_idx_5, table-id: 12, on shard-server id:0
+new table is createded with name: district_0, table-id: 13, on shard-server id:0
+new table is createded with name: district_1, table-id: 14, on shard-server id:0
+new table is createded with name: district_2, table-id: 15, on shard-server id:0
+new table is createded with name: district_3, table-id: 16, on shard-server id:0
+new table is createded with name: district_4, table-id: 17, on shard-server id:0
+new table is createded with name: district_5, table-id: 18, on shard-server id:0
+new table is createded with name: history_0, table-id: 19, on shard-server id:0
+new table is createded with name: history_1, table-id: 20, on shard-server id:0
+new table is createded with name: history_2, table-id: 21, on shard-server id:0
+new table is createded with name: history_3, table-id: 22, on shard-server id:0
+new table is createded with name: history_4, table-id: 23, on shard-server id:0
+new table is createded with name: history_5, table-id: 24, on shard-server id:0
+new table is createded with name: new_order_0, table-id: 25, on shard-server id:0
+new table is createded with name: new_order_1, table-id: 26, on shard-server id:0
+new table is createded with name: new_order_2, table-id: 27, on shard-server id:0
+new table is createded with name: new_order_3, table-id: 28, on shard-server id:0
+new table is createded with name: new_order_4, table-id: 29, on shard-server id:0
+new table is createded with name: new_order_5, table-id: 30, on shard-server id:0
+new table is createded with name: oorder_0, table-id: 31, on shard-server id:0
+new table is createded with name: oorder_1, table-id: 32, on shard-server id:0
+new table is createded with name: oorder_2, table-id: 33, on shard-server id:0
+new table is createded with name: oorder_3, table-id: 34, on shard-server id:0
+new table is createded with name: oorder_4, table-id: 35, on shard-server id:0
+new table is createded with name: oorder_5, table-id: 36, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_0, table-id: 37, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_1, table-id: 38, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_2, table-id: 39, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_3, table-id: 40, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_4, table-id: 41, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_5, table-id: 42, on shard-server id:0
+new table is createded with name: order_line_0, table-id: 43, on shard-server id:0
+new table is createded with name: order_line_1, table-id: 44, on shard-server id:0
+new table is createded with name: order_line_2, table-id: 45, on shard-server id:0
+new table is createded with name: order_line_3, table-id: 46, on shard-server id:0
+new table is createded with name: order_line_4, table-id: 47, on shard-server id:0
+new table is createded with name: order_line_5, table-id: 48, on shard-server id:0
+new table is createded with name: stock_0, table-id: 49, on shard-server id:0
+new table is createded with name: stock_1, table-id: 50, on shard-server id:0
+new table is createded with name: stock_2, table-id: 51, on shard-server id:0
+new table is createded with name: stock_3, table-id: 52, on shard-server id:0
+new table is createded with name: stock_4, table-id: 53, on shard-server id:0
+new table is createded with name: stock_5, table-id: 54, on shard-server id:0
+new table is createded with name: stock_data_0, table-id: 55, on shard-server id:0
+new table is createded with name: stock_data_1, table-id: 56, on shard-server id:0
+new table is createded with name: stock_data_2, table-id: 57, on shard-server id:0
+new table is createded with name: stock_data_3, table-id: 58, on shard-server id:0
+new table is createded with name: stock_data_4, table-id: 59, on shard-server id:0
+new table is createded with name: stock_data_5, table-id: 60, on shard-server id:0
+new table is createded with name: warehouse_0, table-id: 61, on shard-server id:0
+new table is createded with name: warehouse_1, table-id: 62, on shard-server id:0
+new table is createded with name: warehouse_2, table-id: 63, on shard-server id:0
+new table is createded with name: warehouse_3, table-id: 64, on shard-server id:0
+new table is createded with name: warehouse_4, table-id: 65, on shard-server id:0
+new table is createded with name: warehouse_5, table-id: 66, on shard-server id:0
+new table is createded with name: item, table-id: 67, on shard-server id:0
+20251108-05:13.47-333351(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+20251108-05:13.47-333418(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.47-333467(us) 19429 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+[TRANSPORT] Using default: rrr
+20251108-05:13.47-333490(us) 19429 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:31011 (listening on 0.0.0.0:31011)
+20251108-05:13.47-333495(us) 19429 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:31011
+20251108-05:13.47-333501(us) 19429 * RunEventLoop    (rrr_rpc_backend.cc:518): RrrRpcBackend::RunEventLoop: Starting event loop
+20251108-05:13.47-333541(us) 19429 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251108-05:13.47-333566(us) 19429 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:31012 (listening on 0.0.0.0:31012)
+20251108-05:13.47-333571(us) 19429 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:31012
+20251108-05:13.47-333576(us) 19429 * RunEventLoop    (rrr_rpc_backend.cc:518): RrrRpcBackend::RunEventLoop: Starting event loop
+20251108-05:13.47-334532(us) 19429 ! run             (bench.cc:357):     # of loaders size:6
+start worker:649
+PinToWarehouseId(): coreid=2 pinned to whse=1 (partid=0)
+[INFO] finished loading warehouse
+[INFO]   * average warehouse record length: PinToWarehouseId(): coreid=3 pinned to whse=1 (partid=0)
+97num batches: 30
+PinToWarehouseId(): coreid=4 pinned to whse=1 (partid=0)
+ bytes
+PinToWarehouseId(): coreid=3 pinned to whse=2 (partid=1)
+PinToWarehouseId(): coreid=5 pinned to whse=1 (partid=0)PinToWarehouseId(): coreid=3 pinned to whse=3 (partid=2)
+
+PinToWarehouseId(): coreid=3 pinned to whse=4 (partid=3)
+PinToWarehouseId(): coreid=3 pinned to whse=5 (partid=4)
+PinToWarehouseId(): coreid=3 pinned to whse=6 (partid=5)
+[INFO] finished loading district
+[INFO]   * average district record length: 99 bytes
+PinToWarehouseId(): coreid=5 pinned to whse=2 (partid=1)
+[INFO] finished loading item
+[INFO]   * average item record length: 84.1739 bytes
+PinToWarehouseId(): coreid=5 pinned to whse=3 (partid=2)
+PinToWarehouseId(): coreid=4 pinned to whse=2 (partid=1)
+PinToWarehouseId(): coreid=5 pinned to whse=4 (partid=3)
+PinToWarehouseId(): coreid=5 pinned to whse=5 (partid=4)
+PinToWarehouseId(): coreid=4 pinned to whse=3 (partid=2)
+PinToWarehouseId(): coreid=5 pinned to whse=6 (partid=5)
+[INFO] finished loading order
+[INFO]   * average order_line record length: 11.2511 bytes
+[INFO]   * average oorder record length: 7.88727 bytes
+[INFO]   * average new_order record length: 12 bytes
+PinToWarehouseId(): coreid=2 pinned to whse=2 (partid=1)
+PinToWarehouseId(): coreid=4 pinned to whse=4 (partid=3)
+PinToWarehouseId(): coreid=4 pinned to whse=5 (partid=4)
+PinToWarehouseId(): coreid=4 pinned to whse=6 (partid=5)
+PinToWarehouseId(): coreid=2 pinned to whse=3 (partid=2)
+[INFO] finished loading customer
+[INFO]   * average customer record length: 153.954 bytes 
+PinToWarehouseId(): coreid=2 pinned to whse=4 (partid=3)
+PinToWarehouseId(): coreid=2 pinned to whse=5 (partid=4)
+PinToWarehouseId(): coreid=2 pinned to whse=6 (partid=5)
+[INFO] finished loading stock
+[INFO]   * average stock record length: 8 bytes
+timed region dataloading took 3975.68 ms
+DB size: 2745.93 MB
+[0, 0, 0] txns persisted in loading phase
+20251108-05:13.51-310244(us) 19429 ! run             (bench.cc:410):     # of nthreads:6
+starting benchmark...
+--------------Finish loading data and wait for others completing load phase ------------
+tpcc: worker id 32 => warehouses [1, 2)
+tpcc: worker id 33 => warehouses [2, 3)
+tpcc: worker id 34 => warehouses [3, 4)
+tpcc: worker id 35 => warehouses [4, 5)
+tpcc: worker id 36 => warehouses [5, 6)
+tpcc: worker id 37 => warehouses [6, 7)
+No JEMALLOC_NO_RENAME
+No JEMALLOC_NO_RENAME
+No JEMALLOC_NO_RENAME
+No JEMALLOC_NO_RENAME
+No JEMALLOC_NO_RENAME
+No JEMALLOC_NO_RENAME
+20251108-05:13.51-312193(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312319(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312343(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312355(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312377(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+20251108-05:13.51-312431(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312453(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312482(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+20251108-05:13.51-312507(us) 19429 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251108-05:13.51-312518(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312531(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312543(us) 19429 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:31000 (listening on 0.0.0.0:31000)
+20251108-05:13.51-312549(us) 19429 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:31000
+20251108-05:13.51-312555(us) 19429 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+[TRANSPORT] Using default: rrr
+20251108-05:13.51-312571(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312593(us) 19429 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:31001 (listening on 0.0.0.0:31001)
+20251108-05:13.51-312600(us) 19429 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:31001
+[TRANSPORT] Using default: rrr
+20251108-05:13.51-312630(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+20251108-05:13.51-312655(us) 19429 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251108-05:13.51-312675(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312688(us) 19429 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251108-05:13.51-312705(us) 19429 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:31003 (listening on 0.0.0.0:31003)
+20251108-05:13.51-312712(us) 19429 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:31003
+[TRANSPORT] Using default: rrr
+20251108-05:13.51-312717(us) 19429 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251108-05:13.51-312734(us) 19429 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:31002 (listening on 0.0.0.0:31002)
+20251108-05:13.51-312744(us) 19429 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:31002
+20251108-05:13.51-312749(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312765(us) 19429 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:31004 (listening on 0.0.0.0:31004)
+20251108-05:13.51-312779(us) 19429 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:31004
+20251108-05:13.51-312787(us) 19429 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251108-05:13.51-312813(us) 19429 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:31005 (listening on 0.0.0.0:31005)
+20251108-05:13.51-312818(us) 19429 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:31005
+20251108-05:13.51-312833(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312858(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312894(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312939(us) 19429 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251108-05:13.51-312992(us) 19429 ! run             (bench.cc:461):     start the running time, runTime:30
+20251108-05:13.51-313006(us) 19429 ! run             (bench.cc:473):     runtime time left:30000 ms, bool:1
+we can start a advancer
+start the advancer thread...
+20251108-05:13.52-318854(us) 19429 ! run             (bench.cc:473):     runtime time left:29000 ms, bool:1
+20251108-05:13.53-324980(us) 19429 ! run             (bench.cc:473):     runtime time left:28000 ms, bool:1
+20251108-05:13.54-331160(us) 19429 ! run             (bench.cc:473):     runtime time left:27000 ms, bool:1
+20251108-05:13.55-337097(us) 19429 ! run             (bench.cc:473):     runtime time left:26000 ms, bool:1
+20251108-05:13.56-343045(us) 19429 ! run             (bench.cc:473):     runtime time left:25000 ms, bool:1
+20251108-05:13.57-348996(us) 19429 ! run             (bench.cc:473):     runtime time left:24000 ms, bool:1
+20251108-05:13.58-354957(us) 19429 ! run             (bench.cc:473):     runtime time left:23000 ms, bool:1
+20251108-05:13.59-360774(us) 19429 ! run             (bench.cc:473):     runtime time left:22000 ms, bool:1
+20251108-05:14.00-366999(us) 19429 ! run             (bench.cc:473):     runtime time left:21000 ms, bool:1
+20251108-05:14.01-372848(us) 19429 ! run             (bench.cc:473):     runtime time left:20000 ms, bool:1
+20251108-05:14.02-378718(us) 19429 ! run             (bench.cc:473):     runtime time left:19000 ms, bool:1
+20251108-05:14.03-384668(us) 19429 ! run             (bench.cc:473):     runtime time left:18000 ms, bool:1
+20251108-05:14.04-390725(us) 19429 ! run             (bench.cc:473):     runtime time left:17000 ms, bool:1
+20251108-05:14.05-396845(us) 19429 ! run             (bench.cc:473):     runtime time left:16000 ms, bool:1
+20251108-05:14.06-402660(us) 19429 ! run             (bench.cc:473):     runtime time left:15000 ms, bool:1
+20251108-05:14.07-408665(us) 19429 ! run             (bench.cc:473):     runtime time left:14000 ms, bool:1
+20251108-05:14.08-414419(us) 19429 ! run             (bench.cc:473):     runtime time left:13000 ms, bool:1
+20251108-05:14.09-420220(us) 19429 ! run             (bench.cc:473):     runtime time left:12000 ms, bool:1
+20251108-05:14.10-426276(us) 19429 ! run             (bench.cc:473):     runtime time left:11000 ms, bool:1
+20251108-05:14.11-432397(us) 19429 ! run             (bench.cc:473):     runtime time left:10000 ms, bool:1
+20251108-05:14.12-438376(us) 19429 ! run             (bench.cc:473):     runtime time left:9000 ms, bool:1
+20251108-05:14.13-444491(us) 19429 ! run             (bench.cc:473):     runtime time left:8000 ms, bool:1
+20251108-05:14.14-450505(us) 19429 ! run             (bench.cc:473):     runtime time left:7000 ms, bool:1
+20251108-05:14.15-456631(us) 19429 ! run             (bench.cc:473):     runtime time left:6000 ms, bool:1
+20251108-05:14.16-462630(us) 19429 ! run             (bench.cc:473):     runtime time left:5000 ms, bool:1
+20251108-05:14.17-468397(us) 19429 ! run             (bench.cc:473):     runtime time left:4000 ms, bool:1
+20251108-05:14.18-474547(us) 19429 ! run             (bench.cc:473):     runtime time left:3000 ms, bool:1
+20251108-05:14.19-480612(us) 19429 ! run             (bench.cc:473):     runtime time left:2000 ms, bool:1
+20251108-05:14.20-486595(us) 19429 ! run             (bench.cc:473):     runtime time left:1000 ms, bool:1
+20251108-05:14.21-492605(us) 19429 ! run             (bench.cc:483):     runtime_plus:0
+[SHUTDOWN] Setting running=false to stop database worker threads
+[SHUTDOWN] Calling first stop() to stop client transports
+20251108-05:14.21-492667(us) 19429 ! stop            (bench.cc:332):     jump out the while loop
+stop all erpc clients. set stop=false
+20251108-05:14.21-492681(us) 19429 * Stop            (rrr_rpc_backend.cc:599): RrrRpcBackend::Stop: BEGIN - Setting stop flag
+20251108-05:14.21-492688(us) 19429 * Stop            (rrr_rpc_backend.cc:602): RrrRpcBackend::Stop: Waiting for event loop to exit...
+jump out the while loop
+20251108-05:14.21-492693(us) 19429 * Stop            (rrr_rpc_backend.cc:618): RrrRpcBackend::Stop: Event loop exited successfully
+20251108-05:14.21-492704(us) 19429 * Stop            (rrr_rpc_backend.cc:622): RrrRpcBackend::Stop: Signaling 0 request queues to stop
+jump out the while loopjump out the while loop
+20251108-05:14.21-492709(us) 19429 * PrintStats      (rrr_rpc_backend.cc:689): RrrRpcBackend request stats: msg_size_req_sent: 0 bytes, counter: 0, avg: -nan
+jump out the while loop
+
+20251108-05:14.21-492740(us) 19429 * PrintStats      (rrr_rpc_backend.cc:689): RrrRpcBackend request stats: msg_size_req_sent: 0 bytes, counter: 0, avg: -nanjump out the while loop
+
+20251108-05:14.21-492758(us) 19429 * PrintStats      (rrr_rpc_backend.cc:689): RrrRpcBackend request stats: msg_size_req_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.21-492785(us) 19429 * PrintStats      (rrr_rpc_backend.cc:689): RrrRpcBackend request stats: msg_size_req_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.21-492812(us) 19429 * Stop            (rrr_rpc_backend.cc:630): RrrRpcBackend::Stop: Signaling 0 response queues to stop
+20251108-05:14.21-492820(us) 19429 * Stop            (rrr_rpc_backend.cc:641): RrrRpcBackend::Stop: Server cleanup deferred to destructor
+20251108-05:14.21-492824(us) 19429 * Stop            (rrr_rpc_backend.cc:644): RrrRpcBackend::Stop: Closing client connections
+20251108-05:14.21-492829(us) 19429 * PrintStats      (rrr_rpc_backend.cc:689): RrrRpcBackend request stats: msg_size_req_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.21-492855(us) 19429 * Stop            (rrr_rpc_backend.cc:648): RrrRpcBackend::Stop: Found 0 client connections to close
+20251108-05:14.21-492862(us) 19429 * Stop            (rrr_rpc_backend.cc:668): RrrRpcBackend::Stop: Closed 0 client connections
+20251108-05:14.21-492867(us) 19429 * Stop            (rrr_rpc_backend.cc:680): RrrRpcBackend stats: msg_size_resp_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.21-492874(us) 19429 * Stop            (rrr_rpc_backend.cc:683): RrrRpcBackend::Stop: END
+20251108-05:14.21-492879(us) 19429 * PrintStats      (rrr_rpc_backend.cc:689): RrrRpcBackend request stats: msg_size_req_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.21-492907(us) 19429 * Stop            (rrr_rpc_backend.cc:599): RrrRpcBackend::Stop: BEGIN - Setting stop flag
+20251108-05:14.21-492912(us) 19429 * Stop            (rrr_rpc_backend.cc:602): RrrRpcBackend::Stop: Waiting for event loop to exit...
+20251108-05:14.21-492916(us) 19429 * Stop            (rrr_rpc_backend.cc:618): RrrRpcBackend::Stop: Event loop exited successfully
+20251108-05:14.21-492920(us) 19429 * Stop            (rrr_rpc_backend.cc:622): RrrRpcBackend::Stop: Signaling 0 request queues to stop
+20251108-05:14.21-492925(us) 19429 * Stop            (rrr_rpc_backend.cc:630): RrrRpcBackend::Stop: Signaling 0 response queues to stop
+20251108-05:14.21-492929(us) 19429 * Stop            (rrr_rpc_backend.cc:641): RrrRpcBackend::Stop: Server cleanup deferred to destructor
+20251108-05:14.21-492933(us) 19429 * Stop            (rrr_rpc_backend.cc:644): RrrRpcBackend::Stop: Closing client connections
+20251108-05:14.21-492948(us) 19429 * Stop            (rrr_rpc_backend.cc:648): RrrRpcBackend::Stop: Found 0 client connections to close
+20251108-05:14.21-492954(us) 19429 * Stop            (rrr_rpc_backend.cc:668): RrrRpcBackend::Stop: Closed 0 client connections
+20251108-05:14.21-492967(us) 19429 * Stop            (rrr_rpc_backend.cc:680): RrrRpcBackend stats: msg_size_resp_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.21-492972(us) 19429 * Stop            (rrr_rpc_backend.cc:683): RrrRpcBackend::Stop: END
+20251108-05:14.21-492977(us) 19429 * Stop            (rrr_rpc_backend.cc:599): RrrRpcBackend::Stop: BEGIN - Setting stop flag
+20251108-05:14.21-492981(us) 19429 * Stop            (rrr_rpc_backend.cc:602): RrrRpcBackend::Stop: Waiting for event loop to exit...
+20251108-05:14.21-492985(us) 19429 * Stop            (rrr_rpc_backend.cc:618): RrrRpcBackend::Stop: Event loop exited successfully
+20251108-05:14.21-492989(us) 19429 * Stop            (rrr_rpc_backend.cc:622): RrrRpcBackend::Stop: Signaling 0 request queues to stop
+20251108-05:14.21-492993(us) 19429 * Stop            (rrr_rpc_backend.cc:630): RrrRpcBackend::Stop: Signaling 0 response queues to stop
+20251108-05:14.21-492997(us) 19429 * Stop            (rrr_rpc_backend.cc:641): RrrRpcBackend::Stop: Server cleanup deferred to destructor
+20251108-05:14.21-493004(us) 19429 * Stop            (rrr_rpc_backend.cc:644): RrrRpcBackend::Stop: Closing client connections
+20251108-05:14.21-493011(us) 19429 * Stop            (rrr_rpc_backend.cc:648): RrrRpcBackend::Stop: Found 0 client connections to close
+20251108-05:14.21-493018(us) 19429 * Stop            (rrr_rpc_backend.cc:668): RrrRpcBackend::Stop: Closed 0 client connections
+20251108-05:14.21-493022(us) 19429 * Stop            (rrr_rpc_backend.cc:680): RrrRpcBackend stats: msg_size_resp_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.21-493026(us) 19429 * Stop            (rrr_rpc_backend.cc:683): RrrRpcBackend::Stop: END
+20251108-05:14.21-493031(us) 19429 * Stop            (rrr_rpc_backend.cc:599): RrrRpcBackend::Stop: BEGIN - Setting stop flag
+20251108-05:14.21-493035(us) 19429 * Stop            (rrr_rpc_backend.cc:602): RrrRpcBackend::Stop: Waiting for event loop to exit...
+20251108-05:14.21-493039(us) 19429 * Stop            (rrr_rpc_backend.cc:618): RrrRpcBackend::Stop: Event loop exited successfully
+20251108-05:14.21-493044(us) 19429 * Stop            (rrr_rpc_backend.cc:622): RrrRpcBackend::Stop: Signaling 0 request queues to stop
+20251108-05:14.21-493048(us) 19429 * Stop            (rrr_rpc_backend.cc:630): RrrRpcBackend::Stop: Signaling 0 response queues to stop
+20251108-05:14.21-493052(us) 19429 * Stop            (rrr_rpc_backend.cc:641): RrrRpcBackend::Stop: Server cleanup deferred to destructor
+20251108-05:14.21-493056(us) 19429 * Stop            (rrr_rpc_backend.cc:644): RrrRpcBackend::Stop: Closing client connections
+20251108-05:14.21-493060(us) 19429 * Stop            (rrr_rpc_backend.cc:648): RrrRpcBackend::Stop: Found 0 client connections to close
+20251108-05:14.21-493064(us) 19429 * Stop            (rrr_rpc_backend.cc:668): RrrRpcBackend::Stop: Closed 0 client connections
+20251108-05:14.21-493070(us) 19429 * Stop            (rrr_rpc_backend.cc:680): RrrRpcBackend stats: msg_size_resp_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.21-493076(us) 19429 * Stop            (rrr_rpc_backend.cc:683): RrrRpcBackend::Stop: END
+20251108-05:14.21-493084(us) 19429 * Stop            (rrr_rpc_backend.cc:599): RrrRpcBackend::Stop: BEGIN - Setting stop flag
+20251108-05:14.21-493088(us) 19429 * Stop            (rrr_rpc_backend.cc:602): RrrRpcBackend::Stop: Waiting for event loop to exit...
+20251108-05:14.21-493092(us) 19429 * Stop            (rrr_rpc_backend.cc:618): RrrRpcBackend::Stop: Event loop exited successfully
+20251108-05:14.21-493096(us) 19429 * Stop            (rrr_rpc_backend.cc:622): RrrRpcBackend::Stop: Signaling 0 request queues to stop
+20251108-05:14.21-493100(us) 19429 * Stop            (rrr_rpc_backend.cc:630): RrrRpcBackend::Stop: Signaling 0 response queues to stop
+20251108-05:14.21-493106(us) 19429 * Stop            (rrr_rpc_backend.cc:641): RrrRpcBackend::Stop: Server cleanup deferred to destructor
+20251108-05:14.21-493110(us) 19429 * Stop            (rrr_rpc_backend.cc:644): RrrRpcBackend::Stop: Closing client connections
+20251108-05:14.21-493115(us) 19429 * Stop            (rrr_rpc_backend.cc:648): RrrRpcBackend::Stop: Found 0 client connections to close
+20251108-05:14.21-493119(us) 19429 * Stop            (rrr_rpc_backend.cc:668): RrrRpcBackend::Stop: Closed 0 client connections
+20251108-05:14.21-493123(us) 19429 * Stop            (rrr_rpc_backend.cc:680): RrrRpcBackend stats: msg_size_resp_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.21-493127(us) 19429 * Stop            (rrr_rpc_backend.cc:683): RrrRpcBackend::Stop: END
+20251108-05:14.21-493131(us) 19429 * Stop            (rrr_rpc_backend.cc:599): RrrRpcBackend::Stop: BEGIN - Setting stop flag
+20251108-05:14.21-493136(us) 19429 * Stop            (rrr_rpc_backend.cc:602): RrrRpcBackend::Stop: Waiting for event loop to exit...
+20251108-05:14.21-493140(us) 19429 * Stop            (rrr_rpc_backend.cc:618): RrrRpcBackend::Stop: Event loop exited successfully
+20251108-05:14.21-493144(us) 19429 * Stop            (rrr_rpc_backend.cc:622): RrrRpcBackend::Stop: Signaling 0 request queues to stop
+20251108-05:14.21-493148(us) 19429 * Stop            (rrr_rpc_backend.cc:630): RrrRpcBackend::Stop: Signaling 0 response queues to stop
+20251108-05:14.21-493152(us) 19429 * Stop            (rrr_rpc_backend.cc:641): RrrRpcBackend::Stop: Server cleanup deferred to destructor
+20251108-05:14.21-493156(us) 19429 * Stop            (rrr_rpc_backend.cc:644): RrrRpcBackend::Stop: Closing client connections
+20251108-05:14.21-493160(us) 19429 * Stop            (rrr_rpc_backend.cc:648): RrrRpcBackend::Stop: Found 0 client connections to close
+20251108-05:14.21-493164(us) 19429 * Stop            (rrr_rpc_backend.cc:668): RrrRpcBackend::Stop: Closed 0 client connections
+20251108-05:14.21-493168(us) 19429 * Stop            (rrr_rpc_backend.cc:680): RrrRpcBackend stats: msg_size_resp_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.21-493172(us) 19429 * Stop            (rrr_rpc_backend.cc:683): RrrRpcBackend::Stop: END
+[SHUTDOWN] First stop() completed
+[SHUTDOWN] Joining 6 worker threads
+[SHUTDOWN] Joining worker 0
+[SHUTDOWN] Worker 0 joined
+[SHUTDOWN] Joining worker 1
+[SHUTDOWN] Worker 1 joined
+[SHUTDOWN] Joining worker 2
+[SHUTDOWN] Worker 2 joined
+[SHUTDOWN] Joining worker 3
+[SHUTDOWN] Worker 3 joined
+[SHUTDOWN] Joining worker 4
+[SHUTDOWN] Worker 4 joined
+[SHUTDOWN] Joining worker 5
+[SHUTDOWN] Worker 5 joined
+[SHUTDOWN] All workers joined
+[SHUTDOWN] Calling stop_erpc_server()
+[STOP_SERVER] Stopping 2 server transports
+[STOP_SERVER] Stopping server transport 0
+20251108-05:14.22-493374(us) 19429 * Stop            (rrr_rpc_backend.cc:599): RrrRpcBackend::Stop: BEGIN - Setting stop flag
+20251108-05:14.22-493394(us) 19429 * Stop            (rrr_rpc_backend.cc:602): RrrRpcBackend::Stop: Waiting for event loop to exit...
+20251108-05:14.22-493408(us) 19429 * RunEventLoop    (rrr_rpc_backend.cc:583): RrrRpcBackend::RunEventLoop: Stop flag detected, exiting event loop
+20251108-05:14.22-493425(us) 19429 * RunEventLoop    (rrr_rpc_backend.cc:587): RrrRpcBackend::RunEventLoop: Exited cleanly
+20251108-05:14.22-493430(us) 19429 * erpc_server     (rpc_setup.cc:121): the erpc_server is terminated on shardIdx:0, alpha:0!
+20251108-05:14.22-503467(us) 19429 * Stop            (rrr_rpc_backend.cc:618): RrrRpcBackend::Stop: Event loop exited successfully
+20251108-05:14.22-503484(us) 19429 * Stop            (rrr_rpc_backend.cc:622): RrrRpcBackend::Stop: Signaling 0 request queues to stop
+20251108-05:14.22-503489(us) 19429 * Stop            (rrr_rpc_backend.cc:630): RrrRpcBackend::Stop: Signaling 0 response queues to stop
+20251108-05:14.22-503494(us) 19429 * Stop            (rrr_rpc_backend.cc:641): RrrRpcBackend::Stop: Server cleanup deferred to destructor
+20251108-05:14.22-503499(us) 19429 * Stop            (rrr_rpc_backend.cc:644): RrrRpcBackend::Stop: Closing client connections
+20251108-05:14.22-503509(us) 19429 * Stop            (rrr_rpc_backend.cc:648): RrrRpcBackend::Stop: Found 0 client connections to close
+20251108-05:14.22-503514(us) 19429 * Stop            (rrr_rpc_backend.cc:668): RrrRpcBackend::Stop: Closed 0 client connections
+20251108-05:14.22-503518(us) 19429 * Stop            (rrr_rpc_backend.cc:680): RrrRpcBackend stats: msg_size_resp_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.22-503523(us) 19429 * Stop            (rrr_rpc_backend.cc:683): RrrRpcBackend::Stop: END
+[STOP_SERVER] Server transport 0 stopped
+[STOP_SERVER] Stopping server transport 1
+20251108-05:14.22-503541(us) 19429 * Stop            (rrr_rpc_backend.cc:599): RrrRpcBackend::Stop: BEGIN - Setting stop flag
+20251108-05:14.22-503546(us) 19429 * Stop            (rrr_rpc_backend.cc:602): RrrRpcBackend::Stop: Waiting for event loop to exit...
+20251108-05:14.22-503598(us) 19429 * RunEventLoop    (rrr_rpc_backend.cc:583): RrrRpcBackend::RunEventLoop: Stop flag detected, exiting event loop
+20251108-05:14.22-503614(us) 19429 * RunEventLoop    (rrr_rpc_backend.cc:587): RrrRpcBackend::RunEventLoop: Exited cleanly
+20251108-05:14.22-503619(us) 19429 * erpc_server     (rpc_setup.cc:121): the erpc_server is terminated on shardIdx:0, alpha:1!
+20251108-05:14.22-513613(us) 19429 * Stop            (rrr_rpc_backend.cc:618): RrrRpcBackend::Stop: Event loop exited successfully
+20251108-05:14.22-513628(us) 19429 * Stop            (rrr_rpc_backend.cc:622): RrrRpcBackend::Stop: Signaling 0 request queues to stop
+20251108-05:14.22-513632(us) 19429 * Stop            (rrr_rpc_backend.cc:630): RrrRpcBackend::Stop: Signaling 0 response queues to stop
+20251108-05:14.22-513637(us) 19429 * Stop            (rrr_rpc_backend.cc:641): RrrRpcBackend::Stop: Server cleanup deferred to destructor
+20251108-05:14.22-513658(us) 19429 * Stop            (rrr_rpc_backend.cc:644): RrrRpcBackend::Stop: Closing client connections
+20251108-05:14.22-513663(us) 19429 * Stop            (rrr_rpc_backend.cc:648): RrrRpcBackend::Stop: Found 0 client connections to close
+20251108-05:14.22-513668(us) 19429 * Stop            (rrr_rpc_backend.cc:668): RrrRpcBackend::Stop: Closed 0 client connections
+20251108-05:14.22-513672(us) 19429 * Stop            (rrr_rpc_backend.cc:680): RrrRpcBackend stats: msg_size_resp_sent: 0 bytes, counter: 0, avg: -nan
+20251108-05:14.22-513677(us) 19429 * Stop            (rrr_rpc_backend.cc:683): RrrRpcBackend::Stop: END
+[STOP_SERVER] Server transport 1 stopped
+[STOP_SERVER] All server transports stopped
+[SHUTDOWN] stop_erpc_server() completed
+[SHUTDOWN] Calling second stop()
+20251108-05:14.22-513689(us) 19429 ! stop            (bench.cc:332):     stop all erpc clients. set stop=false
+[SHUTDOWN] Second stop() completed
+[SHUTDOWN] Calling do_txn_finish()
+[SHUTDOWN] do_txn_finish() completed
+--- n_commits per partition ---
+ par_id: 0, n_commits: 1685869
+ par_id: 1, n_commits: 1661767
+ par_id: 2, n_commits: 1679261
+ par_id: 3, n_commits: 1623457
+ par_id: 4, n_commits: 1657094
+ par_id: 5, n_commits: 1633249
+--- benchmark statistics ---
+runtime: 30.2007 sec
+memory delta: 33841.6 MB
+n_commits: 9940697
+latency_numer_us: 175403278
+latency_numer_us_remote: 0
+memory delta rate: 1120.56 MB/sec
+logical memory delta: 565.887 MB
+logical memory delta rate: 18.7375 MB/sec
+agg_nosync_throughput: 329154 ops/sec
+avg_nosync_per_core_throughput: 54859.1 ops/sec/core
+agg_throughput: 329154 ops/sec
+avg_per_core_throughput: 54859 ops/sec/core
+agg_persist_throughput: 329154 ops/sec
+avg_per_core_persist_throughput: 54859 ops/sec/core
+avg_latency: 0.017645 ms
+avg_persist_latency: 0 ms
+agg_abort_rate: 92.6137 aborts/sec
+avg_per_core_abort_rate: 15.4356 aborts/sec/core
+  NewOrder_local_commit_latency: 0.0201227 ms
+  NewOrder_local_abort_latency: 0.0273895 ms
+  NewOrder_local_abort_ratio: 0.000102532
+  Payment_local_commit_latency: 0.00710273 ms
+  Payment_local_abort_latency: 0.0051165 ms
+  Payment_local_abort_ratio: 7.54138e-06
+  OrderStatus_local_commit_latency: 0.00503088 ms
+  OrderStatus_local_abort_latency: 0.0059876 ms
+  OrderStatus_local_abort_ratio: 5.0327e-06
+  StockLevel_local_commit_latency: 0.0676958 ms
+  StockLevel_local_abort_latency: 0.075536 ms
+  StockLevel_local_abort_ratio: 0.00237135
+  NewOrder_remote_ratio: 0 %
+  NewOrder_remote_abort_ratio: -nan %
+  NewOrder_remote_commit_latency: -nan ms
+  NewOrder_remote_abort_latency: -nan ms
+  Payment_remote_ratio: 0 %
+  Payment_remote_abort_ratio: -nan %
+  Payment_remote_commit_latency: -nan ms
+  Payment_remote_abort_latency: -nan ms
+--- system counters (for benchmark) ---
+--- perf counters (if enabled, for benchmark) ---
+--- allocator stats ---
+[allocator] ncpus=6
+[allocator] cpu=0 fully_faulted?=0 remaining=180355072 bytes
+[allocator] cpu=1 fully_faulted?=0 remaining=180355072 bytes
+[allocator] cpu=2 fully_faulted?=0 remaining=180355072 bytes
+[allocator] cpu=3 fully_faulted?=0 remaining=180355072 bytes
+[allocator] cpu=4 fully_faulted?=0 remaining=180355072 bytes
+[allocator] cpu=5 fully_faulted?=0 remaining=180355072 bytes
+---------------------------------------
+--- system counters for n_comits ---
+[STOP_SERVER] Stopping 2 server transports
+[STOP_SERVER] Stopping server transport 0
+20251108-05:14.22-513961(us) 19429 * Stop            (rrr_rpc_backend.cc:595): RrrRpcBackend::Stop: Already stopped, returning
+[STOP_SERVER] Server transport 0 stopped
+[STOP_SERVER] Stopping server transport 1
+20251108-05:14.22-513975(us) 19429 * Stop            (rrr_rpc_backend.cc:595): RrrRpcBackend::Stop: Already stopped, returning
+[STOP_SERVER] Server transport 1 stopped
+[STOP_SERVER] All server transports stopped
+20251108-05:14.22-513995(us) 19429 ! send_end_signal (mako.hh:834):      ######--------------###### send endLlogs #####---------------######
+20251108-05:14.22-514032(us) 19429 * db_close        (mako.hh:861):      Leader sent end signal, waiting 3 seconds for propagation...
+20251108-05:14.22-565097(us) 19429 ! operator()      (mako.hh:391):      Recieved a zero length log
+20251108-05:14.22-565319(us) 19429 ! operator()      (mako.hh:391):      Recieved a zero length log
+20251108-05:14.22-565618(us) 19429 ! operator()      (mako.hh:391):      Recieved a zero length log
+20251108-05:14.22-565698(us) 19429 ! operator()      (mako.hh:391):      Recieved a zero length log
+20251108-05:14.22-565779(us) 19429 ! operator()      (mako.hh:391):      Recieved a zero length log
+20251108-05:14.22-566364(us) 19429 ! operator()      (mako.hh:391):      Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:14:22.565 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:14:22.565 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:14:22.565 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:14:22.565 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:14:22.565 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-08 05:14:22.566 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:999] 2025-12-08 05:14:27.514 | shutdown Server Control Service after task finish total submit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:14:27.514 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:14:27.514 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:14:27.514 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:14:27.514 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:14:27.514 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-08 05:14:27.514 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:311] 2025-12-08 05:14:27.514 | all server workers have shut down.
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:14:27.614 | site s101 deleting services, num: 1 0 3330 3330
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:14:27.665 | site par 0, loc 0: prepare 0, accept 3330, commit 3330
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:14:27.686 | site s102 deleting services, num: 1 0 3382 3382
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:14:27.737 | site par 1, loc 0: prepare 0, accept 3382, commit 3382
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:14:27.761 | site s103 deleting services, num: 1 0 3377 3377
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:14:27.811 | site par 2, loc 0: prepare 0, accept 3377, commit 3377
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:14:27.845 | site s104 deleting services, num: 1 0 3272 3272
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:14:27.896 | site par 3, loc 0: prepare 0, accept 3272, commit 3272
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:14:27.918 | site s105 deleting services, num: 1 0 3254 3254
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:14:27.920 | site par 4, loc 0: prepare 0, accept 3254, commit 3254
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-08 05:14:27.950 | site s106 deleting services, num: 1 0 3768 3768
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-08 05:14:27.000 | site par 5, loc 0: prepare 0, accept 3768, commit 3768
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:14:28.075 | Ending worker with n_tot 3330 and n_current 3330
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:14:28.091 | Ending worker with n_tot 3382 and n_current 3382
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:14:28.108 | Ending worker with n_tot 3377 and n_current 3377
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:14:28.126 | Ending worker with n_tot 3272 and n_current 3272
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:14:28.142 | Ending worker with n_tot 3254 and n_current 3254
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-08 05:14:28.160 | Ending worker with n_tot 3768 and n_current 3768
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:332] 2025-12-08 05:14:28.181 | exit process.

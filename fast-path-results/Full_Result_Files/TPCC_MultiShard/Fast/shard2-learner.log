@@ -1,0 +1,262 @@
+=========================================
+Configuration:
+=========================================
+  Number of shards:  3
+  Shard index:       2
+  Number of threads: 2
+  Cluster:           learner
+  Micro benchmark:   disabled
+  Replicated mode:   enabled
+=========================================
+20251110-03:35.20-57151(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:78] 2025-12-10 03:35:20.057 | PWD : /opt/actions-runner/_work/mako-fast-reads/mako-fast-reads
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:276] 2025-12-10 03:35:20.057 | starting process 19434
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/config.cc:290] 2025-12-10 03:35:20.057 | LoadYML: config/1leader_2followers/paxos2_shardidx2.yml
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/config.cc:290] 2025-12-10 03:35:20.057 | LoadYML: config/occ_paxos.yml
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:285] 2025-12-10 03:35:20.058 | server_infos, number of sites: 2, proc_name: learner
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-10 03:35:20.063 | parition id of each Paxos group is 1, site-name: s402, site-id: 7
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:291] 2025-12-10 03:35:20.068 | parition id of each Paxos group is 0, site-name: s401, site-id: 3
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:297] 2025-12-10 03:35:20.068 | running machine-id: 3
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-10 03:35:20.068 | launching site: 3, bind address 0.0.0.0:19301
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:106] 2025-12-10 03:35:20.068 | waiting for server setup threads.
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:92] 2025-12-10 03:35:20.068 | launching site: 7, bind address 0.0.0.0:19302
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-10 03:35:20.068 | [service]loc_id: 3, name: s401, proc: learner, id: 3
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:198] 2025-12-10 03:35:20.068 | [service]loc_id: 3, name: s402, proc: learner, id: 7
+starting server at 0.0.0.0:19301
+starting server at 0.0.0.0:19302
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-10 03:35:20.069 | Server s402 ready at 0.0.0.0:19302
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:221] 2025-12-10 03:35:20.069 | Server s401 ready at 0.0.0.0:19301
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-10 03:35:20.069 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:14] 2025-12-10 03:35:20.069 | setup paxos communicator
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:20.069 | connect to site: 127.0.0.1:19001 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:20.069 | connect to site: 127.0.0.1:19001 (attempt 0)
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-10 03:35:20.069 | rrr::Client: connect(127.0.0.1:19001): Connection refused
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-10 03:35:20.069 | rrr::Client: connect(127.0.0.1:19001): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:21.069 | connect to site: 127.0.0.1:19001 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:21.069 | connect to site: 127.0.0.1:19001 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:21.069 | connect to site: 127.0.0.1:19101 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:21.069 | connect to site: 127.0.0.1:19101 (attempt 0)
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-10 03:35:21.069 | rrr::Client: connect(127.0.0.1:19101): Connection refused
+E [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/rrr/rpc/client.cpp:194] 2025-12-10 03:35:21.069 | rrr::Client: connect(127.0.0.1:19101): Connection refused
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19101 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19101 (attempt 1)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19201 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19301 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19002 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19102 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19202 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/communicator.cc:175] 2025-12-10 03:35:22.069 | connect to site: 127.0.0.1:19302 (attempt 0)
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-10 03:35:22.069 | site 7 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:103] 2025-12-10 03:35:22.069 | site 3 launched!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:110] 2025-12-10 03:35:22.069 | done waiting for server setup threads.
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-10 03:35:22.069 | heartbeat setup for s401 on 0.0.0.0:29301
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:255] 2025-12-10 03:35:22.069 | heartbeat setup for s402 on 0.0.0.0:29302
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:117] 2025-12-10 03:35:22.069 | server workers' communicators setup
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:756] 2025-12-10 03:35:22.070 | start a heartbeatBackground, addr:127.0.0.1:29001
+tpcc settings:
+  cross_partition_transactions : 1
+  read_only_snapshots          : 1
+  partition_locks              : 0
+  separate_tree_per_partition  : 1
+  new_order_remote_item_pct    : 1
+  new_order_fast_id_gen        : 1
+  uniform_item_dist            : 0
+  order_status_scan_hack       : 0
+  workload_mix                 : [10, 10, 0, 40, 40]
+reinitializing partitions under failure
+reinitializing partitions under failure - DONE
+new table is createded with name: customer_remote_1, table-id: 1, on shard-server id:0
+new table is createded with name: customer_remote_2, table-id: 2, on shard-server id:0
+new table is createded with name: customer_remote_3, table-id: 201, on shard-server id:1
+new table is createded with name: customer_remote_4, table-id: 202, on shard-server id:1
+new table is createded with name: customer_name_idx_remote_1, table-id: 3, on shard-server id:0
+new table is createded with name: customer_name_idx_remote_2, table-id: 4, on shard-server id:0
+new table is createded with name: customer_name_idx_remote_3, table-id: 203, on shard-server id:1
+new table is createded with name: customer_name_idx_remote_4, table-id: 204, on shard-server id:1
+new table is createded with name: district_remote_1, table-id: 5, on shard-server id:0
+new table is createded with name: district_remote_2, table-id: 6, on shard-server id:0
+new table is createded with name: district_remote_3, table-id: 205, on shard-server id:1
+new table is createded with name: district_remote_4, table-id: 206, on shard-server id:1
+new table is createded with name: history_remote_1, table-id: 7, on shard-server id:0
+new table is createded with name: history_remote_2, table-id: 8, on shard-server id:0
+new table is createded with name: history_remote_3, table-id: 207, on shard-server id:1
+new table is createded with name: history_remote_4, table-id: 208, on shard-server id:1
+new table is createded with name: new_order_remote_1, table-id: 9, on shard-server id:0
+new table is createded with name: new_order_remote_2, table-id: 10, on shard-server id:0
+new table is createded with name: new_order_remote_3, table-id: 209, on shard-server id:1
+new table is createded with name: new_order_remote_4, table-id: 210, on shard-server id:1
+new table is createded with name: oorder_remote_1, table-id: 11, on shard-server id:0
+new table is createded with name: oorder_remote_2, table-id: 12, on shard-server id:0
+new table is createded with name: oorder_remote_3, table-id: 211, on shard-server id:1
+new table is createded with name: oorder_remote_4, table-id: 212, on shard-server id:1
+new table is createded with name: oorder_c_id_idx_remote_1, table-id: 13, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_remote_2, table-id: 14, on shard-server id:0
+new table is createded with name: oorder_c_id_idx_remote_3, table-id: 213, on shard-server id:1
+new table is createded with name: oorder_c_id_idx_remote_4, table-id: 214, on shard-server id:1
+new table is createded with name: order_line_remote_1, table-id: 15, on shard-server id:0
+new table is createded with name: order_line_remote_2, table-id: 16, on shard-server id:0
+new table is createded with name: order_line_remote_3, table-id: 215, on shard-server id:1
+new table is createded with name: order_line_remote_4, table-id: 216, on shard-server id:1
+new table is createded with name: stock_remote_1, table-id: 17, on shard-server id:0
+new table is createded with name: stock_remote_2, table-id: 18, on shard-server id:0
+new table is createded with name: stock_remote_3, table-id: 217, on shard-server id:1
+new table is createded with name: stock_remote_4, table-id: 218, on shard-server id:1
+new table is createded with name: stock_data_remote_1, table-id: 19, on shard-server id:0
+new table is createded with name: stock_data_remote_2, table-id: 20, on shard-server id:0
+new table is createded with name: stock_data_remote_3, table-id: 219, on shard-server id:1
+new table is createded with name: stock_data_remote_4, table-id: 220, on shard-server id:1
+new table is createded with name: warehouse_remote_1, table-id: 21, on shard-server id:0
+new table is createded with name: warehouse_remote_2, table-id: 22, on shard-server id:0
+new table is createded with name: warehouse_remote_3, table-id: 221, on shard-server id:1
+new table is createded with name: warehouse_remote_4, table-id: 222, on shard-server id:1
+new table is createded with name: item_remote_1, table-id: 23, on shard-server id:0
+new table is createded with name: item_remote_2, table-id: 24, on shard-server id:0
+new table is createded with name: item_remote_3, table-id: 223, on shard-server id:1
+new table is createded with name: item_remote_4, table-id: 224, on shard-server id:1
+20251110-03:35.25-70786(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251110-03:35.25-70831(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+[TRANSPORT] Using default: rrr
+20251110-03:35.25-70949(us) 19434 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251110-03:35.25-70977(us) 19434 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:34207 (listening on 0.0.0.0:34207)
+20251110-03:35.25-70983(us) 19434 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:34207
+20251110-03:35.25-70993(us) 19434 * RunEventLoop    (rrr_rpc_backend.cc:518): RrrRpcBackend::RunEventLoop: Starting event loop
+20251110-03:35.25-71007(us) 19434 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251110-03:35.25-71038(us) 19434 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:34208 (listening on 0.0.0.0:34208)
+20251110-03:35.25-71043(us) 19434 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:34208
+20251110-03:35.25-71054(us) 19434 * RunEventLoop    (rrr_rpc_backend.cc:518): RrrRpcBackend::RunEventLoop: Starting event loop
+20251110-03:35.25-71633(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251110-03:35.25-71664(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251110-03:35.25-71736(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251110-03:35.25-71772(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251110-03:35.25-71915(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251110-03:35.25-71978(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251110-03:35.25-71990(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251110-03:35.25-72032(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251110-03:35.25-72320(us) 19434 ! modeMonitor     (common2.h:100):    start for modeMonitor, running:0
+start worker:2192
+allocator::Initialize()
+  hugepgsize: 2097152
+  use MADV_WILLNEED: 1
+  mmap() region [0x7d53b9c00000, 0x7d53f9e00000)
+cpu0 owns [0x7d53b9c00000, 0x7d53d9c00000)
+cpu1 owns [0x7d53d9c00000, 0x7d53f9c00000)
+Database Benchmark:
+  pid: 19434
+settings:
+  num-cpus    : 32
+  num-threads : 2
+  shardIndex  : 2
+  paxos_proc_name  : learner
+  nshards     : 3
+  is_micro    : 0
+  is_replicated : 1
+  var-encode  : yes
+  allocator   : jemalloc
+system properties:
+  tuple_prefetch          : no
+  btree_node_prefetch     : yes
+20251110-03:35.25-72512(us) 19434 ! Init            (sync_util.hh:79):  the watermark is exchanging within the cluster: learner
+20251110-03:35.25-72954(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+20251110-03:35.25-73111(us) 19434 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251110-03:35.25-73149(us) 19434 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:34203 (listening on 0.0.0.0:34203)
+20251110-03:35.25-73155(us) 19434 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:34203
+20251110-03:35.25-73160(us) 19434 * RunEventLoop    (rrr_rpc_backend.cc:518): RrrRpcBackend::RunEventLoop: Starting event loop
+20251110-03:35.25-373144(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+20251110-03:35.25-373401(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+[TRANSPORT] Using default: rrr
+20251110-03:35.25-373507(us) 19434 * Initialize      (rrr_rpc_backend.cc:58): RrrRpcBackend::Initialize: poll_thread_worker_ created, is_some=1
+20251110-03:35.25-373532(us) 19434 * Initialize      (rrr_rpc_backend.cc:88): RrrRpcBackend initialized on 127.0.0.1:34204 (listening on 0.0.0.0:34204)
+20251110-03:35.25-373537(us) 19434 * FastTransport   (fasttransport.cc:116): FastTransport initialized with rrr/rpc backend on 127.0.0.1:34204
+20251110-03:35.25-373756(us) 19434 * ParseOldFormat  (configuration.cc:66): Using old configuration format
+we can start a advancer
+start the advancer thread...
+20251110-03:35.26-372939(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:165, wait_time:1s
+
+20251110-03:35.27-373008(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:226, wait_time:2s
+
+20251110-03:35.28-373057(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:289, wait_time:3s
+
+20251110-03:35.29-373142(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:350, wait_time:4s
+
+20251110-03:35.30-373226(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:410, wait_time:5s
+
+20251110-03:35.31-373307(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:469, wait_time:6s
+
+20251110-03:35.32-373394(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:530, wait_time:7s
+
+20251110-03:35.33-373478(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:590, wait_time:8s
+
+20251110-03:35.34-373562(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:649, wait_time:9s
+
+20251110-03:35.35-373666(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:709, wait_time:10s
+
+20251110-03:35.36-373757(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:770, wait_time:11s
+
+20251110-03:35.37-373841(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:829, wait_time:12s
+
+20251110-03:35.38-373921(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:889, wait_time:13s
+
+20251110-03:35.39-374008(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:948, wait_time:14s
+
+20251110-03:35.40-374096(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1006, wait_time:15s
+
+20251110-03:35.41-374191(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1066, wait_time:16s
+
+20251110-03:35.42-374273(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1124, wait_time:17s
+
+20251110-03:35.43-374353(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1184, wait_time:18s
+
+20251110-03:35.44-374438(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1245, wait_time:19s
+
+20251110-03:35.45-374524(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1307, wait_time:20s
+
+20251110-03:35.46-374600(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1365, wait_time:21s
+
+20251110-03:35.47-374679(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1423, wait_time:22s
+
+20251110-03:35.48-374766(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1481, wait_time:23s
+
+20251110-03:35.49-374819(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1541, wait_time:24s
+
+20251110-03:35.50-374907(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1600, wait_time:25s
+
+20251110-03:35.51-374991(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1656, wait_time:26s
+
+20251110-03:35.52-375070(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1710, wait_time:27s
+
+20251110-03:35.53-375151(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1766, wait_time:28s
+
+20251110-03:35.54-375199(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1822, wait_time:29s
+
+20251110-03:35.55-375278(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1872, wait_time:30s
+
+20251110-03:35.56-375358(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 0/2, noops_cnt:0, replay_batch:1922, wait_time:31s
+
+20251110-03:35.57-356610(us) 19434 ! operator()      (mako.hh:233):      Recieved a zero length log
+20251110-03:35.57-360520(us) 19434 ! operator()      (mako.hh:233):      Recieved a zero length log
+20251110-03:35.57-375441(us) 19434 * wait_for_termination (mako.hh:534):      learner is waiting for being ended: 2/2, noops_cnt:0, replay_batch:1930, wait_time:32s
+
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-10 03:35:57.356 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:140] 2025-12-10 03:35:57.360 | Recieved a zero length log
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:999] 2025-12-10 03:35:59.375 | shutdown Server Control Service after task finish total submit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-10 03:35:59.375 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/benchmark_control_rpc.cc:43] 2025-12-10 03:35:59.375 | Shutdown Server Control Service
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:311] 2025-12-10 03:35:59.375 | all server workers have shut down.
+20251110-03:35.59-583692(us) 19434 ! modeMonitorRun  (common2.h:81):     start for modeMonitorRun, running:0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:770] 2025-12-10 03:35:59.379 | heartbeatBackground is ended!
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-10 03:35:59.475 | site s401 deleting services, num: 1 0 0 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-10 03:35:59.476 | site par 0, loc 3: prepare 0, accept 0, commit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:288] 2025-12-10 03:35:59.476 | site s402 deleting services, num: 1 0 0 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos/server.h:47] 2025-12-10 03:35:59.527 | site par 1, loc 3: prepare 0, accept 0, commit 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-10 03:35:59.577 | Ending worker with n_tot 0 and n_current 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_worker.cc:649] 2025-12-10 03:35:59.580 | Ending worker with n_tot 0 and n_current 0
+I [/opt/actions-runner/_work/mako-fast-reads/mako-fast-reads/src/deptran/paxos_main_helper.cc:332] 2025-12-10 03:35:59.583 | exit process.
+END of advancer
