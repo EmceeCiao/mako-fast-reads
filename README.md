@@ -146,8 +146,6 @@ evaluation script being ran can be found at `scripts/run_tpcc_fast_path_eval.sh`
 
 ---
 
----
-
 ## Future Work
 
 Several directions could further strengthen and extend this work:
